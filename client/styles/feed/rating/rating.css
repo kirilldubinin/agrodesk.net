@@ -1,0 +1,92 @@
+.rating-card {
+  padding: 0 20px;
+  height: 100%;
+  overflow: hidden; }
+  .rating-card .rating-title {
+    color: #333;
+    font-size: 14px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #FF9800; }
+    .rating-card .rating-title.best-value {
+      background-color: #FFCC80;
+      border-top: 3px solid #FF9800;
+      padding-bottom: 0px;
+      font-size: 12px; }
+      .rating-card .rating-title.best-value h2 {
+        font-size: 12px; }
+      .rating-card .rating-title.best-value .rating-header {
+        color: #555;
+        font-weight: 600; }
+      .rating-card .rating-title.best-value.index {
+        padding-left: 10px;
+        font-weight: 600; }
+    .rating-card .rating-title h2 {
+      padding-top: 12px;
+      padding-right: 10px; }
+  .rating-card .rating-header {
+    padding-top: 12px;
+    text-align: right;
+    /* padding-right: 30px; */
+    color: #666;
+    padding-right: 10px;
+    padding-bottom: 10px; }
+    .rating-card .rating-header.index {
+      padding-left: 10px;
+      font-weight: 600; }
+    .rating-card .rating-header .property-name {
+      font-size: 12px; }
+  .rating-card .rating-dashboard {
+    margin-top: 20px;
+    /*height: calc(100% - 75px);*/
+    overflow: auto; }
+    .rating-card .rating-dashboard .mode-description {
+      font-size: 14px; }
+      .rating-card .rating-dashboard .mode-description .feed-type-select {
+        margin-left: 20px; }
+      .rating-card .rating-dashboard .mode-description .prop-list {
+        margin: 10px 0 20px 0; }
+        .rating-card .rating-dashboard .mode-description .prop-list li {
+          padding: 2px 0; }
+      .rating-card .rating-dashboard .mode-description h2 {
+        font-size: 16px; }
+        .rating-card .rating-dashboard .mode-description h2 .arrow-icon {
+          margin-bottom: 1px; }
+    .rating-card .rating-dashboard .empty-select-message {
+      margin: auto; }
+    .rating-card .rating-dashboard ul, .rating-card .rating-dashboard li {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      font-size: 12px; }
+    .rating-card .rating-dashboard .property-row > div {
+      height: 100%; }
+    .rating-card .rating-dashboard .property-label {
+      font-size: 16px;
+      color: #333;
+      border-bottom: 1px solid #DDD;
+      line-height: 26px; }
+    .rating-card .rating-dashboard .property-value {
+      color: #333;
+      padding: 20px 10px;
+      border-right: 1px solid #FFF;
+      border-bottom: 1px solid #FFF;
+      font-size: 12px;
+      text-align: right; }
+      .rating-card .rating-dashboard .property-value.index {
+        padding: 6px 10px;
+        font-weight: 600;
+        font-size: 18px; }
+      .rating-card .rating-dashboard .property-value.in-range {
+        background-color: #80CBC4;
+        color: #555555;
+        font-weight: 600; }
+      .rating-card .rating-dashboard .property-value.out-range {
+        background-color: #EF9A9A;
+        color: #555555;
+        font-weight: 600; }
+      .rating-card .rating-dashboard .property-value.feed-name {
+        text-align: left;
+        background-color: transparent;
+        color: #3F51B5;
+        font-weight: normal;
+        padding: 6px 10px; }

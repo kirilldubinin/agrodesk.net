@@ -1,0 +1,68 @@
+.ration-view {
+  padding: 0 20px; }
+  .ration-view .ration-title {
+    padding: 10px 20px; }
+    .ration-view .ration-title .ration-type {
+      background-color: #2196F3;
+      color: #fff;
+      border-radius: 3px;
+      padding: 6px 8px;
+      height: 26px;
+      margin: auto 20px auto 0;
+      text-transform: uppercase;
+      font-size: 12px; }
+    .ration-view .ration-title .ration-target {
+      background-color: #009688;
+      color: #fff;
+      border-radius: 3px;
+      padding: 6px 8px;
+      height: 26px;
+      margin: auto 14px auto 0;
+      text-transform: uppercase;
+      font-size: 12px; }
+    .ration-view .ration-title h2 {
+      margin: auto; }
+  .ration-view .ration-view-content ul.ration-info {
+    padding: 0 20px;
+    margin: 0;
+    font-size: 12px; }
+    .ration-view .ration-view-content ul.ration-info li {
+      padding: 4px 0; }
+      .ration-view .ration-view-content ul.ration-info li label {
+        min-width: 80px;
+        text-align: right;
+        margin-right: 10px;
+        color: rgba(0, 0, 0, 0.54); }
+  .ration-view .ration-view-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px; }
+    .ration-view .ration-view-content table th {
+      color: rgba(0, 0, 0, 0.54); }
+    .ration-view .ration-view-content table tr {
+      align-items: stretch; }
+      .ration-view .ration-view-content table tr.total {
+        font-weight: 700; }
+      .ration-view .ration-view-content table tr td, .ration-view .ration-view-content table tr th {
+        min-width: 110px;
+        border-bottom: 1px rgba(0, 0, 0, 0.12) solid;
+        text-align: right;
+        padding: 12px 18px; }
+        .ration-view .ration-view-content table tr td:first-child, .ration-view .ration-view-content table tr th:first-child {
+          width: 20px;
+          min-width: 20px; }
+        .ration-view .ration-view-content table tr td.feed-name, .ration-view .ration-view-content table tr th.feed-name {
+          width: 100%;
+          text-align: left; }
+        .ration-view .ration-view-content table tr td.property-name, .ration-view .ration-view-content table tr th.property-name {
+          width: 100%;
+          text-align: left; }
+        .ration-view .ration-view-content table tr td p, .ration-view .ration-view-content table tr th p {
+          padding: 0;
+          margin: 4px 0 0 0;
+          font-size: 11px;
+          color: rgba(0, 0, 0, 0.54); }
+    .ration-view .ration-view-content table tbody tr:hover {
+      background-color: #F0F0F0; }
+  .ration-view .ration-view-content .composition {
+    padding: 16px; }

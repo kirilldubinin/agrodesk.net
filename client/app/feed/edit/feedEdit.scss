@@ -1,0 +1,99 @@
+.feed-edit {
+	
+	border: 3px solid #FF9800;
+    padding: 20px 10px 0 10px;
+
+	.feed-edit-header {
+
+		.analysis {
+			.title {
+			    margin-right: 15px;
+			}
+		}
+
+		.title {
+			text-transform: uppercase;
+		}
+
+		min-height: 50px;
+	    border-bottom: 3px solid #FF9800;
+
+	    .title {
+		    margin-right: 30px;
+		}
+
+		.group-buttons {
+			margin-top: -8px;
+		}
+
+		.delete-analysis-btn {
+			margin-top: -8px;	
+		}
+
+		.analysis-btn {
+			width: 40px;
+		    min-width: 40px;
+		    margin: 0 8px 0 0;
+		    margin-top: -8px;
+		}
+	}
+
+	.feed-edit-content {
+		overflow: auto;
+		.feed-property {
+
+			&._md-datepicker-floating-label {
+				label {
+
+				}
+			}
+
+			&.booleanProperty {
+				margin: 0;
+			}
+
+			&.required {
+				label {
+					color: rgb(255,87,34);
+				}
+			}
+
+			width: 90%;
+			.md-errors-spacer {
+				display: none;
+			}
+
+			.self-explanation-link {
+				&:hover {
+					color: #3F51B5;
+				}
+			}
+		}
+
+		.checkbox {
+			span {
+				font-size: 16px;
+			}
+		}
+
+		.md-datepicker-input-container {
+			width: calc(100% - 46px);
+		    padding: 0;
+		    margin: 0;
+		}
+
+		.md-datepicker-button {
+			margin-left: 0;
+    		padding-left: 0;
+		}
+	}
+
+	.feed-edit-actions {
+		min-height: 60px;
+		height: 60px;
+		border-top: 3px solid #FF9800;
+	}
+
+
+} 
+

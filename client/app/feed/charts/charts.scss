@@ -1,0 +1,33 @@
+.charts {
+	
+	padding: 0 20px;
+    height: 100%;
+    overflow: hidden;
+
+	.charts-title {
+		color: #3F51B5;
+	    font-size: 20px;
+	    padding-bottom: 12px;
+	    border-bottom: 3px solid #FF9800;
+
+	    h2 {
+	    	margin-top: 12px;
+	    	font-size: 20px;
+	    }
+	}
+
+	.charts-dashboard {
+		padding-top: 20px;
+
+		.mode-description {
+			p {
+				color: #555;
+			    font-size: 12px;
+			    line-height: 20px;
+			}
+			h2 {
+				font-size: 14px;
+			}
+		}
+	}
+}

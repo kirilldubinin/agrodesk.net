@@ -1,0 +1,91 @@
+<div class="feed-view" layout="column">
+    <div class="feed-title" layout="row" ng-class="{done: feedView.feed.done}">
+        <h2 class="feed-name">
+            {{::feedView.feed.name}}
+            <br/>
+            <div class="feed-storage" layout="row">
+                <div ng-if="feedView.feed.branch">{{::feedView.feed.branch}}:&nbsp;</div>
+                <div>{{::feedView.feed.storage}}</div>
+            </div>
+        </h2>
+        <h2>
+            <b>
+                {{::feedView.feed.year}}
+            </b>
+        </h2>
+        <!--<div class="weight-wrapper" ng-class="{opened: feedView.feed.general.opened.value}"> -->
+        <span class="weight-control" ng-class="{opened: feedView.feed.opened, done: feedView.feed.done }" ng-if="feedView.feed.totalWeight">
+            <span class="balance">
+                {{::feedView.feed.balanceWeight}}
+            </span>
+            <span class="total">
+                {{::feedView.feed.totalWeight}}
+            </span>
+        </span>
+        <!--</div>-->
+        <div class="actions" flex="">
+            <!--<md-button class="md-raised" ng-click="feedView.copy()">
+        Copy
+      </md-button>-->
+            <md-button class="md-{{action.buttonType}} {{action.key}}-btn" ng-click="feedView[action.key]()" ng-repeat="action in feedView.actions">
+                <ng-md-icon ng-if="action.icon" class="print-icon" icon="{{action.icon}}" size="24">
+                </ng-md-icon>
+                {{action.key === 'print' ? '' : action.label}}
+            </md-button>
+        </div>
+    </div>
+    <!-- HEADER -->
+    <div class="feed-view-header" layout="row">
+        <div flex="{{block.width}}" ng-repeat="block in ::feedView.feedItemSections">
+            <label class="title">
+                {{::block.label}}
+            </label>
+        </div>
+    </div>
+    <!-- CONTENT -->
+    <div class="feed-view-content" flex="" layout="row">
+        <div flex="{{block.width}}" id="{{block.key}}" ng-repeat="block in ::feedView.feedItemSections" ng-switch="block.key">
+            <!-- ANALYSIS -->
+            <ul class="feed-properties" ng-class="block.key" ng-switch-when="analysis">
+                <li class="property" layout="row" ng-repeat="(key, data) in ::block.controls" ng-switch="key">
+                    <!-- LABEL -->
+                    <label flex="60" ng-class="{catalogLink: data.catalogLink}" ng-href="data.catalogLink">
+                        <a ng-href="{{data.catalogLink}}" ng-if="data.catalogLink">
+                            {{::data.label}}
+                        </a>
+                        <lable ng-if="!data.catalogLink">
+                            {{::data.label}}
+                        </lable>
+                        <lable ng-if="data.dimension">
+                            , {{::data.dimension}}
+                        </lable>
+                    </label>
+                    <!-- DRY Control -->
+                    <md-checkbox class="md-primary dry-switch" ng-if="key === 'isNaturalWet'" ng-model="block.controls.isNaturalWet.values[$index]" ng-repeat="v in ::data.values track by $index">
+                        ({{ block.controls.isNaturalWet.values[$index] ? 'Да' : 'Нет' }})
+                    </md-checkbox>
+                    <div class="value" ng-if="key !== 'isNaturalWet'" ng-repeat="v in ::data.values track by $index">
+                        {{ 
+                _.isObject(v) ?
+                (block.controls.isNaturalWet.values[$index] ? v.rawValue : v.dryValue) :
+                v 
+            }}
+                    </div>
+                </li>
+            </ul>
+            <!-- OTHER -->
+            <ul class="feed-properties" ng-class="block.key" ng-switch-default="">
+                <li class="property" layout="row" ng-repeat="(key, data) in ::block.controls">
+                    <!-- LABEL -->
+                    <label flex="">
+                        {{::data.label}}  {{::data.dimension}}
+                    </label>
+                    <!-- SINGLE VALUE -->
+                    <div class="value" flex="" ng-if="!data.values">
+                        {{::data.value}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

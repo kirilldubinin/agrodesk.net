@@ -1,0 +1,205 @@
+.demo-wrapper {
+  height: 100%;
+  overflow: auto; }
+
+.feed .weight-control {
+  font-family: 'Titillium Web', sans-serif; }
+  .feed .weight-control .balance {
+    display: none;
+    color: #FF9800;
+    padding: 0px 10px;
+    background-color: #fff;
+    border: 2px solid #ff9800;
+    box-sizing: border-box;
+    border-radius: 3px 0 0 3px;
+    border-right: 0px; }
+  .feed .weight-control .total {
+    background-color: #009688;
+    color: #fff;
+    padding: 0 10px;
+    border: 2px solid #009688;
+    border-radius: 3px; }
+  .feed .weight-control.opened {
+    border-color: #FF9800; }
+    .feed .weight-control.opened .balance {
+      display: inline; }
+    .feed .weight-control.opened .left {
+      display: none;
+      color: #FF9800; }
+    .feed .weight-control.opened .total {
+      background-color: #FF9800;
+      border-color: #FF9800;
+      border-radius: 0 3px 3px 0; }
+  .feed .weight-control.done .left {
+    display: none; }
+  .feed .weight-control.done .balance {
+    display: none; }
+  .feed .weight-control.done .total {
+    color: #f0f0f0;
+    background-color: #999;
+    padding: 1px 10px;
+    border-color: #999;
+    border-radius: 3px; }
+
+.feed .feed-title .weight-control {
+  margin-top: 16px; }
+
+.feed .feed-list {
+  font-size: 11px;
+  overflow: auto;
+  padding-top: 0; }
+  .feed .feed-list .feed-item {
+    cursor: pointer;
+    background-color: #fff;
+    min-height: 68px;
+    border-bottom: 1px solid #eee; }
+    .feed .feed-list .feed-item .md-button {
+      padding: 8px 10px; }
+    .feed .feed-list .feed-item.selected {
+      background-color: #BBDEFB !important; }
+    .feed .feed-list .feed-item.inDiff {
+      background-color: #BBDEFB  !important; }
+    .feed .feed-list .feed-item button.md-no-style {
+      min-height: 68px; }
+    .feed .feed-list .feed-item .md-list-item-text {
+      line-height: normal; }
+    .feed .feed-list .feed-item .analysis-length {
+      padding-top: 8px;
+      color: #999; }
+      .feed .feed-list .feed-item .analysis-length.no-analysis {
+        color: #EF5350; }
+    .feed .feed-list .feed-item .year {
+      color: #3F51B5;
+      font-weight: bold;
+      margin-top: 7px;
+      font-size: 12px; }
+    .feed .feed-list .feed-item .title {
+      color: #555;
+      font-size: 18px; }
+    .feed .feed-list .feed-item .source {
+      font-size: 11px;
+      margin-top: 2px; }
+    .feed .feed-list .feed-item .composition {
+      font-size: 12px;
+      color: #333; }
+    .feed .feed-list .feed-item .weight.weight-control {
+      margin-top: 5px;
+      height: 22px;
+      float: right;
+      font-size: 12px;
+      margin-left: 5px; }
+    .feed .feed-list .feed-item.done p, .feed .feed-list .feed-item.done b {
+      color: #999; }
+    .feed .feed-list .feed-item.done .weight.weight-control .total {
+      padding: 1px 10px;
+      background-color: #999;
+      color: #f0f0f0;
+      border-color: #999;
+      border-radius: 3px; }
+    .feed .feed-list .feed-item.done .analysis-length.no-analysis {
+      color: #999; }
+
+.feed .hide-items-length {
+  background-color: #5C6BC0;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  /* opacity: 0.9; */
+  position: relative; }
+  .feed .hide-items-length i {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    cursor: pointer; }
+
+.feed .navigator {
+  height: calc(100% - 14px);
+  margin-right: 0; }
+
+.feed .dashboard {
+  height: calc(100% - 14px); }
+  .feed .dashboard md-content {
+    height: 100%; }
+    .feed .dashboard md-content ul, .feed .dashboard md-content li {
+      list-style-type: none;
+      padding: 0;
+      margin: 0; }
+    .feed .dashboard md-content .dashboard-card {
+      padding: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      margin-bottom: 10px; }
+      .feed .dashboard md-content .dashboard-card h2 {
+        border-bottom: 3px solid #FF9800;
+        padding-bottom: 4px;
+        margin-bottom: 10px;
+        font-size: 20px; }
+      .feed .dashboard md-content .dashboard-card md-radio-group {
+        margin-bottom: 10px;
+        font-size: 14px; }
+    .feed .dashboard md-content .dashboard-balance .balance-list {
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      font-size: 14px;
+      padding-left: 8px; }
+      .feed .dashboard md-content .dashboard-balance .balance-list .balance-percent {
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 14px; }
+      .feed .dashboard md-content .dashboard-balance .balance-list .weight-control {
+        height: 22px;
+        font-size: 12px;
+        vertical-align: middle;
+        float: right; }
+      .feed .dashboard md-content .dashboard-balance .balance-list li h2 {
+        font-size: 20px; }
+      .feed .dashboard md-content .dashboard-balance .balance-list li .composition {
+        padding-left: 20px;
+        padding-top: 16px; }
+        .feed .dashboard md-content .dashboard-balance .balance-list li .composition .composition-item {
+          font-size: 12px;
+          color: rgba(0, 0, 0, 0.54);
+          height: 28px; }
+    .feed .dashboard md-content .dashboard-scheduler p {
+      padding: 0px;
+      margin-top: 10px 0; }
+    .feed .dashboard md-content .dashboard-scheduler a {
+      padding: 0px; }
+    .feed .dashboard md-content .dashboard-scheduler ul.auto-decrement-feeds li {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      margin-top: 20px; }
+      .feed .dashboard md-content .dashboard-scheduler ul.auto-decrement-feeds li .weight-control {
+        height: 22px;
+        font-size: 12px;
+        vertical-align: middle;
+        float: right;
+        text-align: left; }
+      .feed .dashboard md-content .dashboard-scheduler ul.auto-decrement-feeds li .feed-schedule {
+        font-size: 14px;
+        margin: 8px 0;
+        line-height: 20px; }
+        .feed .dashboard md-content .dashboard-scheduler ul.auto-decrement-feeds li .feed-schedule label {
+          color: rgba(0, 0, 0, 0.54);
+          font-size: 12px;
+          display: inline-block;
+          min-width: 110px; }
+      .feed .dashboard md-content .dashboard-scheduler ul.auto-decrement-feeds li .feeding-progress {
+        border: 1px solid #009688;
+        height: 14px;
+        width: 100%;
+        margin: 2px 20px; }
+        .feed .dashboard md-content .dashboard-scheduler ul.auto-decrement-feeds li .feeding-progress.min {
+          border: 1px solid #EF5350; }
+          .feed .dashboard md-content .dashboard-scheduler ul.auto-decrement-feeds li .feeding-progress.min .left-percent {
+            background-color: #EF5350; }
+        .feed .dashboard md-content .dashboard-scheduler ul.auto-decrement-feeds li .feeding-progress .left-percent {
+          background-color: #009688;
+          height: 100%;
+          float: right;
+          text-align: center;
+          font-size: 11px;
+          color: #fff;
+          min-width: 40px; }
+
+.feed.demo .list-header {
+  height: auto; }

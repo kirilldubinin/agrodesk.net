@@ -1,0 +1,19 @@
+.info {
+  height: calc(100% - 14px);
+  padding: 0 20px;
+  overflow: hidden; }
+  .info md-content {
+    background-color: transparent; }
+  .info .info-title {
+    color: #3F51B5;
+    border-bottom: 3px solid #FF9800;
+    padding: 20px 0 12px 0;
+    margin-bottom: 20px; }
+  .info .info-content p label {
+    display: inline-block;
+    text-align: right;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 14px; }
+  .info .info-content p span {
+    margin-left: 10px;
+    font-size: 14px; }

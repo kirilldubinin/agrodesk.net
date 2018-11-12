@@ -1,0 +1,30 @@
+<div class="rating-card" layout="column" ui-view="">
+	<div class="rating-title" layout="row">
+		<span class="index rating-header">
+		</span>
+		<h2 class="" flex="">
+			Рейтинг
+		</h2>
+	</div>
+	<div class="rating-dashboard" flex="" layout="row">
+		<div flex class="mode-description" ng-if="!rating.feeds.length">
+			<p>
+				Данный модуль показывает Вам рейтинг кормов в зависимости от ряда показателей. Чем больше показателей попадает в оптимальные границы, тем выше находится корм в рейтинге.
+			<p/>
+			<p>
+                Корма без анализов не могут участвовать в рейтинге.
+            </p> 
+  			Выберите тип корма: 
+  			<md-button class="md-primary" md-no-ink="" ng-click="rating.goToHaylage();">
+                Сенаж травяной
+            </md-button>
+			<md-button class="md-primary" md-no-ink="" ng-click="rating.goToGreenMass();">
+					Зеленая масса
+				</md-button>
+			<md-button class="md-primary" md-no-ink="" ng-click="rating.goToSilage();">
+                Силос кукурузный
+			</md-button>
+		</div>
+		
+	</div>
+</div>

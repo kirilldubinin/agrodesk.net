@@ -1,0 +1,86 @@
+<div class="diff-card" layout="column">
+    <div class="diff-title" layout="row">
+        <h2 flex="25">
+            Сравнение
+        </h2>
+        <div class="feed-header" flex="" ng-repeat="header in diff.headers">
+            {{header.name}}
+            <b>
+                {{header.year}}
+            </b>
+            <br/>
+            <span class="feed-composition">
+                {{header.composition}},
+            </span>
+            <span class="feed-storage">
+                {{header.storage}}
+            </span>
+        </div>
+    </div>
+    <div class="diff-dashboard" flex="" layout="row">
+        <div flex class="mode-description" ng-if="!diff.diffRows.length">
+            <p>
+                Данный модуль позволяет Вам оперативно проводить сравнение кормов по любому показателю, присутствующему в корме.
+                Для сравнения нужно просто выбрать из списка несколько кормов, показатели которых интересны Вам для сравнения. 
+            </p>
+            <p>
+                Корма без анализов не могут участвовать в сравнении.
+            </p> 
+            <h2>
+                <ng-md-icon class="arrow-icon" icon="arrow_back"></ng-md-icon>
+                Выберите корма с анализами из списка
+            </h2>
+        </div>
+        <ul class="property-list" flex="" ng-if="diff.diffRows.length">
+            <li class="property-row" ng-if="property.key === 'analysis'" ng-repeat="property in ::diff.diffRows">
+                <h4 class="root-property">
+                    {{property.label}}
+                    <a href="" ng-click="property.hidden = !property.hidden">
+                        {{ property.hidden ? 'показать' : 'скрыть' }}
+                    </a>
+                </h4>
+                <ul ng-if="property.children && !property.hidden">
+                    <li class="property-values" layout="row" ng-repeat="child in ::property.children" ng-switch="child.key">
+                        <span class="property-label" flex="25">
+                            {{child.label}} {{child.dimension}}
+                        </span>
+                        <span class="property-value" flex="" layout="row" ng-init="valueIdx = $index" ng-repeat="value in ::child.values">
+                            <!-- DRY Control -->
+                            <span flex="" ng-if="child.key === 'isNaturalWet'" ng-repeat="v in ::diff.dryRawValues[valueIdx] track by $index">
+                                <md-checkbox class="md-primary dry-switch" ng-model="diff.dryRawValues[valueIdx][$index]">
+                                    ({{ diff.dryRawValues[valueIdx][$index] ? 'Да' : 'Нет' }})
+                                </md-checkbox>
+                            </span>
+                            <!-- ng-class="{max: child.maxDryValue === v.dryValue || child.maxDryValue === v }" -->
+                            <span flex="" ng-if="child.key !== 'isNaturalWet'" ng-repeat="v in ::value track by $index">
+                                {{
+                                  (diff._.isNumber(v.dryValue) || diff._.isNumber(v.rawValue)) ? 
+                                  (diff.dryRawValues[valueIdx][$index] ? v.rawValue : v.dryValue) :
+                                  (diff._.isObject(v) ? '' : v)
+                                }}
+                            </span>
+                        </span>
+                    </li>
+                </ul>
+            </li>
+            <li class="property-row" ng-if="property.key !== 'analysis'" ng-repeat="property in ::diff.diffRows">
+                <h4 class="root-property">
+                    {{property.label}}
+                    <a href="" ng-click="property.hidden = !property.hidden">
+                        {{ property.hidden ? 'показать' : 'скрыть' }}
+                    </a>
+                </h4>
+                <ul ng-if="property.children && !property.hidden">
+                    <li class="property-values" layout="row" ng-repeat="child in ::property.children">
+                        <span class="property-label" flex="25">
+                            {{child.label}}
+                        </span>
+                        <span class="property-value" flex="" ng-repeat="value in ::child.values track by $index">
+                            {{value}}
+                        </span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

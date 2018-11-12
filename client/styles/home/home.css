@@ -1,0 +1,56 @@
+.main-header {
+  color: #6a6c6f;
+  font-size: 22px;
+  padding: 2px 20px 2px 20px;
+  background-color: #3F51B5;
+  color: #fff; }
+  .main-header .user-name button {
+    margin-left: 0px;
+    margin-right: 0px; }
+  .main-header .prokorm-title {
+    line-height: 46px;
+    font-size: 28px; }
+  .main-header .md-button.md-raised {
+    color: #3F51B5; }
+
+.main-content {
+  height: calc(100% - 52px);
+  overflow-y: hidden; }
+  .main-content .feed {
+    height: 100%;
+    overflow-y: hidden; }
+
+.list-header {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  height: 110px;
+  min-height: 90; }
+  .list-header .module-name {
+    font-size: 22px;
+    color: #3f51b5;
+    text-transform: uppercase;
+    padding: 12px; }
+  .list-header .md-fab.add-feed-button {
+    margin-left: 0;
+    margin-right: 0; }
+  .list-header .filter-button {
+    font-size: 14px;
+    text-transform: none;
+    color: #3F51B5;
+    margin-left: 12px; }
+  .list-header .hide-items-length {
+    font-size: 12px;
+    text-transform: none;
+    color: #999;
+    margin-left: 12px;
+    padding-top: 2px; }
+
+.list-filter {
+  padding: 12px;
+  border-bottom: 1px solid #ddd; }
+  .list-filter md-checkbox span {
+    font-size: 12px; }
+  .list-filter md-input-container {
+    margin-bottom: 0; }
+    .list-filter md-input-container span {
+      font-size: 12px; }
