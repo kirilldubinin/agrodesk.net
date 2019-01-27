@@ -13,24 +13,28 @@ function sortFeeds(a, b) {
 }
 
 function charts(feeds) {
-    /*var series = ['dryMaterial', 'ph', 'milkAcid', 'aceticAcid', 'oilAcid', 
-                'exchangeEnergy', 'nel', 'crudeAsh', 'crudeProtein', 'crudeFat',
-                'sugar', 'starch', 'crudeFiber', 'ndf', 'adf', 'adl'];*/
 
-    const series = ['crudeProtein'];
-    
-    var byDefault = ['dryMaterial', 'ph', 'exchangeEnergy', 'crudeAsh', 'crudeProtein', 'crudeFiber'];
+    // filter feeds
+    // feed with no totalWeight and analysis can't be include in chart
+    feeds = _.filter(feeds, (feed) => {
+        return _.size(feed.analysis) && feed.general.totalWeight;
+    });
+    var series = ['dryMaterial', 'ph', 'milkAcid', 'aceticAcid', 'oilAcid', 
+                'exchangeEnergy', 'nel', 'crudeAsh', 'crudeProtein', 'crudeFat',
+                'sugar', 'starch', 'crudeFiber', 'ndf', 'adf', 'adl'];
+
+    //var byDefault = ['dryMaterial', 'ph', 'exchangeEnergy', 'crudeAsh', 'crudeProtein', 'crudeFiber'];*/
     var byDefault = ['crudeProtein'];
     try {
         var allYears = [];
         var chartSeries = _.map(series, function(seria) {
-            var seriaDates = _.map(feeds, function(feed) {
+            var seriaDates = _(feeds)
+            .map((feed) => {
                 var lastAnalys = _.last(feed.analysis);
                 var value = null;
                 allYears.push(lastAnalys.date.getFullYear());
-                var canBerecalcalated = feedUtils.propertyForRecalculate[seria];
                 if (_.isNumber(lastAnalys[seria])) {
-                    if (canBerecalcalated) {
+                    if (feedUtils.propertyForRecalculate[seria]) {
                         value = lastAnalys.isNaturalWet ? 
                             
                             feedUtils.calcDryRaw(true, lastAnalys.dryMaterial, lastAnalys[seria]).dryValue : 
@@ -39,41 +43,33 @@ function charts(feeds) {
                     } else {
                         value = lastAnalys[seria];
                     }
+                    return {
+                        year: feed.general.year,
+                        value: value,
+                        // dry weight
+                        dryWeight: feed.general.totalWeight / lastAnalys.dryMaterial
+                    };
                 }
+            })
+            .reject(_.isUndefined)
+            .groupBy('year')
+            .map((data, key) => {
+                /*
+                    * C = (C1*V1 + ... Cn*Vn) / (V1 + ... Vn)
+                    * c - concetration, v - volume/weight
+                */
+
+                var top = _.sumBy(data, (d) => {
+                    return d.value * d.dryWeight;
+                });
+                var bottom = _.sumBy(data, 'dryWeight');
+                var resultData = top/bottom;
                 return {
-                    year: feed.general.year,
-                    value: value,
-                    // dry weight
-                    balanceDryWeight: feed.general.balanceWeight / lastAnalys.dryMaterial
-                };
-            });     
-            seriaDates = _.groupBy(seriaDates, 'year');
-            seriaDates = _.map(seriaDates, function(data, key) {
-
-    	        data = _.filter(data, function (d) { return _.isNumber(d.value); });
-    	        if (data.length) {
-
-                    /*
-                     * C = (C1*V1 + ... Cn*Vn) / (V1 + ... Vn)
-                     * c - concetration, v - volume/weight
-                    */
-
-                    var top = _.sumBy(data, function (d) {
-                        return d.value * d.balanceDryWeight;
-                    });
-                    var bottom = _.sumBy(data, 'balanceDryWeight');
-                    var resultData = top/bottom;
-    	        	return {
-    	        		year: key,
-                    	data: Math.round(resultData*100)/100
-    	        	}
-    	        } else {
-    	        	return {
-    	        		year: key,
-    	        		data: null
-    	        	}
-    	        }
-            });
+                    year: key,
+                    data: Math.round(resultData*100)/100
+                }
+            })
+            .value();
 
             return {
                 dimension: dimension(seria),
@@ -85,31 +81,33 @@ function charts(feeds) {
             }
         });
 
-
         allYears = _.uniq(allYears).sort(function(a, b) {
             return a - b;
         });
+
+        chartSeries = _.map(chartSeries, function(chartSeria) {
+
+            var groupByYear = _.groupBy(chartSeria.data, 'year');
+            return {
+                name: chartSeria.name + ', ' + chartSeria.dimension,
+                data: _.map(allYears, function(year) {
+                    if (!groupByYear[year]) {
+                        return null;
+                    } else {
+                        return _.first(_.map(groupByYear[year], 'data'));
+                    }
+                }),
+                visible: chartSeria.visible
+            }
+        });
+    
+        return {
+            categories: allYears,
+            chartSeries: chartSeries
+        }
     } catch(e) {
         console.log(e);
     }  
-    chartSeries = _.map(chartSeries, function(chartSeria) {
-        var groupByYear = _.groupBy(chartSeria.data, 'year');
-        return {
-            name: chartSeria.name + ', ' + chartSeria.dimension,
-            data: _.map(allYears, function(year) {
-                if (!groupByYear[year]) {
-                    return null;
-                } else {
-                    return _.first(_.map(groupByYear[year], 'data'));
-                }
-            }),
-            visible: chartSeria.visible
-        }
-    });
-
-    return {
-        categories: allYears,
-        chartSeries: chartSeries
-    }
+    
 }
 module.exports = charts;

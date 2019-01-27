@@ -57,7 +57,7 @@ app.use(session({
 	//store: sessionStore,
 	cookie : { 
 		httpOnly: true, 
-		maxAge: 1000 * 60 * 60 
+		maxAge: null
 	},
 	secret: '4342-dede-5601-xapw-0912-moez', 
 }));

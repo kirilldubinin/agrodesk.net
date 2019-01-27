@@ -1,9 +1,19 @@
+.h-100 {
+	height: 100%;
+	overflow: hidden;
+}
+md-tab-content > div {
+	height: 100%;
+}
 .ration-view {
 	padding: 0 20px;
-
+	height: 100%;;
 	.ration-title {
-		padding: 10px 20px;
+		padding: 10px 0px 10px 4px;
 
+		b {
+			margin: 15px 20px 0 0px;
+		}
 		.ration-type {
 			background-color: #2196F3;
 		    color: #fff;
@@ -64,7 +74,7 @@
 			    	font-weight: 700;
 			    }
 			    td, th {
-			    	min-width: 110px;
+			    	min-width: 120px;
 				    border-bottom: 1px rgba(0,0,0,.12) solid;
 				    text-align: right;
 				    padding: 12px 18px;
@@ -102,7 +112,108 @@
 		}
 
 		.composition {
-			padding: 16px;
+			font-size: 12px;
+			text-align: right;
+			height: 100%;
+
+			.scroll-wrapper {
+				overflow: auto;
+			}
+
+			
+			md-tab-content > div,
+			md-content {
+				height: 100%;
+				overflow: hidden;
+			}
+
+			.component-index {
+				width: 40px;
+				text-align: left;
+			}
+			.component-name {
+				text-align: left;
+				padding-left: 1em;
+				a {
+					color: #3f51b5;
+				}
+			}
+			.composition-title {
+				font-size: 12px;
+				padding-bottom: 1em;
+				border-bottom: 2px solid #FF9800;
+				div:first-child {
+					padding-left: 16px;
+				}
+				div:last-child {
+					padding-right: 16px;
+				}
+			}
+			.composition-total {
+				padding-top: 12px;
+				font-size: 16px;
+				text-align: right;
+				font-weight: bold;
+			}
+			.composition-item {
+				padding: 12px 0;
+				border-bottom: 2px solid #fff;
+				div:first-child {
+					padding-left: 16px;
+				}
+				div:last-child {
+					padding-right: 16px;
+				}
+				&:hover {
+					background-color: #fff;
+				}
+				.rate {
+					font-weight: bold;
+					font-size: 14px;
+				}
+				&.mk {
+					.component-name {
+						&:before {
+							content: "MK";
+							display: inline-block;
+							background-color: #969c28;
+							border-radius: 4px;
+							font-size: 10px;
+							padding: 2px 6px;
+							color: #f0f0f0;
+							margin-right: 0.5em;
+						}
+					}
+				}
+				&.kk {
+					.component-name {
+						&:before {
+							content: "KK";
+							display: inline-block;
+							background-color: #f37136;
+							border-radius: 4px;
+							font-size: 10px;
+							padding: 2px 6px;
+							color: #f0f0f0;
+							margin-right: 0.5em;
+						}
+					}
+				}
+				&.ok {
+					.component-name {
+						&:before {
+							content: "OK";
+							display: inline-block;
+							background-color: #009688;
+							border-radius: 4px;
+							font-size: 10px;
+							padding: 2px 6px;
+							color: #f0f0f0;
+							margin-right: 0.5em;
+						}
+					}
+				}
+			}
 		}
 	}
 }

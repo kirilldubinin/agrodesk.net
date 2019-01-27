@@ -49,4 +49,68 @@ describe('feed.charts', function() {
         expect(feedChart.chartSeries[0].data[0]).to.equal(46.67);
         done();
     });
+
+    it.only('charts with empty values', function(done) {
+        var feeds = [{
+            _id: '1',
+            general: {
+                name: '1',
+                year: 2015,
+                feedType: 'haylage',
+                composition: 'foo',
+                totalWeight: 1
+            },
+            analysis: [{
+                date: new Date('12-10-2015'),
+                isNaturalWet: true,
+                number: 2,
+                dryMaterial: 10,
+                crudeProtein: 10
+            }]
+        }, {
+            _id: '2',
+            general: {
+                name: '2',
+                year: 2015,
+                feedType: 'haylage',
+                composition: 'bar',
+                totalWeight: 2
+            },analysis: [{
+                date: new Date('12-10-2015'),
+                isNaturalWet: true,
+                number: 2,
+                dryMaterial: 10,
+                crudeProtein: 20
+            }]
+        }, {
+            _id: '3',
+            general: {
+                name: '3',
+                year: 2015,
+                feedType: 'haylage',
+                composition: 'bar',
+                totalWeight: 2
+            },analysis: [{
+                date: new Date('12-10-2015'),
+                isNaturalWet: true,
+                number: 2,
+                dryMaterial: 10,
+                crudeProtein: 20
+            }]
+        }];
+
+        var feedChart = charts(feeds);
+        console.log(feedChart.chartSeries);
+
+        done();
+        return;
+        expect(feedChart.chartSeries[0].data[0]).to.equal(166.67);
+
+        feeds[1].analysis[0].isNaturalWet = false;
+        feedChart = charts(feeds);
+
+        console.log(feedChart.chartSeries[0].data)
+        expect(feedChart.chartSeries[0].data[0]).to.equal(46.67);
+        done();
+    });
 });

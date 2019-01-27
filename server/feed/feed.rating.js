@@ -231,7 +231,6 @@ function getRaiting(feeds, feedType) {
         }].concat(values);
     });
 
-    console.log(ratingFeeds);
     ratingFeeds = ratingFeeds.sort(function (a, b) {
         return _.first(b).score - _.first(a).score;
     });

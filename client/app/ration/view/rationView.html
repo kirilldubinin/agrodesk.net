@@ -1,13 +1,14 @@
 <div class="ration-view" layout="column">
     <div class="ration-title" layout="row">
+        <b>#201</b>
         <div class="ration-type">
             раздой
         </div>
         <span class="ration-target">
-            32 литра
+            38 литров
         </span>
         <h2 class="ration-name" flex="">
-            20-100 дней, двор 6
+            Высокопродуктивные 1 группа.
         </h2>
         <div class="actions">
             <md-button ng-click="">
@@ -15,174 +16,93 @@
             </md-button>
         </div>
     </div>
-    <div class="ration-view-content" flex="" layout="column">
-        <md-tabs md-border-bottom="" md-dynamic-height="">
-            <md-tab label="Состав">
-                <md-content class="md-padding">
-                    <div class="composition" flex="">
-                        <table>
-                            <thead>
-                                <th>
-                                    #
-                                </th>
-                                <th class="feed-name">
-                                    Компонент
-                                </th>
-                                <th>
-                                    Доля, кг
-                                </th>
-                                <th>
-                                    СВ, г/кг
-                                </th>
-                                <th>
-                                    Итого СВ, кг
-                                </th>
-                                <th>
-                                    Цена, руб/кг
-                                </th>
-                                <th>
-                                    Цена, руб
-                                </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td class="feed-name">
-                                        <a href="#">
-                                            Сенаж: Люцерна 2016
-                                        </a>
-                                        <p>
-                                            Гавриловка, Курган Семеново
-                                        </p>
-                                    </td>
-                                    <td>
-                                        246
-                                    </td>
-                                    <td>
-                                        3198
-                                    </td>
-                                    <td>
-                                        13.000
-                                    </td>
-                                    <td>
-                                        1.20
-                                    </td>
-                                    <td>
-                                        15.60
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td class="feed-name">
-                                        <a href="#">
-                                            Сенаж: Люцерна 2016
-                                        </a>
-                                        <p>
-                                            Гавриловка, Курган Семеново
-                                        </p>
-                                    </td>
-                                    <td>
-                                        246
-                                    </td>
-                                    <td>
-                                        3198
-                                    </td>
-                                    <td>
-                                        13.000
-                                    </td>
-                                    <td>
-                                        1.20
-                                    </td>
-                                    <td>
-                                        15.60
-                                    </td>
-                                </tr>
-                                <tr class="total">
-                                    <td>
-                                    </td>
-                                    <td class="feed-name">
-                                    </td>
-                                    <td>
-                                        21.6
-                                    </td>
-                                    <td>
-                                        52.6
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        154.80
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <div class="ration-view-content" flex layout="column">
+        <md-tabs flex md-dynamic-height="false">
+            <md-tab label="Состав" class="h-100">
+                <md-content class="md-padding h-100">
+                    <div class="composition" flex="" layout="column">
+                        <div class="composition-title" layout="row">
+                            <div class="component-index" flex="2">
+                                #
+                            </div>
+                            <div class="component-name" flex="30">
+                                Компонент
+                            </div>
+                            <div class="" flex="">
+                                Доля, кг.
+                            </div>
+                            <div class="" flex="">
+                                СВ в 1 кг, кг.
+                            </div>
+                            <div class="" flex="">
+                                Итого СВ, кг.
+                            </div>
+                            <div class="" flex="">
+                                Цена руб/кг
+                            </div>
+                            <div class="" flex="">
+                                Цена рациона, руб.
+                            </div>
+                        </div>  
+                        <div class="scroll-wrapper" flex>
+                            <div ng-class="component.type" class="composition-item" layout="row" ng-repeat="component in rationView.components">
+                                <div class="component-index" flex="2">
+                                    {{component.index}}
+                                </div>
+                                <div class="component-name" flex="30">
+                                    <a href="#">{{component.name}}</a>  
+                                </div>
+                                <div class="rate" flex="">
+                                    {{component.rate}}
+                                </div>
+                                <div class="" flex="">
+                                    {{component.dryMatrial}}
+                                </div>
+                                <div class="" flex="">
+                                    {{component.totalDryMaterial}}
+                                </div>
+                                <div class="" flex="">
+                                    {{component.priceKilo}}
+                                </div>
+                                <div class="" flex="">
+                                    {{component.priceTotal}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="composition-total" layout="row">
+                                <div class="component-index" flex="2">
+                                </div>
+                                <div class="component-name" flex="30">
+                                </div>
+                                <div class="" flex="">
+                                    61.930
+                                </div>
+                                <div class="" flex="">
+                                </div>
+                                <div class="" flex="">
+                                    26.536
+                                </div>
+                                <div class="" flex="">
+                                    
+                                </div>
+                                <div class="" flex="">
+                                    260.56
+                                </div>
+                        </div>  
                     </div>
                 </md-content>
             </md-tab>
             <md-tab label="Параметры">
                 <md-content class="md-padding">
                     <div class="properties" flex="">
-                        <table>
-                            <thead>
-                                <th>
-                                    #
-                                </th>
-                                <th class="property-name">
-                                    Параметры
-                                </th>
-                                <th>
-                                    Мин.
-                                </th>
-                                <th>
-                                    Содержание
-                                </th>
-                                <th>
-                                    Макс.
-                                </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td class="property-name">
-                                        Сухое вещество, г
-                                    </td>
-                                    <td>
-                                        
-                                    </td>
-                                    <td>
-                                        21586
-                                    </td>
-                                    <td>
-                                        22000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td class="property-name">
-                                        Влажность рациона, %
-                                    </td>
-                                    <td>
-                                        45
-                                    </td>
-                                    <td>
-                                        58.5
-                                    </td>
-                                    <td>
-                                        60
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <p>Живой вес: 600 кг</p>
+                        <p>Жирность молока: 4,20 %</p>
+                        <p>Белок: 3,30 %</p>
+                        <p>Соотношение ОК:КК: - 60.1% : 39.9%</p>
+                        <p>Содержание СВ: 40.2%</p>
+                        <p>Итого СВ: 26.536 кг</p>
+                        <p>Итого цена: 260.56 руб</p>
+                        <p>Цена литра молока по кормам: 6.85 руб</p>
                     </div>
                 </md-content>
             </md-tab>
