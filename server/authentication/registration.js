@@ -2,8 +2,8 @@ var Tenant = require('../models/tenant');
 var User = require('../models/user');
 var Tariff = require('../models/tariff');
 var passGenerator = require('generate-password');
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport('smtps://sales%40prokorm.com:4noLimits$@smtp.gmail.com');
+//var nodemailer = require('nodemailer');
+//var transporter = nodemailer.createTransport('smtps://sales%40prokorm.com:pass@smtp.gmail.com');
 
 function createTenant(data, callback) {
     var newTenant = new Tenant();
@@ -68,12 +68,12 @@ function sendNewTenantEmail(emailData, callback) {
         html: '<b>Поздравляем! Вы зарегестрировали новую организацию в системе "ПРОКОРМ"</b>' + '<br/>' + '<div>Имя вашей организации: "' + emailData.tenant + '"</div>' + '<div>Имя пользователя: "' + emailData.tenant + '"</div>' + '<div>Пароль: "' + emailData.password + '"</div>' + '<br/>' + '<div>Для входа в систему перейдите по ссылке <a href="http://prokorm.com/#/login/' + emailData.tenant + '" target="blank">ПРОКОРМ</a></div>',
     };
     // send mail with defined transport object 
-    transporter.sendMail(mailOptions, function(error, info) {
+    /*transporter.sendMail(mailOptions, function(error, info) {
         if (error) {
             return callback(error);
         }
         callback(null, info.response);
-    });
+    });*/
 }
 module.exports = {
     createTenant: createTenant,
