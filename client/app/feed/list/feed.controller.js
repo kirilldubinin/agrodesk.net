@@ -8,7 +8,6 @@
             noAnalysis: true,
             showEmpty: true
         };
-        var originatorEv;
         
         feedFactory.getFeeds().then(function(result) {
             vm.filterValues = result.filterValues;
@@ -17,9 +16,12 @@
             vm.updateVisible();
         });
 
-        feedFactory.getFeedDashboard().then(function(dashboard) {
+        /*feedFactory.getFeedDashboard().then(function(dashboard) {
             vm.dashboard = dashboard;
-        });
+            setTimeout(function () {
+                Highcharts.chart('chartByFeedType', dashboard.balance.chartByFeedType);
+            }, 100);
+        });*/
         vm.openMenu = function($mdOpenMenu, ev) {
             originatorEv = ev;
             $mdOpenMenu(ev);
@@ -239,6 +241,10 @@
                 vm.selectedItemId = null;
                 feedFactory.getFeedDashboard().then(function(dashboard) {
                     vm.dashboard = dashboard;
+                    setTimeout(function () {
+                        Highcharts.chart('chartByFeedType', dashboard.balance.chartByFeedType);
+                        Highcharts.chart('chartByComposition', dashboard.balance.chartByComposition);
+                    }, 100);
                 });
             } else if (newState.name === 'tenant.feed.instance') {
                 vm.selectedItemId = params.feedId;

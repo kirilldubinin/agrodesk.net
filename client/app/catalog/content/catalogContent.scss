@@ -1,3 +1,4 @@
+@import "../../variables";
 .catalog-view {
 	
 	padding: 0 20px;
@@ -7,7 +8,7 @@
 	.catalog-title {
 		color: #3F51B5;
 	    font-size: 20px !important;
-	    border-bottom: 3px solid #FF9800;
+	    border-bottom: 3px solid $orange;
 	    padding: 20px 0 12px 0;
 
 	    .md-raised {

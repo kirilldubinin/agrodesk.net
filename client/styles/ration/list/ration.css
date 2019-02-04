@@ -12,52 +12,53 @@
       font-size: 12px;
       color: rgba(0, 0, 0, 0.54); }
 
-.ration .ration-list {
-  font-size: 12px;
-  overflow: auto;
-  padding-top: 0; }
-  .ration .ration-list .ration-item {
-    cursor: pointer;
-    background-color: #fff;
-    min-height: 68px;
-    border-bottom: 1px solid #eee; }
-    .ration .ration-list .ration-item .md-button {
-      padding: 0 10px; }
-    .ration .ration-list .ration-item.selected {
-      background-color: #BBDEFB !important; }
-    .ration .ration-list .ration-item button.md-no-style {
-      min-height: 68px; }
-    .ration .ration-list .ration-item .md-list-item-text {
-      line-height: normal; }
-    .ration .ration-list .ration-item .first-line .ration-type {
-      background-color: #2196F3;
-      color: #fff;
-      padding: 4px 8px;
-      border-radius: 3px;
-      text-transform: uppercase;
-      font-size: 12px;
-      max-height: 22px; }
-    .ration .ration-list .ration-item .first-line p {
-      color: #555;
-      text-align: right;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding-left: 10px; }
-    .ration .ration-list .ration-item .second-line {
-      margin: 6px 0; }
-      .ration .ration-list .ration-item .second-line .ration-target {
-        background-color: #009688;
+.ration {
+  height: 100%; }
+  .ration .ration-list {
+    font-size: 12px;
+    overflow: auto;
+    padding-top: 0; }
+    .ration .ration-list .ration-item {
+      cursor: pointer;
+      background-color: #fff;
+      border-bottom: 1px solid #eee; }
+      .ration .ration-list .ration-item.done {
+        background-color: #ddd; }
+        .ration .ration-list .ration-item.done .ration-target,
+        .ration .ration-list .ration-item.done .ration-type {
+          opacity: 0.5; }
+      .ration .ration-list .ration-item .md-button {
+        padding: 0 10px; }
+      .ration .ration-list .ration-item.selected {
+        background-color: #BBDEFB !important; }
+      .ration .ration-list .ration-item button.md-no-style {
+        min-height: 68px; }
+      .ration .ration-list .ration-item .md-list-item-text {
+        margin: 16px 0 6px 0; }
+      .ration .ration-list .ration-item b {
+        color: #666; }
+      .ration .ration-list .ration-item span {
+        line-height: 1.8em;
+        padding: 0 10px; }
+      .ration .ration-list .ration-item .first-line .ration-type {
+        background-color: #2196F3;
         color: #fff;
         padding: 4px 8px;
-        border-radius: 2px;
-        font-size: 12px; }
-      .ration .ration-list .ration-item .second-line .ration-date {
-        padding: 4px 0;
-        text-align: right; }
-    .ration .ration-list .ration-item .third-line .ration-price {
-      font-size: 12px;
-      color: #3F51B5;
-      font-weight: bold; }
-    .ration .ration-list .ration-item .third-line .ration-weight {
-      text-align: right; }
+        border-radius: 3px;
+        text-transform: uppercase;
+        font-size: 12px;
+        line-height: 1.3em;
+        height: 2em; }
+      .ration .ration-list .ration-item .second-line {
+        margin: 12px 0 6px 0; }
+        .ration .ration-list .ration-item .second-line .ration-target {
+          background-color: #009688;
+          color: #fff;
+          padding: 1px 8px;
+          border-radius: 3px;
+          font-size: 12px; }
+      .ration .ration-list .ration-item .third-line {
+        font-size: 10px;
+        color: #999; }
+        .ration .ration-list .ration-item .third-line span {
+          padding: 0px; }

@@ -11,10 +11,15 @@
         
         feedFactory.getDemoFeeds().then(function(result) {
             vm.feedItems = result.feeds;
+
         });
 
         feedFactory.getDemoFeedDashboard().then(function(dashboard) {
             vm.dashboard = dashboard;
+            setTimeout(function () {
+                Highcharts.chart('chartByFeedType', dashboard.balance.chartByFeedType);
+                Highcharts.chart('chartByComposition', dashboard.balance.chartByComposition);
+            }, 100);
         });
     }
 })();

@@ -10,7 +10,6 @@ function convertToControl(item, parentKey) {
     _.each(item, function(value, key) {
         if (item.hasOwnProperty(key)) {
             editObj[key] = {
-
                 isEnum: feedUtils.enumFields[parentKey + '.' + key],
                 isNumber: _.isNumber(value),
                 isBoolean: value === true || value === false,

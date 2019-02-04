@@ -1,3 +1,4 @@
+@import "../variables";
 .public-screen {
     
     background-image: url(../../img/background.jpg);
@@ -124,16 +125,16 @@
                     .number {
                         font-family: 'Titillium Web',sans-serif;
                         font-size: 16px;
-                        color: #FF9800;
+                        color: $orange;
                         font-weight: bold;
                         margin: 0 4px;
-                        color: #FF9800;
+                        color: $orange;
                     }
                 }
             }
 
             h2 {
-                border-bottom: 3px solid #FF9800;
+                border-bottom: 3px solid $orange;
                 padding-bottom: 4px;
                 margin: 10px 0;
                 font-size: 20px;

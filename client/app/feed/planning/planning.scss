@@ -1,3 +1,4 @@
+@import "../../variables";
 .planning-card {
 	padding: 0 20px;
     height: 100%;
@@ -7,7 +8,7 @@
     	color: #333;
 	    font-size: 14px;
 	    padding-bottom: 12px;
-	    border-bottom: 3px solid #FF9800;
+	    border-bottom: 3px solid $orange;
     	margin-bottom: 20px;
 
     	h2 {
@@ -72,7 +73,7 @@
 		    padding: 6px 20px;
 		    min-width: 60px;
 		    text-align: right;
-		    border-left: 1px solid #FF9800;
+		    border-left: 1px solid $orange;
 		    border-bottom: 1px solid #DDD;
 		    font-size: 14px;
 
@@ -82,7 +83,7 @@
 
 		    input {
 		    	text-align: right;
-			    border-color: #FF9800;
+			    border-color: $orange;
 			    margin: 0px auto;
 			    width: 60px;
 			    border-radius: 3px;

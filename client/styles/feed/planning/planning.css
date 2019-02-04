@@ -6,7 +6,7 @@
     color: #333;
     font-size: 14px;
     padding-bottom: 12px;
-    border-bottom: 3px solid #FF9800;
+    border-bottom: 3px solid #fdae39;
     margin-bottom: 20px; }
     .planning-card .planning-title h2 {
       padding-top: 12px; }
@@ -49,14 +49,14 @@
       padding: 6px 20px;
       min-width: 60px;
       text-align: right;
-      border-left: 1px solid #FF9800;
+      border-left: 1px solid #fdae39;
       border-bottom: 1px solid #DDD;
       font-size: 14px; }
       .planning-card .planning-dashboard .property-value.input {
         padding: 1px 20px; }
       .planning-card .planning-dashboard .property-value input {
         text-align: right;
-        border-color: #FF9800;
+        border-color: #fdae39;
         margin: 0px auto;
         width: 60px;
         border-radius: 3px;

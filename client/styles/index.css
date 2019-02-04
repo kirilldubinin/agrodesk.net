@@ -2,8 +2,7 @@
  *  Do not remove the comment below. It's the markers used by wiredep to inject
  *  sass dependencies when defined in the bower.json of your dependencies
  */
-@import url("https://fonts.googleapis.com/css?family=Montserrat");
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700&subset=cyrillic,cyrillic-ext");
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -32,30 +31,6 @@
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased; }
 
-/* latin-ext */
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 400;
-  src: local("Titillium Web"), local("TitilliumWeb-Regular"), url(https://fonts.gstatic.com/s/titilliumweb/v4/7XUFZ5tgS-tD6QamInJTcSo_WB_cotcEMUw1LsIE8mM.woff2) format("woff2");
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
-
-/* latin */
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 400;
-  src: local("Titillium Web"), local("TitilliumWeb-Regular"), url(https://fonts.gstatic.com/s/titilliumweb/v4/7XUFZ5tgS-tD6QamInJTcZSnX671uNZIV63UdXh3Mg0.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
-
-/** {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  .weight-control {
-    font-family: 'Titillium Web', sans-serif;
-  }
-}
-
 /**
  *  Do not remove the comment below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
@@ -75,6 +50,9 @@ h2 {
 
 .view {
   height: 100%; }
+
+.text-align-right {
+  text-align: right !important; }
 
 .md-select-menu-container md-option {
   height: 28px; }

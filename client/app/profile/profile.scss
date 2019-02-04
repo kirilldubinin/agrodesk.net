@@ -1,3 +1,4 @@
+@import "../variables";
 .profile {
 	height: calc(100% - 14px);
     padding: 0 20px;
@@ -9,7 +10,7 @@
 
     .profile-title {
     	color: #3F51B5;
-	    border-bottom: 3px solid #FF9800;
+	    border-bottom: 3px solid $orange;
 	    padding: 20px 0 12px 0;
 	    margin-bottom: 20px;
     }
@@ -52,7 +53,7 @@
     .edit-actions {
     	min-height: 60px;
 		height: 60px;
-		border-top: 3px solid #FF9800;
+		border-top: 3px solid $orange;
     }
 }
 

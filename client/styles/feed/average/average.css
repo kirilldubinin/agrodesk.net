@@ -14,7 +14,7 @@
     color: #3F51B5;
     font-size: 20px;
     padding-bottom: 12px;
-    border-bottom: 3px solid #FF9800; }
+    border-bottom: 3px solid #fdae39; }
     .average-card .average-title h2 {
       margin-top: 12px;
       font-size: 20px; }
@@ -48,15 +48,15 @@
       border-bottom: 1px solid #ddd;
       padding: 6px 2px; }
     .average-card .average-dashboard .property-values:hover .property-value {
-      border-bottom: 1px solid #FF9800; }
+      border-bottom: 1px solid #fdae39; }
     .average-card .average-dashboard .property-values:hover .property-label {
-      border-bottom: 1px solid #FF9800; }
+      border-bottom: 1px solid #fdae39; }
     .average-card .average-dashboard .property-values .property-value {
       color: #333;
       padding: 6px 20px;
       min-width: 60px;
       text-align: right;
-      border-left: 1px solid #FF9800;
+      border-left: 1px solid #fdae39;
       border-bottom: 1px solid #DDD;
       /*&.odd {
 			    	background-color: #f0f0f0;

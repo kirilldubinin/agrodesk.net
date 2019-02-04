@@ -294,7 +294,7 @@ var mailOptionsSilage = {
 var mailOptionsEpam = {
     from: '<kirill_dubinin@epam.com>', // sender address 
     to: 'kirill_dubinin@epam.com', // list of receivers 
-    subject: 'test', // Subject line 
+    subject: 'test22', // Subject line 
     html: 
         `<!doctype html>
         <section>
@@ -324,23 +324,23 @@ var mailOptionsEpam = {
                                     <td width="185">
                                         <table cellspacing="0" cellpadding="0">
 											<tr>
-												<td bgcolor="#00749c" style="padding: 8px 14px;border: 2px solid #00749c;">
-                                                    <a href="{ALERTLINKNEW}" style="text-decoration:none; color: #fff;">
-                                                    View New Results
-                                                    </a>
-													
-												</td>
+                                            <td bgcolor="#DCDCDC" style="padding: 8px 14px;border: 2px solid #DCDCDC; cursor: default;">
+											<a href="#" style="text-decoration:none; color: #fff; cursor: default;">
+											View New Results
+											</a>
+											
+										</td>
 											</tr>
 										</table>
                                     </td>
 									<td width="170">
                                         <table cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td bgcolor="#fff" style="padding: 8px 14px; border: 2px solid #00749c;background-color: #fff;">
-                                                    <a href="{ALERTLINKTOTAL}" style="text-decoration:none; color: #000;">
-                                                        View All Results
-                                                    </a>
-                                                </td>
+                                            <td bgcolor="#00749c" style="padding: 8px 14px; border: 2px solid #00749c;background-color: #00749c;">
+                                                <a href="#" style="text-decoration:none; color: #fff;">
+                                                    View All Results
+                                                </a>
+                                            </td>
                                             </tr>    
                                         </table>
                                     </td>

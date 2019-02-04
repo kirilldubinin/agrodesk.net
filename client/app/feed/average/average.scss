@@ -1,3 +1,4 @@
+@import "../../variables";
 .average-card {
 	padding: 0 20px;
     height: 100%;
@@ -19,7 +20,7 @@
     	color: #3F51B5;
 	    font-size: 20px;
 	    padding-bottom: 12px;
-	    border-bottom: 3px solid #FF9800;
+	    border-bottom: 3px solid $orange;
 
 	    h2 {
 	    	margin-top: 12px;
@@ -79,11 +80,11 @@
 			&:hover {
 
 				.property-value {
-					border-bottom: 1px solid #FF9800;
+					border-bottom: 1px solid $orange;
 				}
 
 				.property-label {
-					border-bottom: 1px solid #FF9800;
+					border-bottom: 1px solid $orange;
 				}
 			}
 			.property-value {
@@ -91,7 +92,7 @@
 			    padding: 6px 20px;
 			    min-width: 60px;
 			    text-align: right;
-			    border-left: 1px solid #FF9800;
+			    border-left: 1px solid $orange;
 			    border-bottom: 1px solid #DDD;
 
 			    /*&.odd {

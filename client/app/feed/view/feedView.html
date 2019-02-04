@@ -16,10 +16,12 @@
         <!--<div class="weight-wrapper" ng-class="{opened: feedView.feed.general.opened.value}"> -->
         <span class="weight-control" ng-class="{opened: feedView.feed.opened, done: feedView.feed.done }" ng-if="feedView.feed.totalWeight">
             <span class="balance">
-                {{::feedView.feed.balanceWeight}}
+                {{::feedView.feed.balanceWeight || '?'}}
+                <md-tooltip md-direction="bottom">осталось тонн</md-tooltip>
             </span>
-            <span class="total">
+            <span class="total" tooltip="всего тонн">
                 {{::feedView.feed.totalWeight}}
+                <md-tooltip md-direction="bottom">всего тонн</md-tooltip>
             </span>
         </span>
         <!--</div>-->

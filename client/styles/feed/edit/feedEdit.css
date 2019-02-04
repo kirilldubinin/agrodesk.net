@@ -1,9 +1,9 @@
 .feed-edit {
-  border: 3px solid #FF9800;
+  border: 3px solid #fdae39;
   padding: 20px 10px 0 10px; }
   .feed-edit .feed-edit-header {
     min-height: 50px;
-    border-bottom: 3px solid #FF9800; }
+    border-bottom: 3px solid #fdae39; }
     .feed-edit .feed-edit-header .analysis .title {
       margin-right: 15px; }
     .feed-edit .feed-edit-header .title {
@@ -43,4 +43,4 @@
   .feed-edit .feed-edit-actions {
     min-height: 60px;
     height: 60px;
-    border-top: 3px solid #FF9800; }
+    border-top: 3px solid #fdae39; }

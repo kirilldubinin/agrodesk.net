@@ -1,3 +1,4 @@
+@import "../../variables";
 .feed-view {
 	padding: 0 20px;
 	height: 100%;
@@ -48,7 +49,7 @@
 	}
 
 	.feed-view-header { 
-		border-bottom: 3px solid #FF9800;
+		border-bottom: 3px solid $orange;
 	    padding-bottom: 8px;
 	    text-transform: uppercase;
 	    color: #212121;
@@ -196,7 +197,7 @@
 	.print-title {
 		background-color: #fff;
 		font-weight: 700;
-	    border-bottom: 3px solid #FF9800;
+	    border-bottom: 3px solid $orange;
 	    padding-bottom: 6px;
 
 		h2 {

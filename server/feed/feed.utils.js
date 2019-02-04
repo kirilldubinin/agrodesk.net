@@ -78,6 +78,8 @@ var requiredFields = {
     'general.feedType': 'required',
     'general.composition': 'required',
     'general.year': 'required',
+    'general.totalWeight': 'required',
+    'general.balanceWeight': 'required',
     'analysis.number': 'required',
     'analysis.dryMaterial': 'required',
     'analysis.date': 'required'

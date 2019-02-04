@@ -1,8 +1,17 @@
-var Feed = require('../models/feed');
 var lang = require('./lang');
-var feedUtils = require('./feed.utils');
-var dimension = require('./dimension.sum');
 var _ = require('lodash');
+
+function getFeedIconName (feed) {
+    const feedType = feed.general.feedType;
+    if (feedType === 'haylage' || feedType === 'greenWeight') {
+        return 'grass';
+    } else if (feedType === 'silage') {
+        return 'corn';
+    } else if (feedType === 'grain' || feedType === 'cornSilage') {
+        return 'grain';
+    }
+    return null;
+}
 
 function sortFeeds (a,b) {
     
@@ -44,6 +53,7 @@ function list(feeds) {
 
         return _.merge({}, feed.general, {
             _id: feed._id,
+            icon: getFeedIconName(feed),
             analysis: feed.analysis ? feed.analysis.length : 0,
             feedType: lang(feed.general.feedType),
             field: feed.general.field ? 

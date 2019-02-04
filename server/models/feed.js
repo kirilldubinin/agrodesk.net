@@ -157,12 +157,12 @@ var goldObject = {
         feedType: 'none',
         composition: '',
         year: null,
+        totalWeight: null,
+        balanceWeight: null,
         branch: '',
         storage: '',
         storageType: '',
         field: '',
-        totalWeight: null,
-        balanceWeight: null,
         price: null,
         opened: false,
         done: false
@@ -224,8 +224,10 @@ FeedSchema.pre('validate', function(next) {
     if (!this.general.year || 
         this.general.feedType === 'none' || 
         !this.general.feedType ||
+        !_.isNumber(this.general.totalWeight) ||
+        !_.isNumber(this.general.balanceWeight) ||
         !this.general.composition) {
-        return next(Error('"Год", "Тип" и "Состав" корма обязательны для заполнения.'));
+        return next(Error('"Год", "Тип", "Состав" и "Вес" корма обязательны для заполнения.'));
     } 
 
     // analysis
