@@ -7,9 +7,9 @@
 
         vm.tenantName = $state.params.tenant;
         vm.user = {
-            tenantname: 'ZARYA',// vm.tenantName || '',
-            username: 'ZARYA',
-            password: 'X8vZxo'
+            tenantname: vm.tenantName || '',
+            username: '',
+            password: ''
         };
         vm.do = function () {
             authFactory.login(vm.user).then(
