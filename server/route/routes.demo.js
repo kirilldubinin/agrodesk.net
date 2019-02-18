@@ -26,14 +26,13 @@ var demoConfig = {
     
     viewDemoFeedId: '588f5567a136f8601a505728', //'5874df36beef28178710c156'
     
-    diffDemoFeedIds: ['588f5353a136f8601a505726','5be02bd41095212584e622c8', '5be025141095212584e622c6'],
+    diffDemoFeedIds: ['588f5353a136f8601a505726','588f4ecfa136f8601a505724', '588f4c21a136f8601a505722'],
     
     averageDemoFeedIds: ['588f4854a136f8601a50571e','588f4c21a136f8601a505722', '588f5353a136f8601a505726'],
     
-    sumDemoFeedIds: ['588f5353a136f8601a505726','5be02bd41095212584e622c8','5be025141095212584e622c6',
-    '5beb25e78b06987fff3ea51a','5c57ea83c6735316c82e3d78'],
+    sumDemoFeedIds: ['588f4ecfa136f8601a505724','588f5353a136f8601a505726'],
 
-    ratingDemoFeeds: ['588f4854a136f8601a50571e', '588f4c21a136f8601a505722', '588f5353a136f8601a505726'],
+    ratingDemoFeeds: ['588f5353a136f8601a505726', '588f4ecfa136f8601a505724', '588f4c21a136f8601a505722'],
     
     chartsDemoFeeds:    ['58957f9b9149da6cbc815976','589495e729f0f068bd468f2e','589495e729f0f068bd468f2c',
                         '5894943b29f0f068bd468f2a','5894931729f0f068bd468f28','5891ef318548cb4080704792'
@@ -41,7 +40,6 @@ var demoConfig = {
     
     planningDemoFeeds: ['588f5353a136f8601a505726', '588f4ecfa136f8601a505724']
 };
-
 var demoCache = {};
 
 module.exports = function(app, isAuthenticated, errorHandler) {
@@ -253,8 +251,11 @@ module.exports = function(app, isAuthenticated, errorHandler) {
                 try {
                     demoCache.ratingDemo = rating(feeds, feedType);  
                 } catch(e) {
-                    console.log(e);
+                console.log(e);
                 }
+
+                  
+                console.log(demoCache.ratingDemo);
                 return res.json(demoCache.ratingDemo);
             }, function(err) {
                 res.send(err);
