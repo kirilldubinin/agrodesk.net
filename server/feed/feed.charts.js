@@ -19,6 +19,7 @@ function charts(feeds) {
     feeds = _.filter(feeds, (feed) => {
         return _.size(feed.analysis) && feed.general.totalWeight;
     });
+
     var series = ['dryMaterial', 'ph', 'milkAcid', 'aceticAcid', 'oilAcid', 
                 'exchangeEnergy', 'nel', 'crudeAsh', 'crudeProtein', 'crudeFat',
                 'sugar', 'starch', 'crudeFiber', 'ndf', 'adf', 'adl'];
@@ -32,7 +33,7 @@ function charts(feeds) {
             .map((feed) => {
                 var lastAnalys = _.last(feed.analysis);
                 var value = null;
-                allYears.push(lastAnalys.date.getFullYear());
+                allYears.push(feed.general.year);
                 if (_.isNumber(lastAnalys[seria])) {
                     if (feedUtils.propertyForRecalculate[seria]) {
                         value = lastAnalys.isNaturalWet ? 
@@ -47,7 +48,8 @@ function charts(feeds) {
                         year: feed.general.year,
                         value: value,
                         // dry weight
-                        dryWeight: feed.general.totalWeight / lastAnalys.dryMaterial
+                        // total weight(tonn) * 1000 (tonn -> kg) * dryMaterial/100
+                        dryWeight: feed.general.totalWeight * 1000 * lastAnalys.dryMaterial / 100
                     };
                 }
             })

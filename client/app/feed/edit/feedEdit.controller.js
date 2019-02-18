@@ -2,7 +2,7 @@
     'use strict';
     angular.module('feed').controller('FeedEditController', FeedEdiController);
     /** @ngInject */
-    function FeedEdiController($window, $stateParams, $state, $scope, feedFactory, FEED_TYPES, STORAGE_TYPES) {
+    function FeedEdiController($stateParams, $state, feedFactory, FEED_TYPES, STORAGE_TYPES) {
         var vm = this;
 
         vm.feedItem = {

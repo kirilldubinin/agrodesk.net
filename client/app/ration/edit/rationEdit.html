@@ -1,368 +1,97 @@
 <div class="ration-edit" layout="column">
+    <!-- HEADER -->
+    <div class="ration-sub-title" layout="row">
+        <h2 flex="25">ПАРАМЕТРЫ</h2>
+        <h2 class="text-center" flex="">СОСТАВ</h2>
+    </div>
     <!-- CONTENT -->
-    <div class="ration-edit-content" flex="" layout="column">
-        <md-tabs flex="" md-border-bottom="" md-dynamic-height="">
-
-            <md-tab ng-repeat="section in rationEdit.ration" label="{{section.label}}" >
-                <div ng-switch="section.key" class="md-padding">
-                    <div layout="row" flex ng-switch-when="general">
-                        <div flex>
-                            <md-input-container 
-                                class=""
-                                ng-repeat="control in 
-                                    [section.controls.type, section.controls.name, section.controls.target]">
-                                <label>{{control.label}}</label>
-                                <input type="text" ng-model="section.initialItem[control.key]"/>
-                            </md-input-container>    
-                        </div>
-
-                        <div flex="30">
-                            <md-input-container 
-                                class=""
-                                ng-repeat="control in 
-                                    [section.controls.groupName, section.controls.cowWeight]">
-                                <label>{{control.label}}</label>
-                                <input type="text" ng-model="section.initialItem[control.key]"/>
-                            </md-input-container>    
-                        </div>
-
-                        <div flex="30">
-                            <md-input-container 
-                                class=""
-                                ng-repeat="control in 
-                                    [section.controls.startDate, section.controls.endDate]">
-                                <label>{{control.label}}</label>
-                                <input type="text" ng-model="section.initialItem[control.key]"/>
-                            </md-input-container>    
-                        </div>
-                        
+    <div class="ration-view-content" flex layout="row">
+        <div class="ration-info" flex="25" layout="column">
+            <md-input-container class="ration-property" 
+                flex="" 
+                ng-repeat="(key, data) in rationEdit.rationGeneral.controls"
+                ng-class="{booleanProperty : data.isBoolean, required: data.isRequired}" >
+                <!-- LABEL -->
+                <label class="self-explanation-link" ng-if="!data.isBoolean">
+                    {{data.label + (data.dimension ? (', ' + data.dimension) : '')}}
+                </label>
+                <!-- SELECT -->
+                <md-select ng-if="data.isEnum && data.key === 'rationType'" ng-model="rationEdit.rationGeneral.initialItem[data.key]">
+                    <md-option ng-repeat="type in rationEdit.rationTypes" ng-value="type.value">
+                        {{type.name}}
+                    </md-option>
+                </md-select>
+                <!-- INPUT NUMBER -->
+                <input ng-disabled="data.isDisabled" ng-if="data.isNumber" ng-model="rationEdit.rationGeneral.initialItem[data.key]" type="number"/>
+                <!-- INPUT DATE -->
+                <md-datepicker class="date-picker" ng-if="data.isDate" ng-model="rationEdit.rationGeneral.initialItem[data.key]">
+                </md-datepicker>
+                <!-- INPUT OTHER -->
+                <input ng-disabled="data.isDisabled" ng-if="!data.isBoolean && !data.isNumber && !data.isEnum && !data.isDate" 
+                    ng-model="rationEdit.rationGeneral.initialItem[data.key]"/>
+            </md-input-container>
+            
+        </div>  
+        <div class="composition" flex layout="column">
+            <div class="composition-title" layout="row">
+                <div class="component-index" flex="2">
+                    #
+                </div>
+                <div class="component-name" flex="">
+                    Компонент
+                    <ng-md-icon icon="note_add" class="add-component" ng-click="rationEdit.addComponent()">
+                    </ng-md-icon>
+                </div>
+                <div class="" flex="10">
+                    Цена, руб./кг.
+                </div>
+                <div class="" flex="10">
+                    СВ в 1 кг, кг.
+                </div>
+                <div class="" flex="15">
+                    На голову в сутки, кг.
+                </div>
+                <div class="" flex="15">
+                    На группу в месяц, кг.
+                </div>
+            </div>  
+            <div class="scroll-wrapper" flex>
+                <div class="composition-item" layout="row" 
+                    ng-repeat="component in rationEdit.rationComposition.initialItem track by $index">
+                    <div class="component-index" flex="2">
+                        <span>{{component.number}}</span>
+                        <ng-md-icon icon="delete_forever" ng-click="rationEdit.removeComponent(component)" class="remove-item"></ng-md-icon>
                     </div>
-                    <div ng-switch-when="feeds">
-                        <table>
-                            <thead>
-                                <th ng-repeat="cell in section.header">
-                                    {{cell.label}}
-                                </th>
-                            </thead>
-                            <tbody>
-
-                                <tr ng-repeat="cell in section.body">
-                                    <td>
-                                    </td>
-                                    <td class="feed-name">
-                                        <md-autocomplete 
-                                        md-item-text="item.name" 
-                                        md-items="item in rationEdit.querySearch(rationEdit.searchText)" md-menu-class="autocomplete-custom-template" 
-                                        md-min-length="0" 
-                                        md-no-cache="rationEdit.noCache" 
-                                        md-search-text="rationEdit.searchText" 
-                                        md-search-text-change="rationEdit.searchTextChange(rationEdit.searchText)" md-selected-item="rationEdit.selectedItem" 
-                                        md-selected-item-change="rationEdit.selectedItemChange(item)" 
-                                        ng-disabled="rationEdit.isDisabled" 
-                                        md-menu-class="autocomplete-custom-template"
-                                        placeholder="Выберите корм">
-                                            <md-item-template>
-                                                <div class="item-title">
-                                                    {{item.name}} <b>{{item.year}}</b>
-                                                </div>
-                                                <p class="item-storage">
-                                                    {{item.branch}} {{item.storage}}
-                                                </p>
-                                            </md-item-template>
-                                        </md-autocomplete>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td> 
-                                </tr>   
-
-                                <tr class="total">
-                                    <td>
-                                    </td>
-                                    <td class="feed-name">
-                                        <md-button class="md-raised" ng-click="rationEdit.addFeed()">
-                                            Добавить
-                                        </md-button>
-                                    </td>
-                                    <td>
-                                        {{rationEdit.totalWeight}}
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        {{rationEdit.totalDryWeight}}
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        {{rationEdit.totalPrice}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="component-name" flex="">
+                        <input ng-model="component.name"/>
+                        <md-select ng-model="component.componentType" class="component-type">
+                            <md-option ng-repeat="type in rationEdit.feedTypes" ng-value="type.value">
+                                {{type.name}}
+                            </md-option>
+                        </md-select>
+                    </div>
+                    <div class="" flex="10">
+                        <input type="number" ng-model="component.price" ng-change="rationEdit.update()"/>
+                    </div>
+                    <div class="" flex="10">
+                        <input type="number" ng-model="component.dryMaterial"/>
+                    </div>
+                    <div class="" flex="15">
+                        <input type="number" ng-model="component.value" ng-change="rationEdit.update()"/>
+                    </div>
+                    <div class="" flex="15">
+                        {{ rationEdit.perGroupInMonth(component.value) }}
                     </div>
                 </div>
-            </md-tab>
-
-            <!--md-tab label="Свойства">
-                <div layout="row"  class="md-padding">
-                    <div flex="" layout="column" class="md-padding">
-                        <md-input-container>
-                            <label class="self-explanation-link" ng-if="!data.isBoolean">
-                                Тип
-                            </label>
-                            <input type="text"/>
-                        </md-input-container>
-                        <md-input-container>
-                            <label class="self-explanation-link" ng-if="!data.isBoolean">
-                                Цель
-                            </label>
-                            <input type="text"/>
-                        </md-input-container>
-                        <md-input-container flex="">
-                            <label class="self-explanation-link" ng-if="!data.isBoolean">
-                                Имя
-                            </label>
-                            <input type="text"/>
-                        </md-input-container>
-                    </div>
-                    <div flex="" layout="column" class="md-padding">
-                        <md-input-container>
-                            <label class="self-explanation-link" ng-if="!data.isBoolean">
-                                Группа коров
-                            </label>
-                            <input type="text"/>
-                        </md-input-container>
-                        <md-input-container>
-                            <label class="self-explanation-link" ng-if="!data.isBoolean">
-                                Вес коров
-                            </label>
-                            <input type="text"/>
-                        </md-input-container>
-                    </div>
-                    <div flex="" layout="column" class="md-padding">
-                        <md-checkbox class="checkbox md-primary">
-                            В кормлении
-                        </md-checkbox>
-                        <md-input-container>
-                            <label class="self-explanation-link" ng-if="!data.isBoolean">
-                                Начало кормления
-                            </label>
-                            <input type="text"/>
-                        </md-input-container>
-                        <md-input-container>
-                            <label class="self-explanation-link" ng-if="!data.isBoolean">
-                                Конец кормления
-                            </label>
-                            <input type="text"/>
-                        </md-input-container>
-                    </div>
-                </div>
-            </md-tab>
-            <md-tab label="Состав">
-                <md-content class="md-padding">
-                    <div class="composition" flex="">
-                        <table>
-                            <thead>
-                                <th>
-                                    #
-                                </th>
-                                <th class="feed-name">
-                                    Компонент
-                                </th>
-                                <th>
-                                    Доля, кг
-                                </th>
-                                <th>
-                                    СВ, г/кг
-                                </th>
-                                <th>
-                                    Итого СВ, кг
-                                </th>
-                                <th>
-                                    Цена, руб/кг
-                                </th>
-                                <th>
-                                    Цена, руб
-                                </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <ng-md-icon class="delete-feed-item" icon="delete_forever" size="20">
-                                            <md-tooltip md-direction="bottom">
-                                                Удалить компонент
-                                            </md-tooltip>
-                                        </ng-md-icon>
-                                    </td>
-                                    <td class="feed-name">
-                                        <md-autocomplete 
-                                        md-item-text="item.name" 
-                                        md-items="item in rationEdit.querySearch(rationEdit.searchText)" md-menu-class="autocomplete-custom-template" 
-                                        md-min-length="0" 
-                                        md-no-cache="rationEdit.noCache" 
-                                        md-search-text="rationEdit.searchText" 
-                                        md-search-text-change="rationEdit.searchTextChange(rationEdit.searchText)" md-selected-item="rationEdit.selectedItem" 
-                                        md-selected-item-change="rationEdit.selectedItemChange(item)" 
-                                        ng-disabled="rationEdit.isDisabled" 
-                                        md-menu-class="autocomplete-custom-template"
-                                        placeholder="Выберите корм">
-                                            <md-item-template>
-                                                <div class="item-title">
-                                                    {{item.name}} <b>{{item.year}}</b>
-                                                </div>
-                                                <p class="item-storage">
-                                                    {{item.branch}} {{item.storage}}
-                                                </p>
-                                            </md-item-template>
-                                        </md-autocomplete>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td class="feed-name">
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                    <td>
-                                        <input type="text"/>
-                                    </td>
-                                </tr>
-                                <tr class="total">
-                                    <td>
-                                    </td>
-                                    <td class="feed-name">
-                                        <md-button class="md-raised" ng-click="">
-                                            Добавить
-                                        </md-button>
-                                    </td>
-                                    <td>
-                                        21.6
-                                    </td>
-                                    <td>
-                                        52.6
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        154.80
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </md-content>
-            </md-tab>
-            <md-tab label="Параметры">
-                <md-content class="md-padding">
-                    <div class="properties" flex="">
-                        <table>
-                            <thead>
-                                <th>
-                                    #
-                                </th>
-                                <th class="property-name">
-                                    Параметры
-                                </th>
-                                <th>
-                                    Мин.
-                                </th>
-                                <th>
-                                    Содержание
-                                </th>
-                                <th>
-                                    Макс.
-                                </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td class="property-name">
-                                        Сухое вещество, г
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        21586
-                                    </td>
-                                    <td>
-                                        22000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td class="property-name">
-                                        Влажность рациона, %
-                                    </td>
-                                    <td>
-                                        45
-                                    </td>
-                                    <td>
-                                        58.5
-                                    </td>
-                                    <td>
-                                        60
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </md-content>
-            </md-tab-->
-        </md-tabs>
+            </div>  
+        </div>
     </div>
     <!-- ACTIONS -->
     <div class="ration-edit-actions" layout="row" layout-align="center left" layout-sm="column" layout-wrap="">
-        <md-button class="md-raised" ng-click="feedEdit.cancel()">
+        <md-button class="md-raised" ng-click="rationEdit.cancel()">
             Отмена
         </md-button>
-        <md-button class="md-raised md-primary" ng-click="feedEdit.save()">
+        <md-button class="md-raised md-primary" ng-click="rationEdit.save()">
             Сохранить
         </md-button>
     </div>

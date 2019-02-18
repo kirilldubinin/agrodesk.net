@@ -17,22 +17,29 @@ var balance = require('../feed/feed.balance');
 var progress = require('../feed/feed.progress');
 var charts = require('../feed/feed.charts');
 var list = require('../feed/feed.list');
-var rating = require('../feed/feed.rating');
+var rating = require('../feed/feed.rating').getRaiting;
 var lang = require('../feed/lang');
 
 var demoConfig = {
     tenantId: '588f2a75a136f8601a50571c',// '586e44a29f6b081ab6bb947a',
     tenantName: 'demo',
+    
     viewDemoFeedId: '588f5567a136f8601a505728', //'5874df36beef28178710c156'
+    
     diffDemoFeedIds: ['588f5353a136f8601a505726','5be02bd41095212584e622c8', '5be025141095212584e622c6'],
+    
     averageDemoFeedIds: ['588f4854a136f8601a50571e','588f4c21a136f8601a505722', '588f5353a136f8601a505726'],
-    sumDemoFeedIds: ['588f4854a136f8601a50571e','588f4c21a136f8601a505722','588f5353a136f8601a505726',
-    '588f5567a136f8601a505728','588f571ca136f8601a50572a','588f4a90a136f8601a505720'],
+    
+    sumDemoFeedIds: ['588f5353a136f8601a505726','5be02bd41095212584e622c8','5be025141095212584e622c6',
+    '5beb25e78b06987fff3ea51a','5c57ea83c6735316c82e3d78'],
+
     ratingDemoFeeds: ['588f4854a136f8601a50571e', '588f4c21a136f8601a505722', '588f5353a136f8601a505726'],
+    
     chartsDemoFeeds:    ['58957f9b9149da6cbc815976','589495e729f0f068bd468f2e','589495e729f0f068bd468f2c',
                         '5894943b29f0f068bd468f2a','5894931729f0f068bd468f28','5891ef318548cb4080704792'
                         ,'5891edc18548cb4080704790'],
-    planningDemoFeeds: ['588f4854a136f8601a50571e', '588f4c21a136f8601a505722']
+    
+    planningDemoFeeds: ['588f5353a136f8601a505726', '588f4ecfa136f8601a505724']
 };
 
 var demoCache = {};
@@ -246,11 +253,8 @@ module.exports = function(app, isAuthenticated, errorHandler) {
                 try {
                     demoCache.ratingDemo = rating(feeds, feedType);  
                 } catch(e) {
-                console.log(e);
+                    console.log(e);
                 }
-
-                  
-                console.log(demoCache.ratingDemo);
                 return res.json(demoCache.ratingDemo);
             }, function(err) {
                 res.send(err);

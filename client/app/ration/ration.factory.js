@@ -1,4 +1,5 @@
-angular.module('ration').factory('rationFactory', ['$http', '$location', function($http, $location) {
+angular.module('ration')
+.factory('rationFactory', ['$http', '$location', function($http) {
 
     var host = '';
     var urlBase = host + '/api/';
@@ -16,6 +17,12 @@ angular.module('ration').factory('rationFactory', ['$http', '$location', functio
         var methode = ration._id ? 'put' : 'post';
         var url = ration._id ? (urlBaseRation + ration._id) : urlBaseRation;
         return $http[methode](url, ration);
+    };
+    rationFactory.getRationEdit = function (rationId) {
+        return $http.get(urlBaseRation + rationId + '/edit');
+    };
+    rationFactory.getRationView = function(rationId) {
+        return $http.get(urlBaseRation + rationId + '/view');
     };
     rationFactory.getEmptyRation = function() {
         return $http.post(urlBaseRation + 'new');

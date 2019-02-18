@@ -1,10 +1,20 @@
 (function() {
     'use strict';
-    RationViewController.$inject = ['$mdDialog', '$stateParams', '$state', 'authFactory', 'feedFactory', '_']
+    RationViewController.$inject = ['$mdDialog', '$stateParams', '$state', 'authFactory', 'rationFactory', '_']
     angular.module('ration').controller('RationViewController', RationViewController);
 
-    function RationViewController($mdDialog, $stateParams, $state, authFactory, feedFactory, _) {
+    function RationViewController($mdDialog, $stateParams, $state, authFactory, rationFactory, _) {
         var vm = this;
+        var rationId = $stateParams.rationId;
+        if (!rationId) {
+            return;
+        }
+
+        rationFactory.getRationView(rationId).then(function(rationView) {
+            vm.general = rationView[0];
+            vm.composition = rationView[1];
+        });
+
         vm.components = [
             {
                 index: '01',

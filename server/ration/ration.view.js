@@ -4,6 +4,11 @@ var lang = require('./ration.lang');
 var dimension = require('./ration.dimension');
 
 function convertValue(key, val) {
+    if (key === 'ratio') {
+        return getRatio(val);
+    } else if (key === 'rationType') {
+        return lang(val);
+    }
     return val;
 }
 
@@ -22,86 +27,54 @@ function convertToControl(item) {
     });
     return viewObj;
 }
- 
+
+function getRatio(val) {
+    // ok + kk = 100
+    // ok/kk = val
+    // ok = kk * val
+    // kk * val + kk = 100
+    // kk(val + 1) = 100
+    var kk = Math.round(100 / (1+val));
+    var ok = 100 - kk;
+
+    return (ok + ' / ' + kk);
+}
+
 function convert(ration, sessionData) {
 
-	var generalView = convertToControl(ration.general);
-    var feedsView = _.size(ration.feeds) ? 
-    	{
-	    	head: _.map([
-	    		'#',
-				'component', 
-				'proportionWeight', 
-				'dryMaterial', 
-				'totalDryMaterial', 
-				'priceKilo',
-				'price'], lang),
-	    	body: 
-	    		_.map(ration.feeds, function (feed) {
-	    			return [
-	    				_.omitBy({
-		    				feedId: feed._id,
-		    				name: feed.name,
-		    				year: feed.year,
-		    				branch: feed.branch,
-		    				storage: feed.storage
-		    			},_.isUndefined),
-		    			feed.weight,
-		    			feed.dryMaterial,
-		    			Math.round(feed.weight*feed.dryMaterial/1000), //totalDryMaterial
-		    			feed.price, //priceKilo
-		    			Math.round(feed.weight * feed.price) //price
-	    			] 
-	    		}),
-	    	footer: [
-	    		'',
-	    		'',
-	    		_.sumBy(ration.feeds, 'weight'), // weight
-	    		'',
-	    		_.sumBy(ration.feeds, 'dryMaterial')/1000, // dry material
-	    		'',
-	    		_.sumBy(ration.feeds, function (feed) {
-	    			return Math.round(feed.weight * feed.price);
-	    		})
-	    	]
-	    } :
-	    null;
-
-    var parametersView = _.size(ration.feeds) ?
-    	{
-    		head: _.map([
-	    		'#',
-				'parameters', 
-				'min', 
-				'current', 
-				'max'], lang)
-    	} :
-    	null;
-
-
-    var rationItemSections = [generalView];
-    feedsView && rationItemSections.push(feedsView);
-    //var parametersView = convertToControl(ration.parameters);
-    return {
-    	general: ration.general,
-    	rationItemSections: [
-    		{
-	            label: lang('general'),
-	            key: 'general',
-	            controls: generalView
-    		},
-    		{
-	            label: lang('feeds'),
-	            key: 'feeds',
-	            controls: feedsView
-    		},
-    		{
-	            label: lang('parameters'),
-	            key: 'parameters',
-	            controls: parametersView
-    		}
-    	]
-    };
+	return [
+        {
+            label: lang('general'),
+            key: 'general',
+            controls: Ration.sort(convertToControl(ration.general), 'general')
+        },
+        {
+            label: lang('composition'),
+            key: 'composition',
+            header: [
+                {
+                    label: '#'
+                },
+                {
+                    label: lang('component')
+                },
+                {
+                    label: lang('price')
+                },
+                {
+                    label: lang('dryMaterial')
+                },
+                {
+                    label: lang('kiloPerDay')
+                }
+            ],
+            body: _.map(ration.composition, (item) => {
+				return _.merge(item, {
+                    valuePerMonth: (Math.round(ration.general.cowsNumber * 30 * item.value * 100)/100) || 0
+				})
+			})
+        }
+    ];
 }
 
 module.exports = convert;

@@ -18,100 +18,121 @@ var RationSchema = new Schema({
         }
     },
     general: {
-        type: {
+        // number
+        number: {
             type: String,
             required: true
         },
-        target: {
+        // rationType
+        rationType: {
             type: String,
             required: true
         },
+        // name
         name: {
             type: String,
             required: true
         },
+        // name of cow group
         groupName: {
             type: String
         },
-        cowWeight: {
-            type: Number
+        // nomber of cows
+        cowsNumber: {
+            type: Number,
+            required: true
+        },
+        // consumption of dry material
+        dryMaterialConsumption: {
+            type: Number,
+            required: true
+        },
+        // estimated productivity
+        estimatedProductivity: {
+            type: Number,
+            required: true
+        },
+        // actual productivity
+        actualProductivity: {
+            type: Number,
+            required: true
+        },
+        fat: {
+            type: Number,
+            required: false
+        },
+        protein: {
+            type: Number,
+            required: false
+        },
+        // ration price
+        rationPrice: {
+            type: Number,
+            required: true
+        },
+        // milk price
+        milkPrice: {
+            type: Number,
+            required: true
+        },
+        // efficiency
+        efficiency: {
+            type: Number,
+            required: true
+        },
+        // ratio OK/KK
+        ratio: {
+            type: Number,
+            required: true
         },
         startDate: Date,
         endDate: Date
     },
-    feeds: [{
-        _id: Schema.Types.ObjectId,
+    composition: [{
+        // if from FEED
+        _id: {
+            type: Schema.Types.ObjectId,
+            required: false
+        },
+        number: String,
         name: String,
-        year: Number,
-        branch: String,
-        storage: String,
-        weight: Number,
-        dryMaterial: Number, // gr/kilo
-        price: Number // for kilo
-    }],
-    parameters: [{
-        dryMaterial: {
-            type: Number,
-            required: true
-        },
-        wet: {
-        	type: Number
-        },
-        exchangeEnergy: Number,
-        exchangeEnergyInKg: Number,
-        nel: Number,
-        nelInKg: Number,
-        crudeProtein: Number,
-        nxp: Number,
-        rnb: Number,
-        crudeFat: Number,
-        crudeFiber: Number,
-        structuralFiber: Number,
-        sugar: Number,
-        starch: Number,
-        uncrackedStarch: Number,
-        starchPlusSugar: Number,
-        milkByNel: Number,
-        milkByProtein: Number,
-        milkByNxp: Number
+        componentType: String, // 'OK,KK,MK'
+        price: Number, // for kilo,
+        value: Number, // for coe per day kile
+        dryMaterial: Number
     }]
 });
 
 var goldObject = {
     general: {
-        type: '',
-        target: '',
+        number: '01',
+        rationType: 'milk',
         name: '',
         groupName: '',
-        cowWeight: null,
-        startDate: null,
-        endDate: null
+        cowsNumber: 0,
+        dryMaterialConsumption: 0,
+        estimatedProductivity: 0,
+        actualProductivity: 0,
+        fat: 0,
+        protein: 0,
+        rationPrice: 0,
+        milkPrice: 0,
+        efficiency: 0,
+        ratio: 0,
+        startDate: Date,
+        endDate: Date
     },
-    feeds: [],
-    parameters: [{
-        dryMaterial: null,
-        wet: null,
-        exchangeEnergy: null,
-        exchangeEnergyInKg: null,
-        nel: null,
-        nelInKg: null,
-        crudeProtein: null,
-        nxp: null,
-        rnb: null,
-        crudeFat: null,
-        crudeFiber: null,
-        structuralFiber: null,
-        sugar: null,
-        starch: null,
-        uncrackedStarch: null,
-        starchPlusSugar: null,
-        milkByNel: null,
-        milkByProtein: null,
-        milkByNxp: null
+    composition: [{
+        number: '01',
+        name: '',
+        componentType: 'OK',
+        price: 0,
+        value: 0,
+        dryMaterial: 0
     }]
 };
 
-RationSchema.statics.getEmptyFeed = function() {
+RationSchema.statics.getEmptyRation = function() {
     return goldObject;
 };
 RationSchema.statics.sort = function(object, rootProperty) {
@@ -125,8 +146,9 @@ RationSchema.statics.sort = function(object, rootProperty) {
 };
 RationSchema.pre('validate', function(next) {
     
+    console.log(this.general)
     // general properies
-    if (!this.general.type || 
+    if (!this.general.rationType || 
         !this.general.name) {
         return next(Error('"Тип" и "Имя" рациона обязательны для заполнения.'));
     } 

@@ -1,85 +1,42 @@
 @import "../../variables";
-.ration-view {
+.ration-edit {
+	border: 3px solid $orange;
 	padding: 0 20px;
 	height: 100%;
 	color: #212121;
-	.ration-title {
-		padding: 10px 0px 0px 4px;
-		b {
-			margin: 15px 20px 0 0px;
-		}
-		h2 {
-			margin: auto;
-		}
-		.ration-type {
-			background-color: #2196F3;
-		    color: #fff;
-		    border-radius: 3px;
-		    padding: 6px 8px;
-		    height: 26px;
-		    margin: auto 20px auto 0;
-		    text-transform: uppercase;
-		    font-size: 12px;
-		}
-	}
 	.ration-sub-title {
 		margin: 1em 0 0 0;
 		border-bottom: 2px solid $orange;
 		h2 {
 			color: #212121;
 			font-size: 16px;
-			margin-bottom: 6px;
+			margin-bottom: 1em;
 		}
 	}
 	.ration-info {
 		font-size: 12px;
 		margin-top: 2em;
-		
-		label {
-			display: inline-block;
-			color: #555;
-			padding: 8px 0;
-			font-size: 11px;
-			text-align: right;
-			margin-right: 2em;
-		}
-		span {
-			display: inline-block;
-			color: #222;
-			padding: 8px 0;
+		margin-right: 2em;
 
+		input {
+			font-family: Montserrat,sans-serif;
 		}
-		/*.ration-type {
-			background-color: #2196F3;
-		    color: #fff;
-		    border-radius: 3px;
-		    padding: 6px 8px;
-		    height: 26px;
-		    margin: auto 20px auto 0;
-		    text-transform: uppercase;
-		    font-size: 12px;
+		.ration-property {
+			&.required {
+				label {
+					color: rgb(255,87,34);
+				}
+			}
 		}
-
-		.ration-target {
-			background-color: #009688;
-		    color: #fff;
-		    border-radius: 3px;
-		    padding: 6px 8px;
-		    height: 26px;
-		    margin: auto 14px auto 0;
-		    text-transform: uppercase;
-		    font-size: 12px;
-		}
-		*/ 
 	}
 	.ration-view-content {
 
 		.composition {
 			font-size: 12px;
 			text-align: right;
-			height: 100%;
 			background-color: #fdfdfd;
 			margin-top: 2em;
+			margin-bottom: 2em;
 			box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 			.scroll-wrapper {
 				overflow: auto;
@@ -87,6 +44,7 @@
 			.component-index {
 				width: 40px;
 				text-align: left;
+				
 			}
 			.component-name {
 				text-align: left;
@@ -107,25 +65,75 @@
 				div:last-child {
 					padding-right: 16px;
 				}
+
+				.add-component {
+					color: rgb(63,81,181);
+					margin-left: 1em;
+					cursor: pointer;
+				}
 			}
 			.composition-item {
 				padding: 8px 0;
 				border-bottom: 2px solid #fff;
+				line-height: 3em;
+
+				input {
+					border: none;
+					width: 100%;
+					padding: 10px 6px;
+					border-bottom: 1px solid #fdae39;
+					background-color: #fff;
+					color: #555;
+					font-family: Montserrat,sans-serif;
+				}
+
+				.component-name {
+					position: relative;
+    				padding-right: 80px;
+					input {
+						width: 100%;
+					}
+					.component-type {
+						margin: 0;
+						position: absolute;
+						top: -4px;
+						right: 8px;
+						.md-select-value {
+							min-width: 50px;
+							border-bottom-color: #fdae39;
+						}
+					}
+				}
+
+				.component-index {
+					.remove-item {
+						display: none;
+						cursor: pointer;
+						color: rgb(255,87,34);
+						padding-top: 8px;
+						margin-left: -6px;
+					}
+				}
+
 				&>div {
 					padding: 0 8px;
 				}
-				div:first-child {
+				&>div:first-child {
 					padding-left: 16px;
 				}
-				div:last-child {
+				&>div:last-child {
 					padding-right: 16px;
 				}
 				&:hover {
 					background-color: #fff;
-				}
-				.rate {
-					font-weight: bold;
-					font-size: 14px;
+					.component-index {
+						span {
+							display: none;
+						}
+						.remove-item {
+							display: block;
+						}
+					}
 				}
 				&.mk {
 					.component-name {
@@ -171,5 +179,9 @@
 				}
 			}
 		}
+	}
+	.ration-edit-actions {
+		border-top: 3px solid #fdae39;
+		padding: 6px 0;
 	}
 }

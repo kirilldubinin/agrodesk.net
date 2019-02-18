@@ -1,6 +1,8 @@
 var _ = require('lodash');
 var lang = require('./ration.lang');
+var rationUtils = require('./ration.utils');
 var Ration = require('../models/ration');
+var dimension = require('./ration.dimension');
 
 function convertToControl(item, parentKey) {
 
@@ -8,7 +10,16 @@ function convertToControl(item, parentKey) {
     _.each(item, function(value, key) {
         if (item.hasOwnProperty(key)) {
             editObj[key] = {
+
+                isEnum: rationUtils.enumFields[parentKey + '.' + key],
+                isNumber: _.isNumber(value),
+                isBoolean: value === true || value === false,
+                //isDisabled: rationUtils.disabledFields[parentKey + '.' + key],
+                isRequired: rationUtils.requiredFields[parentKey + '.' + key],
+                isDate: rationUtils.dateFields[parentKey + '.' + key],
+
                 label: lang(key),
+                dimension: dimension(key),
                 key: key,
                 value: value
             }
@@ -19,11 +30,11 @@ function convertToControl(item, parentKey) {
 
 function convert(ration) {
     if (!ration) {
-        ration = Ration.getEmptyFeed();
+        ration = Ration.getEmptyRation();
     }
 
     // sort field
-    var goldFeed = Ration.getEmptyFeed();
+    var goldRation = Ration.getEmptyRation();
 
     return [
         {
@@ -33,44 +44,27 @@ function convert(ration) {
             controls: Ration.sort(convertToControl(ration.general, 'general'), 'general')
         },
         {
-            label: lang('feeds'),
-            key: 'feeds',
-            initialItem: ration.feeds,
+            label: lang('composition'),
+            key: 'composition',
+            initialItem: ration.composition,
             header: [
                 {
                     label: '#'
                 },
                 {
-                    label: lang('feed')
-                },
-                {
-                    label: lang('weight')
-                },
-                {
-                    label: lang('dryMaterial')
-                },
-                {
-                    label: lang('dryMaterialTotal')
+                    label: lang('component')
                 },
                 {
                     label: lang('price')
                 },
                 {
-                    label: lang('priceTotal')
+                    label: lang('dryMaterial')
+                },
+                {
+                    label: lang('kiloPerDay')
                 }
             ],
-            body: _.map(ration.feeds, function (feed, index) {
-
-                return [
-                    index,
-                    feed.name,
-                    feed.weight,
-                    feed.dryMaterial,
-                    Math.round(feed.weight * feed.dryMaterial),
-                    feed.price,
-                    Math.round(feed.weight * feed.price)
-                ];
-            })
+            body: ration.composition
         }
     ];
 }

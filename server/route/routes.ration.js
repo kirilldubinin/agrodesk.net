@@ -8,21 +8,14 @@ var User = require('../models/user');
 var Catalog = require('../models/catalog');
 var Ration = require('../models/ration');
 // helpers =====================================================================
-var diff = require('../feed/feed.diff');
-var sum = require('../feed/feed.sum');
-var average = require('../feed/feed.average');
-var view = require('../feed/feed.view');
 var edit = require('../ration/ration.edit');
-var balance = require('../feed/feed.balance');
-var charts = require('../feed/feed.charts');
-var rating = require('../feed/feed.rating');
-var list = require('../feed/feed.list');
-var lang = require('../feed/lang');
+var list = require('../ration/ration.list');
+var view = require('../ration/ration.view');
 
 module.exports = function(app, isAuthenticated, errorHandler, log) {
     
     function checkUserRightForRation(ration, req, res) {
-        var check = feed.createdBy.tenantId.equals(req.user.tenantId);
+        var check = ration.createdBy.tenantId.equals(req.user.tenantId);
         if (res && !check) {
             res.status(403).send({
                 message: 'You dont have permission for this object.'
@@ -34,6 +27,27 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
     app.get('/api/rations/dashboard', isAuthenticated, function(req, res) {
         
     });
+    // get rations for ration list
+    app.get('/api/rations', isAuthenticated, function(req, res) {
+        Ration.find({
+            'createdBy.tenantId': req.user.tenantId
+        }).lean().exec(function(err, rations) {
+            if (err) {
+                return errorHandler(err, req, res);
+            }
+            // double check checkUserRightForFeed
+            rations = _.filter(rations, function(f) {
+                return checkUserRightForRation(f, req);
+            });
+            res.json(list(rations));
+        });
+    });
+
+    // get ration skeleton
+    app.post('/api/rations/new', isAuthenticated, function(req, res) {
+        res.json(edit());
+    });
+
     // new ration
     app.post('/api/rations', isAuthenticated, function(req, res) {
         if (!req.user._id || !req.user.tenantId || !req.user.permissions) {
@@ -55,13 +69,8 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
             userId: req.user._id,
             tenantId: req.user.tenantId
         }
-
-        ration.name = req.body.name;
-        ration.description = req.body.description;
-        ration.targetCow = req.body.targetCow;
-        ration.feeds = req.body.feeds;
-        ration.feeds = req.body.feeds;
-
+        ration.general = req.body.general;
+        ration.composition = req.body.composition;
         ration.save(function(err, newRation) {
             if (err) {
                 return errorHandler(err, req, res);
@@ -73,24 +82,78 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
             }
         });
     });
-    // get feeds for feed list
-    app.get('/api/rations', isAuthenticated, function(req, res) {
-        Ration.find({
-            'createdBy.tenantId': req.user.tenantId
-        }).lean().exec(function(err, rations) {
+
+    // get ration by id for view mode
+    app.get('/api/rations/:ration_id/view', isAuthenticated, function(req, res) {
+        Ration.findById(req.params.ration_id).lean().exec(function(err, ration) {
             if (err) {
                 return errorHandler(err, req, res);
             }
-            // double check checkUserRightForFeed
-            rations = _.filter(rations, function(f) {
-                return checkUserRightForRation(f, req);
-            });
-            res.json(list(rations));
+            if (ration === null) {
+                return res.status(406).json({
+                    message: 'Нет рациона с таким идентификатором.'
+                });
+            }
+            if (checkUserRightForRation(ration, req, res)) {
+                return res.json(view(ration, req.user));
+            } else {
+                return res.status(406).json({
+                    message: 'Недостаточно прав.'
+                })
+            }
         });
     });
 
-    // get ration skeleton
-    app.post('/api/rations/new', isAuthenticated, function(req, res) {
-        res.json(edit());
+    // get ration by id for edit mode
+    app.get('/api/rations/:ration_id/edit', isAuthenticated, function(req, res) {
+        Ration.findById(req.params.ration_id).lean().exec(function(err, ration) {
+            if (err) {
+                return errorHandler(err, req, res);
+            }
+
+            if (ration === null) {
+                return res.status(406).json({
+                    message: 'Нет рациона с таким идентификатором.'
+                });
+            }
+
+            if (checkUserRightForRation(ration, req, res)) {
+                res.json(edit(ration));
+            }  else {
+                return res.status(406).json({
+                    message: 'Недостаточно прав.'
+                })
+            }
+        });
+    });
+
+    // update route by id
+    app.put('/api/rations/:ration_id', isAuthenticated, function(req, res) {
+        var canEdit = req.user.permissions.indexOf('admin') > -1 || req.user.permissions.indexOf('write') > -1;
+        if (!canEdit) {
+            return res.status(406).json({
+                message: 'Недостаточно прав'
+            });
+        }
+        Ration.findById(req.params.ration_id, function(err, ration) {
+            if (err) {
+                return errorHandler(err, req, res);
+            }
+            if (checkUserRightForRation(ration, req, res)) {
+                // !!! do not update createdBy and createdAt !!!
+                ration.general = req.body.general;
+                ration.composition = req.body.composition;
+                ration.save(function(err, updatedRation) {
+                    if (err) {
+                        return errorHandler(err, req, res);
+                    } else {
+                        res.json({
+                            message: 'OK',
+                            id: updatedRation._id
+                        });
+                    }
+                });
+            }
+        });
     });
 }
