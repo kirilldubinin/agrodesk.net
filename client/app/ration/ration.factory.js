@@ -6,7 +6,6 @@ angular.module('ration')
     var urlBaseRation = urlBase + 'rations/';
     var rationFactory = {};
 
-    // feed
     rationFactory.getRations = function() {
         return $http.get(urlBaseRation);
     };

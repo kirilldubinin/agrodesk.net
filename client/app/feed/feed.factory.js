@@ -9,6 +9,9 @@ angular.module('feed').factory('feedFactory', ['$http', '$location', function($h
     feedFactory.getFeeds = function() {
         return $http.get(urlBaseFeed);
     };
+    feedFactory.getFeedsForRation = function() {
+        return $http.get(urlBaseFeed + 'ration');
+    };
     feedFactory.getDemoFeeds = function() {
         return $http.get(urlBase + 'demoFeeds');
     };

@@ -14,7 +14,7 @@ function convertToControl(item, parentKey) {
                 isEnum: rationUtils.enumFields[parentKey + '.' + key],
                 isNumber: _.isNumber(value),
                 isBoolean: value === true || value === false,
-                //isDisabled: rationUtils.disabledFields[parentKey + '.' + key],
+                isDisabled: rationUtils.disabledFields[parentKey + '.' + key],
                 isRequired: rationUtils.requiredFields[parentKey + '.' + key],
                 isDate: rationUtils.dateFields[parentKey + '.' + key],
 

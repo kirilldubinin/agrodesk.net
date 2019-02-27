@@ -15,13 +15,7 @@
             vm.selectedItemId = $state.params.feedId;
             vm.updateVisible();
         });
-
-        /*feedFactory.getFeedDashboard().then(function(dashboard) {
-            vm.dashboard = dashboard;
-            setTimeout(function () {
-                Highcharts.chart('chartByFeedType', dashboard.balance.chartByFeedType);
-            }, 100);
-        });*/
+        
         vm.openMenu = function($mdOpenMenu, ev) {
             originatorEv = ev;
             $mdOpenMenu(ev);

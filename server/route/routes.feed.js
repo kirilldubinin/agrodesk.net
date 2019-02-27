@@ -18,6 +18,7 @@ var progress = require('../feed/feed.progress');
 var charts = require('../feed/feed.charts');
 var rating = require('../feed/feed.rating').getRaiting;
 var list = require('../feed/feed.list');
+var listRation = require('../feed/feed.list.ration');
 var lang = require('../feed/lang');
 
 module.exports = function(app, isAuthenticated, errorHandler, log) {
@@ -137,6 +138,23 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
             res.json(list(feeds));
         });
     });
+
+    // get feeds for feed list
+    app.get('/api/feeds/ration', isAuthenticated, function(req, res) {
+        Feed.find({
+            'createdBy.tenantId': req.user.tenantId
+        }).lean().exec(function(err, feeds) {
+            if (err) {
+                return errorHandler(err, req, res);
+            }
+            // double check checkUserRightForFeed
+            feeds = _.filter(feeds, function(f) {
+                return checkUserRightForFeed(f, req);
+            });
+            res.json(listRation(feeds));
+        });
+    });
+
     // get feeds by search query
     app.post('/api/feeds/search', isAuthenticated, function(req, res) {
         var query = req.body.query;

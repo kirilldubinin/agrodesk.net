@@ -2,8 +2,7 @@
     'use strict';
     angular.module('prokorm').controller('HomeController', HomeController);
     /** @ngInject */
-    function HomeController($scope, $state, authFactory, $mdDialog) {
-        var originatorEv;
+    function HomeController($scope, $state, authFactory) {
         var vm = this;
         vm.currentModule = '';
         authFactory.getSessionData().then(function(data) {
@@ -34,7 +33,7 @@
             $state.go('tenant.info');
         };        
 
-        $scope.$on('$stateChangeSuccess', function (event, newState, params, oldState) {
+        $scope.$on('$stateChangeSuccess', function (event, newState) {
             vm.currentModule = newState.data && newState.data.module;
         });
     }

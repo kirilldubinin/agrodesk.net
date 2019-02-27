@@ -4,11 +4,11 @@ var lang = require('./ration.lang');
 var dimension = require('./ration.dimension');
 
 function convertValue(key, val) {
-    if (key === 'ratio') {
-        return getRatio(val);
-    } else if (key === 'rationType') {
+    if (key === 'rationType') {
         return lang(val);
-    }
+    } else if (_.isDate(val)) {
+        return ('0' + val.getDate()).slice(-2) + '/' + ('0' + (val.getMonth() + 1)).slice(-2) + '/' + val.getFullYear();
+    } 
     return val;
 }
 
@@ -28,7 +28,7 @@ function convertToControl(item) {
     return viewObj;
 }
 
-function getRatio(val) {
+/*function getRatio(val) {
     // ok + kk = 100
     // ok/kk = val
     // ok = kk * val
@@ -38,17 +38,35 @@ function getRatio(val) {
     var ok = 100 - kk;
 
     return (ok + ' / ' + kk);
-}
+}*/
 
 function convert(ration, sessionData) {
 
-	return [
-        {
+    var actions = ['print'];
+    if (sessionData) {
+        var perms = sessionData.permissions;
+        if (_.indexOf(perms, 'admin') !== -1 || _.indexOf(perms, 'write') !== -1) {
+            actions.push('edit');
+            actions.push('delete');    
+        }
+    }
+
+	return {
+        actions: _.map(actions, function (action) {
+            return {
+                key: action,
+                label: lang(action),
+                icon: action === 'print' ? 'local_print_shop' : '',
+                buttonType: action === 'delete' ? 
+                    'warn' : 'raised'
+            };
+        }),
+        general: {
             label: lang('general'),
             key: 'general',
             controls: Ration.sort(convertToControl(ration.general), 'general')
         },
-        {
+        composition: {
             label: lang('composition'),
             key: 'composition',
             header: [
@@ -65,16 +83,15 @@ function convert(ration, sessionData) {
                     label: lang('dryMaterial')
                 },
                 {
-                    label: lang('kiloPerDay')
+                    label: lang('weight')
+                },
+                {
+                    label: lang('portion')
                 }
             ],
-            body: _.map(ration.composition, (item) => {
-				return _.merge(item, {
-                    valuePerMonth: (Math.round(ration.general.cowsNumber * 30 * item.value * 100)/100) || 0
-				})
-			})
+            body: ration.composition
         }
-    ];
+    };
 }
 
 module.exports = convert;

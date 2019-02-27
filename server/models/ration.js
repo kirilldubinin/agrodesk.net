@@ -2,6 +2,15 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var RationSchema = new Schema({
+    historyId: {
+        type: Schema.Types.ObjectId,
+        required: false
+    },
+    changeAt: {
+        type: Date,
+        default: Date.now,
+        required: true
+    },
 	createdAt: {
         type: Date,
         default: Date.now,
@@ -23,6 +32,8 @@ var RationSchema = new Schema({
             type: String,
             required: true
         },
+        startDate: Date,
+        endDate: Date,
         // rationType
         rationType: {
             type: String,
@@ -57,6 +68,15 @@ var RationSchema = new Schema({
             type: Number,
             required: true
         },
+        dryMaterialTMR: {
+            type: Number,
+            required: false
+        },
+        // ratio OK/KK
+        ratio: {
+            type: String,
+            required: true
+        },
         fat: {
             type: Number,
             required: false
@@ -79,14 +99,7 @@ var RationSchema = new Schema({
         efficiency: {
             type: Number,
             required: true
-        },
-        // ratio OK/KK
-        ratio: {
-            type: Number,
-            required: true
-        },
-        startDate: Date,
-        endDate: Date
+        }
     },
     composition: [{
         // if from FEED
@@ -98,7 +111,8 @@ var RationSchema = new Schema({
         name: String,
         componentType: String, // 'OK,KK,MK'
         price: Number, // for kilo,
-        value: Number, // for coe per day kile
+        value: Number, // for cow per day kile
+        proportion: Number, // for by dry materail
         dryMaterial: Number
     }]
 });
@@ -106,6 +120,8 @@ var RationSchema = new Schema({
 var goldObject = {
     general: {
         number: '01',
+        startDate: new Date(),
+        endDate: Date,
         rationType: 'milk',
         name: '',
         groupName: '',
@@ -113,22 +129,22 @@ var goldObject = {
         dryMaterialConsumption: 0,
         estimatedProductivity: 0,
         actualProductivity: 0,
+        dryMaterialTMR: 0,
+        ratio: '',
         fat: 0,
         protein: 0,
         rationPrice: 0,
         milkPrice: 0,
-        efficiency: 0,
-        ratio: 0,
-        startDate: Date,
-        endDate: Date
+        efficiency: 0
     },
     composition: [{
         number: '01',
-        name: '',
-        componentType: 'OK',
-        price: 0,
-        value: 0,
-        dryMaterial: 0
+        name: 'Новый компонент',
+        componentType: 'ok',
+        price: 1,
+        value: 1,
+        proportion: 20,
+        dryMaterial: 0.5
     }]
 };
 
@@ -145,8 +161,6 @@ RationSchema.statics.sort = function(object, rootProperty) {
     return result;
 };
 RationSchema.pre('validate', function(next) {
-    
-    console.log(this.general)
     // general properies
     if (!this.general.rationType || 
         !this.general.name) {

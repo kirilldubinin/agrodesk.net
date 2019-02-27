@@ -18,10 +18,6 @@
             {
                 value: 'fattening',
                 name: 'откорм'
-            },
-            {
-                value: 'fattening',
-                name: 'откорм'
             }
         ]);
     angular.module('ration')

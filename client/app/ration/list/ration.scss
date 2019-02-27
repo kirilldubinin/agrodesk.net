@@ -22,13 +22,21 @@
 
 .ration {
 	height: 100%;
+	.list-header {
+		.add-ration-button {
+			margin: 0.2em .5em;
+		}
+	}
+	
 	.ration-list {
 		font-size: 12px;
 	    overflow: auto;
 	    padding-top: 0;
 
 		.ration-item {
-
+			&:hover {
+				background-color: #f0f0f0;
+			}
 			&.done {
 				background-color: #ddd;
 				.ration-target,
@@ -100,6 +108,13 @@
 				}
 			}
 			
+		}
+	}
+
+	.edit-mode {
+		.module-name {
+			text-align: center;
+			font-size: 14px;
 		}
 	}
 }

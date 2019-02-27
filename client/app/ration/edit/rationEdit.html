@@ -12,7 +12,7 @@
                 ng-repeat="(key, data) in rationEdit.rationGeneral.controls"
                 ng-class="{booleanProperty : data.isBoolean, required: data.isRequired}" >
                 <!-- LABEL -->
-                <label class="self-explanation-link" ng-if="!data.isBoolean">
+                <label class="property-name" ng-if="!data.isBoolean">
                     {{data.label + (data.dimension ? (', ' + data.dimension) : '')}}
                 </label>
                 <!-- SELECT -->
@@ -22,7 +22,10 @@
                     </md-option>
                 </md-select>
                 <!-- INPUT NUMBER -->
-                <input ng-disabled="data.isDisabled" ng-if="data.isNumber" ng-model="rationEdit.rationGeneral.initialItem[data.key]" type="number"/>
+                <input ng-disabled="data.isDisabled" ng-if="data.isNumber" 
+                    ng-change="rationEdit.update()"
+                    ng-model="rationEdit.rationGeneral.initialItem[data.key]" 
+                    type="number"/>
                 <!-- INPUT DATE -->
                 <md-datepicker class="date-picker" ng-if="data.isDate" ng-model="rationEdit.rationGeneral.initialItem[data.key]">
                 </md-datepicker>
@@ -40,50 +43,61 @@
                 <div class="component-name" flex="">
                     Компонент
                     <ng-md-icon icon="note_add" class="add-component" ng-click="rationEdit.addComponent()">
+                        <md-tooltip md-direction="bottom">
+                            Добавить новый компонент
+                        </md-tooltip>
                     </ng-md-icon>
                 </div>
-                <div class="" flex="10">
+                <div class="" flex="15">
                     Цена, руб./кг.
                 </div>
-                <div class="" flex="10">
+                <div class="" flex="15">
                     СВ в 1 кг, кг.
                 </div>
-                <div class="" flex="15">
-                    На голову в сутки, кг.
+                <div class="" flex="10">
+                    Вес, кг.
                 </div>
-                <div class="" flex="15">
-                    На группу в месяц, кг.
+                <div class="" flex="10">
+                    Доля, %.
                 </div>
             </div>  
-            <div class="scroll-wrapper" flex>
+            <div ng-if="rationEdit.rationComposition.initialItem.length" class="scroll-wrapper" flex>
                 <div class="composition-item" layout="row" 
                     ng-repeat="component in rationEdit.rationComposition.initialItem track by $index">
                     <div class="component-index" flex="2">
                         <span>{{component.number}}</span>
-                        <ng-md-icon icon="delete_forever" ng-click="rationEdit.removeComponent(component)" class="remove-item"></ng-md-icon>
+                        <ng-md-icon icon="delete_forever" ng-click="rationEdit.removeComponent(component)" class="remove-item">
+                            <md-tooltip md-direction="bottom">
+                                Удалить компонент
+                            </md-tooltip>
+                        </ng-md-icon>
                     </div>
                     <div class="component-name" flex="">
-                        <input ng-model="component.name"/>
-                        <md-select ng-model="component.componentType" class="component-type">
+                        <input ng-model="component.name" class="{{component.componentType}}"/>
+                        <md-select ng-model="component.componentType" class="component-type" ng-change="rationEdit.update();">
                             <md-option ng-repeat="type in rationEdit.feedTypes" ng-value="type.value">
                                 {{type.name}}
                             </md-option>
                         </md-select>
                     </div>
-                    <div class="" flex="10">
-                        <input type="number" ng-model="component.price" ng-change="rationEdit.update()"/>
+                    <div class="" flex="15">
+                        <input type="number" ng-model="component.price" ng-change="rationEdit.blur()"/>
                     </div>
-                    <div class="" flex="10">
+                    <div class="" flex="15">
                         <input type="number" ng-model="component.dryMaterial"/>
                     </div>
-                    <div class="" flex="15">
-                        <input type="number" ng-model="component.value" ng-change="rationEdit.update()"/>
+                    <div class="component-value" flex="10">
+                        <input type="number" disabled="disabled" ng-model="component.value"/>
                     </div>
-                    <div class="" flex="15">
-                        {{ rationEdit.perGroupInMonth(component.value) }}
+                    <div class="" flex="10">
+                        <input type="number" ng-model="component.proportion" ng-blur="rationEdit.update()"/>
                     </div>
                 </div>
             </div>  
+            {{}}
+            <div class="empty-ration" ng-if="!rationEdit.rationComposition.initialItem.length" flex>
+                <md-button class="md-raised md-primary" ng-click="rationEdit.addComponent()">добавить компонент</md-button>
+            </div>
         </div>
     </div>
     <!-- ACTIONS -->

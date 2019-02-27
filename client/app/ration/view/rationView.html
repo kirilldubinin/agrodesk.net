@@ -1,15 +1,19 @@
 <div class="ration-view" layout="column">
     <div class="ration-title" layout="row">
-        <b>#{{rationView.general.controls.number.value}}</b>
+        <b>#{{::rationView.general.controls.number.value}}</b>
         <div class="ration-type">
-            {{rationView.general.controls.rationType.value}}
+            {{::rationView.general.controls.rationType.value}}
         </div>
         <h2 class="ration-name" flex="">
-            {{rationView.general.controls.name.value}}
+            {{::rationView.general.controls.name.value}}
         </h2>
         <div class="actions">
-            <md-button ng-click="">
-                редактировать
+            <md-button ng-repeat="action in rationView.actions"
+                class="md-{{action.buttonType}} {{action.key}}-btn" 
+                ng-click="rationView[action.key]()">
+                <ng-md-icon ng-if="action.icon" icon="{{action.icon}}" size="24">
+                </ng-md-icon>
+                {{action.key === 'print' ? '' : action.label}}
             </md-button>
         </div>
     </div>
@@ -18,14 +22,12 @@
         <h2 class="text-center" flex="">СОСТАВ</h2>
     </div>
     <div class="ration-view-content" layout="row">
-        <div class="ration-info" flex="30">
+        <div class="ration-info" flex="40">
             <div layout="row" flex="" ng-repeat="(key, data) in rationView.general.controls">
-                <label flex="50">{{data.label}}</label>
+                <label flex="40">{{::data.label}}</label>
                 <span>
-                    {{data.value}}
-                <lable ng-if="data.dimension">
-                    , {{::data.dimension}}
-                </lable></span>
+                    {{::data.value}}<lable ng-if="data.dimension">, {{::data.dimension}}</lable>
+                </span>
             </div>
         </div>  
         <div class="composition" flex layout="column">
@@ -43,10 +45,10 @@
                     СВ в 1 кг, кг.
                 </div>
                 <div class="" flex="15">
-                    На голову в сутки, кг.
+                    Вес, кг.
                 </div>
                 <div class="" flex="15">
-                    На группу в месяц, кг.
+                    Доля, %.
                 </div>
             </div>  
             <div class="scroll-wrapper" flex>
@@ -55,7 +57,9 @@
                         {{component.number}}
                     </div>
                     <div class="component-name" flex="">
-                        <a href="#">{{component.name}}</a>  
+                        {{rationView.sessionData.tenantName}}
+                        <a ng-if="component._id" href="#{{rationView.sessionData.tenantName}}/feed/{{component._id}}">{{component.name}}</a>  
+                        <span ng-if="!component._id">{{component.name}}</span>
                     </div>
                     <div class="" flex="10">
                         {{component.price}}
@@ -66,41 +70,12 @@
                     <div class="rate" flex="15">
                         {{component.value}}
                     </div>
-                    <div class="" flex="15">
-                        {{component.valuePerMonth}}
+                    <div class="rate" flex="15">
+                        {{component.proportion}}
                     </div>
                 </div>
             </div>  
         </div>
     </div>
-        <!--div class="ration-info" layout="row">
-            <div layout="column" flex="25">
-                <div layout="row" flex="">
-                    <label>Продуктивность расчетная</label>
-                    <span>32.6 литра</span>
-                </div>  
-                <div layout="row" flex="">
-                    <label>Продуктивность фактическая</label>
-                    <span>32.6 литра</span>
-                </div>  
-                
-            </div>
-            <div layout="column" flex="25">
-                <div layout="row" flex="">
-                    <label>Количество голов</label>
-                    <span>169</span>
-                </div>  
-            </div>
-            <div layout="column" flex="25">
-                <div layout="row" flex="">
-                    <label>СВ на голову</label>
-                    <span>32.6 кг.</span>
-                </div>  
-                <div layout="row" flex="">
-                    <label>Цена на голову</label>
-                    <span>216 руб.</span>
-                </div>  
-            </div>
-        </div-->  
     </div>
 </div>

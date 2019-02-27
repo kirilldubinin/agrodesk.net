@@ -73,6 +73,12 @@
                 params: {
                     id: undefined
                 }
+            })
+            .state('tenant.modules', {
+                url: '/modules',
+                templateUrl: 'app/modules/modules.html',
+                controller: 'ModulesController',
+                controllerAs: 'modules'
             });
         //$urlRouterProvider.otherwise('/');
     }

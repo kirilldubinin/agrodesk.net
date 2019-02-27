@@ -1,51 +1,126 @@
 <div class="ration" layout="row">
     <md-card class="navigator" flex="20" md-theme="default" layout="column" md-theme-watch="">
-        <div class="list-header">
-            <!-- HEADER -->
-            <div layout="row">
-                <div class="module-name" flex>
-                    Рационы
-                    <span class="ration-amount" ng-if="ration.rationItems.length">
-                        ({{::ration.rationItems.length}})
-                    </span>
+        <section ng-if="!ration.editMode">
+            <div class="list-header">
+                <!-- HEADER -->
+                <div layout="row">
+                    <div class="module-name" flex>
+                        Рационы
+                        <span class="ration-amount" ng-if="ration.rationItems.length">
+                            ({{::ration.rationItems.length}})
+                        </span>
+                    </div>
+                    <md-button class="md-fab md-mini md-primary add-ration-button" ng-click="ration.addRation()">
+                        <md-tooltip md-direction="bottom">
+                            Добавить новый рацион
+                        </md-tooltip>
+                        <ng-md-icon class="add-icon" icon="plus_one" size="24">
+                        </ng-md-icon>
+                    </md-button>
                 </div>
             </div>
-        </div>
-        <md-list flex class="ration-list">
-            <md-list-item class="md-3-line ration-item" 
-                ng-repeat="rationItem in ration.rationItems"
-                ng-class="{'done': !rationItem.inProgress}">
-                <div class="md-list-item-text" layout="column" ng-click="ration.onRationClick(rationItem)">
-                    <div class="first-line" layout="row">
-                        <span class="ration-uid">
-                            <b>#{{rationItem.number}}</b>
-                        </span>
-                        <span class="ration-type">{{rationItem.rationType}}</span>
-                        <span class="ration-target">
-                            {{rationItem.estimatedProductivity}} литра
-                        </span>
-                        
+            <md-list flex class="ration-list">
+                <md-list-item class="md-3-line ration-item" 
+                    ng-repeat="rationItem in ration.rationItems"
+                    ng-class="{'done': rationItem.done}">
+                    <div class="md-list-item-text" layout="column" ng-click="ration.onRationClick(rationItem)">
+                        <div class="first-line" layout="row">
+                            <span class="ration-uid">
+                                <b>#{{rationItem.number}}</b>
+                            </span>
+                            <span class="ration-type">{{rationItem.rationType}}</span>
+                            <span class="ration-target">
+                                {{rationItem.estimatedProductivity}} литра
+                            </span>
+                            
+                        </div>
+                        <div layout="row" class="second-line name">
+                                {{rationItem.name}}
+                        </div>
+                        <div layout="row" class="third-line">
+                            <span class="ration-weight" flex>
+                                <b>СВ: {{rationItem.dryMaterialConsumption}} кг</b>
+                            </span>
+                            <span class="ration-date">
+                                {{rationItem.start}}
+                            </span>
+                        </div>
                     </div>
-                    <div layout="row" class="second-line name">
-                            {{rationItem.name}}
-                    </div>
-                    <div layout="row" class="third-line">
-                        <span class="ration-weight" flex>
-                            <b>СВ: {{rationItem.dryMaterialConsumption}} кг</b>
-                        </span>
-                        <span class="ration-date">
-                            {{rationItem.start}}
-                        </span>
+                </md-list-item>
+                <md-divider>
+                </md-divider>
+            </md-list>
+        </section>
+        <section ng-if="ration.editMode" class="edit-mode" layout="column">
+            <div class="list-header">
+                <!-- HEADER -->
+                <div layout="row">
+                    <div class="module-name" flex>
+                        Выберите корма для рациона
                     </div>
                 </div>
-            </md-list-item>
-            <md-divider>
-            </md-divider>
-        </md-list>
+            </div>
+            <md-list flex class="feed-list">
+                <md-list-item class="md-3-line feed-item" 
+                    ng-repeat="feedItem in ration.feedItems"
+                    ng-disabled="feed.isDisabled(feedItem)"
+                    ng-class="{opened: feedItem.opened}">
+                    <div class="md-list-item-text" ng-click="ration.onAddFeed(feedItem)" >
+                        <div layout="row" class="first-row">
+                            <b class="year" flex>
+                                {{feedItem.year}}
+                            </b>
+                            <i ng-if="feedItem.icon" class="feed-type-icon" ng-class="feedItem.icon"></i>
+                            <span class="analysis-length" ng-class="{'no-analysis': !feedItem.analysis}">
+                                <i aria-hidden="true" class="fa fa-flask"></i>
+                                {{feedItem.analysis}}
+                            </span>
+                            <span ng-if="feedItem.totalWeight" class="weight weight-control" 
+                                ng-class="{opened: feedItem.opened, done: feedItem.done}">
+                                <span class="balance">
+                                    {{feedItem.balanceWeight || '?'}}
+                                    <md-tooltip md-direction="bottom">осталось тонн</md-tooltip>
+                                </span>
+                                <span class="total">
+                                    {{feedItem.totalWeight}}
+                                    <md-tooltip md-direction="bottom">всего тонн</md-tooltip>
+                                </span>
+                            </span>
+                        </div>
+                        <div layout="row">
+                            <p class="title" flex="">
+                                {{feedItem.name}}
+                            </p>
+                        </div>
+                        <div layout="row">
+                            <p class="composition" flex="">
+                                {{feedItem.feedType ? feedItem.feedType + ': ' + feedItem.composition : feedItem.composition}}
+                            </p>
+                        </div>
+                        <div layout="row">
+                            <p class="source" ng-if="feedItem.branch" flex>
+                                {{feedItem.branch}}
+                            </p>
+                            <p class="source">
+                                {{feedItem.storage}}
+                            </p>
+                        </div>
+                    </div>
+                </md-list-item>
+                <md-divider>
+                </md-divider>
+            </md-list>
+        </section>
+        
     </md-card>
-    <md-card class="dashboard" flex md-theme="default" md-theme-watch="" ui-view="">
-        <md-content layout-padding="">
-            
+    <md-card class="dashboard" flex md-theme="default" md-theme-watch="" ui-view="" layout="column">
+        <md-content layout-padding="" flex>
+            <md-button ng-repeat="action in ::ration.dashboard.actions" 
+                class="md-primary" 
+                md-no-ink="" 
+                ng-click="ration[action.key]()" >
+                {{action.label}}
+            </md-button>
         </md-content>
     </md-card>
 </div>

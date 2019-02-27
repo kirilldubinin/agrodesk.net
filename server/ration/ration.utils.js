@@ -20,6 +20,12 @@ var enumFields = {
 
 };
 
+var disabledFields = {
+    'general.ratio': 'disabled',
+    'general.rationPrice': 'disabled',
+    'general.efficiency': 'disabled'
+};
+
 /*var enumFields = {
     'general.cowsNumber': 'enum',
     'general.dryMaterialConsumption': 'enum',
@@ -33,5 +39,6 @@ var enumFields = {
 module.exports = {
     dateFields: dateFields,
     enumFields: enumFields,
-    requiredFields: requiredFields
+    requiredFields: requiredFields,
+    disabledFields: disabledFields
 };

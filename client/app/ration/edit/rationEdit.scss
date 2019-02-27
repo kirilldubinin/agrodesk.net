@@ -22,6 +22,25 @@
 			font-family: Montserrat,sans-serif;
 		}
 		.ration-property {
+			margin-top: 2.2em;
+			&._md-datepicker-has-calendar-icon {
+				.property-name {
+					left: 40px !important;
+				}
+			}
+			
+			.date-picker {
+				width: 100%;
+				display: inline-block;
+				padding: 0px;
+				margin: 0px;
+				.md-datepicker-button {
+					margin: 0 0 0 -10px;
+				}
+				.md-datepicker-input-container {
+					width: calc(100% - 40px);
+				}
+			}
 			&.required {
 				label {
 					color: rgb(255,87,34);
@@ -30,7 +49,7 @@
 		}
 	}
 	.ration-view-content {
-
+		overflow: auto;
 		.composition {
 			font-size: 12px;
 			text-align: right;
@@ -48,6 +67,17 @@
 			}
 			.component-name {
 				text-align: left;
+				input {
+					&.ok {
+						border-left: 5px solid #009688 ;
+					}
+					&.kk {
+						border-left: 5px solid #f37136 ;
+					}
+					&.mk {
+						border-left: 5px solid #969c28 ;
+					}
+				}
 				a {
 					color: #3f51b5;
 				}
@@ -58,6 +88,7 @@
 				border-bottom: 2px solid $orange;
 				&>div {
 					padding: 0 8px;
+					line-height: 2em;
 				}
 				div:first-child {
 					padding-left: 16px;
@@ -76,6 +107,16 @@
 				padding: 8px 0;
 				border-bottom: 2px solid #fff;
 				line-height: 3em;
+
+				input::-webkit-outer-spin-button,
+				input::-webkit-inner-spin-button {
+					-webkit-appearance: none;
+					margin: 0;
+				}
+				input[type=number] {
+					-moz-appearance:textfield; /* Firefox */
+					text-align: right;
+				}
 
 				input {
 					border: none;
@@ -112,6 +153,12 @@
 						color: rgb(255,87,34);
 						padding-top: 8px;
 						margin-left: -6px;
+					}
+				}
+				.component-value {
+					input {
+						border: none;
+    					background-color: #eee;
 					}
 				}
 
@@ -177,6 +224,10 @@
 						}
 					}
 				}
+			}
+			.empty-ration {
+				text-align: center;
+				margin: 5em 0;
 			}
 		}
 	}

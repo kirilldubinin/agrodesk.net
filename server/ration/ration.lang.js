@@ -13,12 +13,21 @@ var langObj = {
     dryMaterialConsumption: 'Потребление СВ',
     estimatedProductivity: 'Расчетная продуктивность',
     actualProductivity: 'Фактическая продуктивность',
-    rationPrice: 'Цена на голову',
+    dryMaterialTMR: 'СВ в TMR',
+    rationPrice: 'Цена рациона',
     efficiency: 'Коэффициент эффективности',
     ratio: 'Соотношение ОК/КК',
     startDate: 'Дата начала кормления',
     endDate: 'Дата окончания кормления',
-    milk: 'дойный'
+    proportion: 'Доля',
+    milk: 'дойный',
+
+    edit: 'редактировать',
+    delete: 'удалить',
+    print: 'печать',
+
+    chartsRation: 'Аналитика',
+    addRation: 'Добавить'
 };
 function lang(key) {
 
