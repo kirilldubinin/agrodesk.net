@@ -45,15 +45,9 @@
 				}
 
 			}
-
-			.md-button {
-				padding: 0 10px;			
-			}
-
 			&.selected {
 				background-color: #BBDEFB !important;
 			}
-
 			cursor: pointer;
 			background-color: #fff;
 			border-bottom: 1px solid #eee;
@@ -95,19 +89,19 @@
 				}
 			}
 			.second-line {
-				margin: 12px 0 6px 0;
+				margin: 12px 0 10px 0;
 				color: #3f51b5;
 			}
-
 			.third-line {
-				
-				.ration-date {
+				span {
 					font-size: 10px;
-					color: #999;
-					line-height: 2.2em;
+					color: #555;
+					padding-right: 8px;
+				}
+				.ration-date {
+					font-weight: bold;
 				}
 			}
-			
 		}
 	}
 
@@ -115,6 +109,37 @@
 		.module-name {
 			text-align: center;
 			font-size: 14px;
+		}
+	}
+
+	.dashboard-card {
+		&__title {
+			line-height: 1em;
+			position: relative;
+			h2 {
+				margin: 0 1em;
+				padding-top: 4px;
+			}
+			b {
+				padding-top: 4px;
+				line-height: 20px;
+			}
+			.ration-type {
+				background-color: #2196F3;
+				color: #fff;
+				padding: 4px 8px;
+				border-radius: 3px;
+				text-transform: uppercase;
+				margin-right: 1em;
+			}
+			.ration-date {
+				padding-top: 5px;
+			}
+			.toogle-chart-btn {
+				position: absolute;
+				right: -4px;
+				top: -4px;
+			}
 		}
 	}
 }

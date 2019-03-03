@@ -81,20 +81,25 @@
                         </md-select>
                     </div>
                     <div class="" flex="15">
-                        <input type="number" ng-model="component.price" ng-change="rationEdit.blur()"/>
+                        <input type="number" ng-model="component.price" 
+                            ng-blur="rationEdit.update()"/>
                     </div>
                     <div class="" flex="15">
-                        <input type="number" ng-model="component.dryMaterial"/>
+                        <input type="number" ng-model="component.dryMaterial"
+                            ng-blur="rationEdit.update()"/>
                     </div>
                     <div class="component-value" flex="10">
-                        <input type="number" disabled="disabled" ng-model="component.value"/>
+                        <input type="number" ng-disabled="component.componentType !== 'mk'" 
+                            ng-blur="rationEdit.update()"
+                            ng-model="component.value"/>
                     </div>
                     <div class="" flex="10">
-                        <input type="number" ng-model="component.proportion" ng-blur="rationEdit.update()"/>
+                        <input type="number" ng-model="component.proportion" 
+                            ng-blur="rationEdit.update()" 
+                            ng-if="component.componentType !== 'mk'"/>
                     </div>
                 </div>
             </div>  
-            {{}}
             <div class="empty-ration" ng-if="!rationEdit.rationComposition.initialItem.length" flex>
                 <md-button class="md-raised md-primary" ng-click="rationEdit.addComponent()">добавить компонент</md-button>
             </div>

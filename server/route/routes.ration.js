@@ -8,6 +8,9 @@ var edit = require('../ration/ration.edit');
 var list = require('../ration/ration.list');
 var view = require('../ration/ration.view');
 var lang = require('../ration/ration.lang');
+var utils = require('../ration/ration.utils');
+var history = require('../ration/ration.history');
+
 
 module.exports = function(app, isAuthenticated, errorHandler, log) {
     
@@ -24,8 +27,7 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
     // get rations for ration list
     app.get('/api/rations', isAuthenticated, function(req, res) {
         Ration.find({
-            'createdBy.tenantId': req.user.tenantId,
-            'historyId': null
+            'createdBy.tenantId': req.user.tenantId
         }).lean().exec(function(err, rations) {
             if (err) {
                 return errorHandler(err, req, res);
@@ -41,6 +43,28 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
     // get ration skeleton
     app.post('/api/rations/new', isAuthenticated, function(req, res) {
         res.json(edit());
+    });
+
+    // delete feed by id
+    app.delete('/api/rations/:ration_id', isAuthenticated, function(req, res) {
+        var canEdit = req.user.permissions.indexOf('admin') > -1 || req.user.permissions.indexOf('write') > -1;
+        if (!canEdit) {
+            return res.status(406).json({
+                message: 'Недостаточно прав'
+            });
+        }
+        Ration.remove({
+            _id: req.params.ration_id
+        }, function(err, bear) {
+            if (err) {
+                return errorHandler(err, req, res);
+            }
+
+            res.json({
+                message: 'OK',
+                id: req.params.ration_id
+            });
+        });
     });
 
     // new ration
@@ -137,41 +161,46 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
             }
             if (checkUserRightForRation(ration, req, res)) {
 
+                // update history
+                // if any history filed is chnaged
+                if (_.some(utils.historyFields, (value, key) => {
+                    return req.body.general[key] !== ration.general[key];
+                })) {
+                    ration.history.push(_.merge(
+                        {
+                            date: new Date()
+                        },
+                        _.pick(ration.general, _.keys(utils.historyFields))
+                    ));
+                }
+
                 // !!! do not update createdBy and createdAt !!!
                 ration.general = req.body.general;
                 ration.composition = req.body.composition;
                 ration.changeAt = new Date();
 
-                // save ration history
-                var rationHistory = new Ration();
-                rationHistory.createdAt = ration.createdAt;
-                rationHistory.changeAt = new Date();
-                // set userId and tenantId
-                rationHistory.createdBy = {
-                    userId: req.user._id,
-                    tenantId: req.user.tenantId
-                }
-                rationHistory.general = ration.general;
-                rationHistory.composition = ration.composition;
-                rationHistory.historyId = req.params.ration_id;
-
-                rationHistory.save((err, history) => {
-
+                ration.save((err, updatedRation) => {
                     if (err) {
                         return errorHandler(err, req, res);
                     } else {
-                        ration.save((err, updatedRation) => {
-                            if (err) {
-                                return errorHandler(err, req, res);
-                            } else {
-                                res.json({
-                                    message: 'OK',
-                                    id: updatedRation._id
-                                });
-                            }
-                        });    
+                        res.json({
+                            message: 'OK',
+                            id: updatedRation._id
+                        });
                     }
-                });
+                });    
+            }
+        });
+    });
+
+    // get ration history
+    app.put('/api/rations/:ration_id/history', isAuthenticated, function(req, res) {
+        Ration.findById(req.params.ration_id, function(err, ration) {
+            if (err) {
+                return errorHandler(err, req, res);
+            }
+            if (checkUserRightForRation(ration, req, res)) {
+                res.json(ration.history);
             }
         });
     });
@@ -180,17 +209,20 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
         // set user actions for Ration module
         Ration.find({
             'createdBy.tenantId': req.user.tenantId,
-            'general.endDate': null,
-            'historyId': null
+            'general.endDate': null
         }).lean().exec(function(err, rations) {
             var actions = ['chartsRation'];
             var canAdd = (req.user.permissions.indexOf('admin') > -1 || req.user.permissions.indexOf('write') > -1);
             if (canAdd) {
                 actions.unshift('addRation');
             }
+
+            // remove actions for now
+            actions = [];
+
             return res.status(200)
                 .json({
-                    //history: _.map(history, 'general'),
+                    rations: history(rations),
                     actions: _.map(actions, function(f) {
                         return {
                             key: f,
@@ -198,31 +230,6 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
                         };
                 })
             });
-            // get histroy
-            if (_.size(rations)) {
-                console.log('_.first(rations)._id', _.first(rations)._id);
-                Ration.find({
-                    'createdBy.tenantId': req.user.tenantId,
-                    'historyId': '5c75ad1f93705d14fcc5bfe2'
-                }).lean().exec(function(err, history) {
-                    var actions = ['chartsRation'];
-                    var canAdd = (req.user.permissions.indexOf('admin') > -1 || req.user.permissions.indexOf('write') > -1);
-                    if (canAdd) {
-                        actions.unshift('addRation');
-                    }
-
-                    res.status(200)
-                        .json({
-                            history: _.map(history, 'general'),
-                            actions: _.map(actions, function(f) {
-                                return {
-                                    key: f,
-                                    label: lang(f)
-                                };
-                        })
-                    });
-                });
-            }
         });
     });
 }

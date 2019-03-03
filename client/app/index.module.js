@@ -1,25 +1,32 @@
 (function() {
     'use strict';
     // modules
-    angular.module('auth', []);
+    angular.module('public', []);
     angular.module('feed', []);
     angular.module('ration', []);
-    angular.module('profile', []);
+    angular.module('field', []);
     angular.module('catalog', []);
-    angular.module('info', []);
-    angular.module('help', []);
-    angular.module('admin', []);
-    angular.module('prokorm', ['ngResource', 'ui.router', 'ngMaterial', 'ngMdIcons',
-        'catalog', 'profile', 'feed', 'ration', 'auth', 'help', 'info', 'admin']);
+
+    angular.module('agrodesk', [
+        'ngResource', 
+        'ui.router', 
+        'ngMaterial', 
+        'ngMdIcons',
+        'public', 
+        'catalog', 
+        'feed', 
+        'ration', 
+        'field'
+    ]);
     // constant
-    angular.module('prokorm').constant('_', window._);
+    angular.module('agrodesk').constant('_', window._);
     // config
-    angular.module('prokorm').config(['$mdDateLocaleProvider', function($mdDateLocaleProvider) {
+    angular.module('agrodesk').config(['$mdDateLocaleProvider', function($mdDateLocaleProvider) {
         $mdDateLocaleProvider.formatDate = function(date) {
             return moment(date).format('DD-MM-YYYY');
         };
     }]);
-    angular.module('prokorm').config(['$httpProvider', function($httpProvider) {
+    angular.module('agrodesk').config(['$httpProvider', function($httpProvider) {
 
         var dialog;
         //initialize get if not there

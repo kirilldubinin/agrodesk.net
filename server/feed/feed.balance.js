@@ -66,70 +66,9 @@ function convert(feeds) {
         };
     });
 
-    //chart
-    var chartByFeedType = {
-        chart: { type: 'bar' },
-        title: { text: '' },
-        xAxis: {
-            categories: _.map(byFeedType, 'label')
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Осталось тонн'
-            }
-        },
-        legend: { reversed: true },
-        plotOptions: {
-            series: { stacking: 'normal' }
-        },
-        series: _.map(byComposition, (composition) => {
-            return {
-                name: composition.label,
-                data: _.map(byFeedType, (feedType) => {
-                    var d = _.filter(feedType.byComposition, (c) => {
-                        return c.label === composition.label;
-                    })
-                    return _.size(d) ? d[0].balance : 0;
-                })
-            }
-        })
-    };
-
-    var chartByComposition = {
-        chart: { type: 'bar' },
-        title: { text: '' },
-        xAxis: {
-            categories: _.map(byComposition, 'label')
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Осталось тонн'
-            }
-        },
-        legend: { reversed: true },
-        plotOptions: {
-            series: { stacking: 'normal' }
-        },
-        series: _.map(byFeedType, (feedType) => {
-            return {
-                name: feedType.label,
-                data: _.map(byComposition, (composition) => {
-                    var d = _.filter(composition.byFeedType, (c) => {
-                        return c.label === feedType.label;
-                    })
-                    return _.size(d) ? d[0].balance : 0;
-                })
-            }
-        })
-    };
-
     return {
         byFeedType: byFeedType,
-        chartByFeedType: chartByFeedType,
         byComposition: byComposition,
-        chartByComposition: chartByComposition,
         current: 'byFeedType'
     }
 }

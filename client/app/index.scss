@@ -88,3 +88,46 @@ h2 {
   margin-bottom: 1em !important;
 }
 
+.modules {
+  width: 800px;
+  margin: 0 auto;
+  .module {
+      width: 200px;
+      height: 200px;
+      background-color: #fff;
+      opacity: .9;
+      border-radius: 5px;
+      margin: 8em 2em;
+      box-shadow: 0 0 10px rgba(0,0,0,.5);
+      &__icon {
+          background-image: url(../../img/MW01YT.jpg);
+          background-size: 600px;
+          background-repeat: no-repeat;
+          width: 120px;
+          height: 120px;
+          margin: 10px auto 0;
+          
+          &.feed {
+              background-position: -439px -460px;
+              width: 140px;
+          }
+          &.ration {
+              background-position: -303px -317px;
+          }
+          &.field {
+              background-position: -27px -171px;
+          }
+      }
+
+      h4 {
+          color: #069cda;
+          margin: 0;
+          font-size: 26px;
+          text-align: center;
+          padding: .5em 0;
+          font-weight: 400;
+          text-transform: uppercase;
+      }
+  }
+}
+

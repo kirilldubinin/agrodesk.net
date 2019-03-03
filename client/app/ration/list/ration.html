@@ -32,17 +32,22 @@
                             <span class="ration-target">
                                 {{rationItem.estimatedProductivity}} литра
                             </span>
-                            
                         </div>
                         <div layout="row" class="second-line name">
-                                {{rationItem.name}}
+                            {{rationItem.name}}
                         </div>
-                        <div layout="row" class="third-line">
-                            <span class="ration-weight" flex>
-                                <b>СВ: {{rationItem.dryMaterialConsumption}} кг</b>
+                        <div class="third-line" layout="row">
+                            <span class="ration-date" flex>
+                                {{rationItem.startDate | date}}
                             </span>
-                            <span class="ration-date">
-                                {{rationItem.start}}
+                            <span ng-if="rationItem.dryMaterialConsumption">
+                                СВ: {{rationItem.dryMaterialConsumption}} кг
+                            </span>
+                            <span ng-if="rationItem.rationPrice">
+                                {{rationItem.rationPrice}} руб.
+                            </span>
+                            <span ng-if="rationItem.ratio">
+                                {{rationItem.ratio || ''}}
                             </span>
                         </div>
                     </div>
@@ -51,7 +56,7 @@
                 </md-divider>
             </md-list>
         </section>
-        <section ng-if="ration.editMode" class="edit-mode" layout="column">
+        <section ng-if="ration.editMode" class="edit-mode feed" layout="column">
             <div class="list-header">
                 <!-- HEADER -->
                 <div layout="row">
@@ -71,10 +76,6 @@
                                 {{feedItem.year}}
                             </b>
                             <i ng-if="feedItem.icon" class="feed-type-icon" ng-class="feedItem.icon"></i>
-                            <span class="analysis-length" ng-class="{'no-analysis': !feedItem.analysis}">
-                                <i aria-hidden="true" class="fa fa-flask"></i>
-                                {{feedItem.analysis}}
-                            </span>
                             <span ng-if="feedItem.totalWeight" class="weight weight-control" 
                                 ng-class="{opened: feedItem.opened, done: feedItem.done}">
                                 <span class="balance">
@@ -115,12 +116,41 @@
     </md-card>
     <md-card class="dashboard" flex md-theme="default" md-theme-watch="" ui-view="" layout="column">
         <md-content layout-padding="" flex>
+            
+            <div ng-if="!ration.dashboard.rations.length" class="text-center">
+                <br/><br/><br/>
+                У Вас нет рационов в прогрессе на данный момент
+                <br/><br/>
+                <md-button  
+                    class="md-primary" 
+                    md-no-ink="" 
+                    ng-click="ration.addRation()" >
+                    добавить рацион
+                </md-button>
+            </div>
+
             <md-button ng-repeat="action in ::ration.dashboard.actions" 
                 class="md-primary" 
                 md-no-ink="" 
                 ng-click="ration[action.key]()" >
                 {{action.label}}
             </md-button>
+             <md-card class="dashboard-card" layout-padding="" 
+                ng-repeat="rationObj in ration.dashboard.rations">
+                <div layout="row" class="dashboard-card__title">
+                    <b>#{{rationObj.general.number}}</b>
+                    <h2>{{rationObj.general.name}}</h2>
+                    <span class="ration-type" ng-class="">{{rationObj.general.rationType}}</span>
+                    <span class="ration-date">{{rationObj.general.startDate | date}}</span>
+                    <md-button class="toogle-chart-btn" 
+                        ng-if="rationObj.series.length"
+                        ng-click="ration.toggleChart(rationObj)"
+                        md-no-ink class="md-primary">
+                        {{rationObj.showChart ? 'скрыть график' : 'показать график'}}
+                    </md-button>
+                </div>
+                <div ng-show="rationObj.showChart" id="container-{{rationObj.general.number}}"></div>
+            </md-card>
         </md-content>
     </md-card>
 </div>

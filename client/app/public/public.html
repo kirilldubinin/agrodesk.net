@@ -2,40 +2,28 @@
     <section class="header" layout="row" layout-xs="column">
         <div class="prokorm">
             <a href="/"><b>AGRO</b>DESK</a>
-            <div class="sub-info">Все данные о Ваших кормах</div>
+            <div class="sub-info">управление данными</div>
         </div>
         <div class="contact" flex>
             8 800 550 28 27
             <div class="sub-info">sales@prokorm.com</div>
         </div>
-        <md-button class="demo" ng-href="/#/conditions">
-            цены
-        </md-button>
-        <md-button class="demo" ng-href="/#/login/demo">
-            демо
-        </md-button>
-        <md-button class="registration" ng-href="/#/registration">
-            зарегистрироваться
-        </md-button>
         <md-button class="login" ng-href="/#/login">
             Вход
         </md-button>
     </section>
-    <div layout="row">
-        <div hide-xs flex class="info-title">
-            
-            <!--<div class="sub-info">
-	            заготовка   анализы   кормление   аналитика
-                <md-button class="sale md-raised md-warn" ng-href="/#/registration">
-            90 дней бесплатного пользования
-            
-        </md-button>
-	        </div>-->
-             <md-button ng-click="public.current = button.key" ng-class="{ 'md-raised': public.current === button.key }" ng-repeat="button in public.buttons"  ng-href="{{button.url}}">
-                {{button.name}}
-            </md-button>
+    <section class="modules" flex layout="row">
+        <div class="module feed">
+            <h4>КОРМА</h4>
+            <div class="module__icon feed"></div>
         </div>
-    </div>
-    <div flex class="carousel feed" hide-xs ui-view="">
-    </div>
+        <div class="module ration">
+            <h4>РАЦИОНЫ</h4>
+            <div class="module__icon ration"></div>
+        </div>
+        <div class="module field">
+            <h4>ПОЛЯ</h4>
+            <div class="module__icon field"></div>
+        </div>
+    </section>
 </div>

@@ -67,6 +67,7 @@
                     proportion: 20,
                     dryMaterial: 0.5
                 };
+                delete newComponent._id;
             } 
             
             newComponent.componentType = newComponent.componentType || last.componentType;
@@ -78,18 +79,20 @@
 
             // values
             vm.rationComposition.initialItem = _.map(vm.rationComposition.initialItem, function (component) {
-                component.value = 
-                Math.round(
-                    (component.proportion * vm.rationGeneral.initialItem.dryMaterialConsumption) / 
-                    (100 * component.dryMaterial)
-                * 100) / 100;
+                if (component.componentType !== 'mk') {
+                    component.value = 
+                    Math.round(
+                        (component.proportion * vm.rationGeneral.initialItem.dryMaterialConsumption) / 
+                        (100 * component.dryMaterial)
+                    * 100) / 100;
+                }
                 return component;
             })
 
             // price
             var fullPrice = 0;
             _.forEach(vm.rationComposition.initialItem, function (item) {
-                fullPrice += (item.price * item.value);
+                fullPrice += (item.price * item.value) || 0;
             });
             if (_.isNumber(fullPrice) && !_.isNaN(fullPrice)) {
                 vm.rationGeneral.initialItem.rationPrice = Math.round(fullPrice * 100) / 100;

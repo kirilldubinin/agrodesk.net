@@ -2,10 +2,6 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var RationSchema = new Schema({
-    historyId: {
-        type: Schema.Types.ObjectId,
-        required: false
-    },
     changeAt: {
         type: Date,
         default: Date.now,
@@ -114,6 +110,20 @@ var RationSchema = new Schema({
         value: Number, // for cow per day kile
         proportion: Number, // for by dry materail
         dryMaterial: Number
+    }],
+    history: [{
+        date: Date,
+        cowsNumber: {type: Number },
+        dryMaterialConsumption: { type: Number },
+        estimatedProductivity: { type: Number },
+        actualProductivity: { type: Number },
+        dryMaterialTMR: { type: Number },
+        ratio: { type: String },
+        fat: { type: Number },
+        protein: { type: Number },
+        rationPrice: { type: Number },
+        milkPrice: { type: Number },
+        efficiency: {type: Number }
     }]
 });
 

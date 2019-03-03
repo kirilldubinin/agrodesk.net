@@ -1,15 +1,14 @@
 <section class="main-header" layout="row">
     <div class="prokorm-title" flex="20">
-        <b>AGRO</b>DESK
+        <a href="#/{{home.sessionData.user.tenantName}}">
+            <b>AGRO</b>DESK
+        </a>
     </div>
     <div class="modules" flex="">
         <md-button ng-class="{ 'md-raised': module.key === home.currentModule }" ng-click="home.goToModule(module.key)" ng-repeat="module in home.sessionData.user.modules">
             {{module.name}}
         </md-button>
     </div>
-    <!--<div flex="80" class="user-company">
-        {{home.sessionData.user.name}}
-    </div>-->
     <div class="user-name">
         <md-button ng-class="{ 'md-raised': 'profile' === home.currentModule }"  ng-click="home.profile($event)">
             <md-tooltip md-direction="bottom">
@@ -43,33 +42,16 @@
 	            </md-tooltip>
 	        </ng-md-icon>
         </md-button>
-        
-        <!--<ng-md-icon icon="account_circle">
-        </ng-md-icon>
-        {{home.sessionData.user.name}}
-        <md-menu>
-            <md-button aria-label="Menu" class="md-icon-button" ng-click="home.openMenu($mdOpenMenu, $event)">
-                <ng-md-icon icon="menu">
-                </ng-md-icon>
-            </md-button>
-            <md-menu-content width="4">
-                <md-menu-item>
-                    <md-button ng-click="home.profile($event)">
-                        <ng-md-icon icon="account_circle" style="fill: #999">
-                        </ng-md-icon>
-                        Профиль
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button ng-click="home.logout()">
-                        <ng-md-icon icon="logout" style="fill: #999">
-                        </ng-md-icon>
-                        Выйти
-                    </md-button>
-                </md-menu-item>
-            </md-menu-content>
-        </md-menu>-->
     </div>
 </section>
 <section class="main-content" ui-view="">
+    <h2 class="modules-title">выберите модуль</h2>
+    <section class="modules" flex layout="row">
+        <div class="module {{module.key}}" 
+            ng-click="home.goToModule(module.key)" 
+            ng-repeat="module in home.sessionData.user.modules">
+            <h4>{{module.name}}</h4>
+            <div class="module__icon {{module.key}}"></div>
+        </div>
+    </section>
 </section>

@@ -55,7 +55,7 @@
                                 feedingPrint.innerHTML) : ''
                             ) + 
                         '</body>'+
-                        '<footer>prokorm.com</footer>' +
+                        '<footer>agrodesk.net</footer>' +
                     '</html>');
                 popupWin.document.close();
                 //popupWin.onfocus=function(){ popupWin.close();}

@@ -1,16 +1,13 @@
 @import "../variables";
 .public-screen {
-    
-    background-image: url(../../img/background.jpg);
-    height: 100%;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
     color: #fff;
-    background-color: #ffffff;
+    background-color: #00a4de;
     height: 100%;
-
     .header {
-        padding: 10px 20px;
+        width: 600px;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2em 0;
         button {
             color: #fff;
 
@@ -21,129 +18,32 @@
 
         .prokorm {
             font-size: 28px;
-            margin: auto;
             a {
                 text-decoration: none;
                 color: #fff;
+                b {
+                    font-size: 29px;
+                    margin-right: 4px;
+                }
             }
             .sub-info {
-                font-size: 14px;
                 text-transform: lowercase;
+                letter-spacing: 2px;
+                font-size: 12px;
             }
         } 
         .contact {
-            padding-left: 40px;
-            font-size: 28px;
-            margin: auto;
+            padding-left: 2em;
+            font-size: 22px;
+            padding-top: 2px;
             .sub-info {
-                font-size: 14px;
-            }
-        }
-    }
-
-    .public-section {
-        .section-content {
-            width: 100%;
-            height: 800px;
-            background-image: url(../img/screen.png);
-        }
-    }
-
-    .info-title {
-        padding: 6px 20px;
-        /*position: fixed;
-        top: 45px;*/
-        font-size: 22px;
-        text-transform: uppercase;
-
-        .sub-info {
-            text-transform: initial;
-            font-size: 16px;
-        }
-    }
-
-    .sale {
-        opacity: .9;
-        margin-right: 28px;
-        padding: 4px 16px;
-    } 
-
-    .carousel {
-        padding: 10px 20px;
-        overflow-x: hidden;
-        background-color: #f0f0f0;
-        margin: 10px 20px;
-        opacity: 0.9;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-    }
-
-    &.eula {
-        
-        h2 {
-            color: #fff;
-            margin-left: 20px;
-            margin-top: 10px;
-        }
-
-        .carousel {
-            overflow: auto;
-            p {
-                color: #333;
-                text-align: justify;
-                line-height: 22px;
-            }   
-            h4 {
-                color: #333;
-            } 
-
-            ul {
-                li {
-                    color: #333;
-                }
-            }
-        }   
-    }
-
-    &.conditions {
-        .module {
-            margin: 22px;
-            opacity: 0.9;
-            padding: 16px;
-            color: rgba(0,0,0,.54); 
-
-            ul {
-                padding: 0;
-                margin: 0;
-                li {
-                    padding: 0;
-                    list-style: none;
-                    font-size: 14px;
-                    margin: 8px 0px 8px 10px;
-                    
-
-                    .number {
-                        font-family: 'Titillium Web',sans-serif;
-                        font-size: 16px;
-                        color: $orange;
-                        font-weight: bold;
-                        margin: 0 4px;
-                        color: $orange;
-                    }
-                }
-            }
-
-            h2 {
-                border-bottom: 3px solid $orange;
-                padding-bottom: 4px;
-                margin: 10px 0;
-                font-size: 20px;
-                color: #3f51b5;
-            }
-
-            .nds {
+                display: block;
+                margin-top: 6px;
                 font-size: 12px;
             }
         }
     }
+
+    
+
 }

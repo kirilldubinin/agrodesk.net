@@ -1,0 +1,72 @@
+.login-screen {
+    margin: 0 auto;
+    color: #fff;
+    background-color: #00a4de;
+    height: 100%;
+    .main-login-header {
+        font-size: 24px;
+        color: #f0f0f0;
+        background-color: transparent;
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+    }
+    .farm-login {
+        max-width: 400px !important;
+        margin: 0 auto;
+        padding-top: 4em;
+        .login-input {
+
+        	input {
+        		padding: 10px 4px;
+        		border: 1px solid #999;
+        		border-radius: 2px;
+                width: 100%;
+                color: #333;
+        	}
+        }
+
+        .forget {
+            font-size: 14px;
+            line-height: 40px;
+            color: #3f51b5;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 6px;
+            padding: 0;
+            color: #3f51b5;
+        }
+
+        .md-button {
+        	&.register-button {
+
+            }
+        }
+
+        md-card-actions {
+        	margin-bottom: 20px;
+            margin-left: 16px;
+            margin-right: 16px;
+        }
+
+        .or {
+            color: #3f51b5;
+            margin: 20px 0px;
+            font-size: 18px;
+            text-align: center;
+
+            b {
+                font-size: 30px;
+            }
+        }
+        .phone {
+            color: #3f51b5;
+            font-size: 14px;
+            margin: 20px 0 10px 0;
+        }
+    }
+}

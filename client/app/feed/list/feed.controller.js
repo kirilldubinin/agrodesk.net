@@ -235,10 +235,6 @@
                 vm.selectedItemId = null;
                 feedFactory.getFeedDashboard().then(function(dashboard) {
                     vm.dashboard = dashboard;
-                    setTimeout(function () {
-                        Highcharts.chart('chartByFeedType', dashboard.balance.chartByFeedType);
-                        Highcharts.chart('chartByComposition', dashboard.balance.chartByComposition);
-                    }, 100);
                 });
             } else if (newState.name === 'tenant.feed.instance') {
                 vm.selectedItemId = params.feedId;

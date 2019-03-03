@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('prokorm')
+    .module('agrodesk')
     .run(runBlock);
 
   /** @ngInject */

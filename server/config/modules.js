@@ -5,6 +5,6 @@ module.exports = [{
 	key: 'ration',
 	name: 'Рационы'
 }, {
-	key: 'catalog',
-	name: 'Справочник'
+	key: 'field',
+	name: 'Поля'
 }];

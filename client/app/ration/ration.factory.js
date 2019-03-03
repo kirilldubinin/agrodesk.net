@@ -17,6 +17,9 @@ angular.module('ration')
         var url = ration._id ? (urlBaseRation + ration._id) : urlBaseRation;
         return $http[methode](url, ration);
     };
+    rationFactory.deleteRation = function (rationId) {
+        return $http.delete(urlBaseRation + rationId);
+    };
     rationFactory.getRationEdit = function (rationId) {
         return $http.get(urlBaseRation + rationId + '/edit');
     };
@@ -25,6 +28,9 @@ angular.module('ration')
     };
     rationFactory.getEmptyRation = function() {
         return $http.post(urlBaseRation + 'new');
+    };
+    rationFactory.getRationHistory = function(rationId) {
+        return $http.get(urlBaseRation + rationId + '/history');
     };
 
     return rationFactory;

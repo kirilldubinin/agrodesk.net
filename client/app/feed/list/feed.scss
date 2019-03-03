@@ -1,8 +1,4 @@
 @import "../../variables";
-.demo-wrapper {
-	height: 100%;
-    overflow: auto;
-}
 .feed {
 
 	.weight-control {
@@ -223,12 +219,6 @@
 					}
 				}
 			}
-		}
-	}
-
-	&.demo {
-		.list-header {
-			height: auto;
 		}
 	}
 }

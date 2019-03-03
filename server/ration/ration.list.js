@@ -1,4 +1,4 @@
-var Ration = require('../models/ration');
+var lang = require('./ration.lang');
 var _ = require('lodash');
 
 function sortRations (a,b) {
@@ -8,7 +8,14 @@ function sortRations (a,b) {
 function list(rations) {
     var sortedRations = rations.sort(sortRations);
     var shortRations = _.map(sortedRations, function(ration) {
-        return _.merge({}, ration.general, {_id: ration._id});
+        return _.merge(
+            {}, 
+            ration.general, 
+            {
+                rationType: lang(ration.general.rationType),
+                _id: ration._id
+            },
+        );
     });
 
     var filterValues = {

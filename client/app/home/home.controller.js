@@ -1,7 +1,6 @@
 (function() {
     'use strict';
-    angular.module('prokorm').controller('HomeController', HomeController);
-    /** @ngInject */
+    angular.module('agrodesk').controller('HomeController', HomeController);
     function HomeController($scope, $state, authFactory) {
         var vm = this;
         vm.currentModule = '';

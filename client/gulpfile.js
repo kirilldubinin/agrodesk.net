@@ -124,7 +124,7 @@ gulp.task('bump', function() {
 gulp.task('config', ['bump'], function() {
 
 	return gulp.src('config.json')
-	.pipe(gulpNgConfig('prokorm', {
+	.pipe(gulpNgConfig('agrodesk', {
 	  createModule: false,
 	  wrap: true
 	}))

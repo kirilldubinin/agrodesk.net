@@ -49,31 +49,9 @@
 			padding: 8px 0;
 
 		}
-		/*.ration-type {
-			background-color: #2196F3;
-		    color: #fff;
-		    border-radius: 3px;
-		    padding: 6px 8px;
-		    height: 26px;
-		    margin: auto 20px auto 0;
-		    text-transform: uppercase;
-		    font-size: 12px;
-		}
-
-		.ration-target {
-			background-color: #009688;
-		    color: #fff;
-		    border-radius: 3px;
-		    padding: 6px 8px;
-		    height: 26px;
-		    margin: auto 14px auto 0;
-		    text-transform: uppercase;
-		    font-size: 12px;
-		}
-		*/ 
 	}
 	.ration-view-content {
-
+		overflow: auto;
 		.composition {
 			font-size: 12px;
 			text-align: right;

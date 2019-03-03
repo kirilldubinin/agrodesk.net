@@ -26,6 +26,20 @@ var disabledFields = {
     'general.efficiency': 'disabled'
 };
 
+var historyFields = {
+    'cowsNumber': 'history',
+    'dryMaterialConsumption': 'history',
+    'estimatedProductivity': 'history',
+    'actualProductivity': 'history',
+    'dryMaterialTMR': 'history',
+    'ratio': 'history',
+    'fat': 'history',
+    'protein': 'history',
+    'rationPrice': 'history',
+    'milkPrice': 'history',
+    'efficiency': 'history'
+};
+
 /*var enumFields = {
     'general.cowsNumber': 'enum',
     'general.dryMaterialConsumption': 'enum',
@@ -40,5 +54,6 @@ module.exports = {
     dateFields: dateFields,
     enumFields: enumFields,
     requiredFields: requiredFields,
-    disabledFields: disabledFields
+    disabledFields: disabledFields,
+    historyFields: historyFields
 };

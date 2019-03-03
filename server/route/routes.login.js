@@ -7,7 +7,7 @@ var registration = require('../authentication/registration');
 var CustomStrategy = require('../authentication/local');
 
 var emailRegexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-var loginNameRegexp = /^[A-Za-z][A-Za-z0-9]*$/;
+var loginNameRegexp = /^[a-zA-Z\d-_]+$/;
 
 var passGenerator = require('generate-password');
 var nodemailer = require('nodemailer');

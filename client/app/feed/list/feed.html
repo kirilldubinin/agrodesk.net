@@ -207,7 +207,7 @@
                         </md-radio-group>
                     </h2>
                     <div layout="row">
-                        <div flex="25">
+                        <div flex="50">
                             <ul class="balance-list" ng-repeat="balance in ::feed.dashboard.balance.byFeedType" 
                                 ng-if="feed.dashboard.balance.current === 'byFeedType'">
                                 <li>
@@ -239,10 +239,6 @@
                                 </li>
                             </ul>
                         </div>  
-                        <div flex>
-                            <div id="chartByFeedType" ng-show="feed.dashboard.balance.current === 'byFeedType'"></div>  
-                            <div id="chartByComposition" ng-show="feed.dashboard.balance.current === 'byComposition'"></div>  
-                        </div>
                     </div>
                 </md-card>
             </div>

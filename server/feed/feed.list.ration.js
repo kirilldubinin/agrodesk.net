@@ -51,7 +51,9 @@ function list(feeds) {
         return _.merge({}, feed.general, {
             _id: feed._id,
             icon: getFeedIconName(feed),
-            dryMaterial: _.size(feed.analysis) ? (_.last(feed.analysis).dryMaterial / 100) : undefined,
+            dryMaterial: _.size(feed.analysis) ? 
+                Math.round((_.last(feed.analysis).dryMaterial / 100)*1000)/1000
+                : undefined,
             feedType: lang(feed.general.feedType)
         });
     });
