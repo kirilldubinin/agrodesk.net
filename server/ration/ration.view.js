@@ -42,7 +42,7 @@ function convertToControl(item) {
 
 function convert(ration, sessionData) {
 
-    var actions = ['print'];
+    var actions = ['print', 'copy'];
     if (sessionData) {
         var perms = sessionData.permissions;
         if (_.indexOf(perms, 'admin') !== -1 || _.indexOf(perms, 'write') !== -1) {
@@ -51,12 +51,19 @@ function convert(ration, sessionData) {
         }
     }
 
+    var actionsIcon = {
+        print: 'local_print_shop',
+        copy: 'content_copy',
+        edit: 'edit',
+        delete: 'delete_forever'
+    };
+
 	return {
         actions: _.map(actions, function (action) {
             return {
                 key: action,
                 label: lang(action),
-                icon: action === 'print' ? 'local_print_shop' : '',
+                icon: actionsIcon[action] || '',
                 buttonType: action === 'delete' ? 
                     'warn' : 'raised'
             };

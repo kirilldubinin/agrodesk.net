@@ -77,50 +77,64 @@
 
         vm.update = function () {
 
-            // values
-            vm.rationComposition.initialItem = _.map(vm.rationComposition.initialItem, function (component) {
+            vm.error = '';
+
+            // validate
+            // proportion
+            var proportionInvalid = 0;
+            var dryMaterialInvalid = false;
+            _.map(vm.rationComposition.initialItem, function (component) {
+                proportionInvalid += component.proportion;
+                dryMaterialInvalid = dryMaterialInvalid || (component.dryMaterial > 1);
+            });
+
+            if (proportionInvalid > 100) {
+                vm.error = 'Сумма долей всех компонентов не может быть больше 100% !';
+            } else if (dryMaterialInvalid) {
+                vm.error = 'СВ в комопненте не может больше единицы !';
+            }
+
+            var fullPrice = 0;
+            var OK = 0;
+            var KK = 0;
+            var rawMat = 0;
+            var dryMat = 0;
+            _.forEach(vm.rationComposition.initialItem, function (component) {
+                // values
                 if (component.componentType !== 'mk') {
                     component.value = 
                     Math.round(
                         (component.proportion * vm.rationGeneral.initialItem.dryMaterialConsumption) / 
                         (100 * component.dryMaterial)
-                    * 100) / 100;
+                    * 10) / 10;
                 }
-                return component;
-            })
+                // price
+                fullPrice += (component.price * component.value) || 0;
 
-            // price
-            var fullPrice = 0;
-            _.forEach(vm.rationComposition.initialItem, function (item) {
-                fullPrice += (item.price * item.value) || 0;
+                // ratio
+                if (component.componentType === 'ok') {
+                    OK += component.proportion || 0;
+                }
+
+                // dry material in TMR
+                rawMat += component.value;
+                dryMat += component.value * component.dryMaterial;
             });
+
             if (_.isNumber(fullPrice) && !_.isNaN(fullPrice)) {
                 vm.rationGeneral.initialItem.rationPrice = Math.round(fullPrice * 100) / 100;
             }
-
-            // ratio
-            var OK = 0;
-            var KK = 0;
-            _.forEach(vm.rationComposition.initialItem, function (item) {
-                if (item.componentType === 'ok') {
-                    OK += item.value * item.dryMaterial;
-                } else if (item.componentType === 'kk') {
-                    KK += item.value * item.dryMaterial;
-                }
-            });
-            if (_.isNumber(OK) && OK !== 0 && _.isNumber(KK) && KK !== 0) {
-
-                 // ok + kk = 100
-                // ok/kk = val
-                // ok = kk * val
-                // kk * val + kk = 100
-                // kk(val + 1) = 100
-                var KK = Math.round(100 / (1+OK/KK));
-                var OK = 100 - KK;
+            
+            if (_.isNumber(OK) && OK !== 0) {
+                OK = Math.round(OK * 10) / 10;
+                var KK = 100 - OK;
+                KK = Math.round(KK * 10) / 10;
                 vm.rationGeneral.initialItem.ratio = OK + ' / ' + KK;
             } else {
-                vm.rationGeneral.initialItem.ratio = 0;
+                vm.rationGeneral.initialItem.ratio = '0';
             }
+
+            vm.rationGeneral.initialItem.dryMaterialTMR = Math.round((100-((rawMat-dryMat)/rawMat * 100)) * 100) / 100;
 
             // efficiency
             if (vm.rationGeneral.initialItem.milkPrice && 

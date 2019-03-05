@@ -14,7 +14,7 @@
         vm.do = function () {
             authFactory.login(vm.user).then(
                 function(response) {
-                    $state.go('tenant.feed', { 'id': response.tenantName });
+                    $state.go('tenant', { 'id': response.tenantName });
                 }, function (err) {
                     vm.info = err.message;
                 }

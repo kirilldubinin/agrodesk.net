@@ -20,6 +20,9 @@ angular.module('ration')
     rationFactory.deleteRation = function (rationId) {
         return $http.delete(urlBaseRation + rationId);
     };
+    rationFactory.copyRation = function (rationId) {
+        return $http.get(urlBaseRation + rationId + '/copy');
+    };
     rationFactory.getRationEdit = function (rationId) {
         return $http.get(urlBaseRation + rationId + '/edit');
     };

@@ -13,7 +13,9 @@
                 ng-click="rationView[action.key]()">
                 <ng-md-icon ng-if="action.icon" icon="{{action.icon}}" size="24">
                 </ng-md-icon>
-                {{action.key === 'print' ? '' : action.label}}
+                <md-tooltip md-direction="bottom">
+                    {{action.label}}    
+                </md-tooltip>
             </md-button>
         </div>
     </div>
@@ -21,7 +23,7 @@
         <h2 class="text-center" flex="40">ПАРАМЕТРЫ</h2>
         <h2 class="text-center" flex="">СОСТАВ</h2>
     </div>
-    <div class="ration-view-content" layout="row">
+    <div class="ration-view-content" flex layout="row">
         <div class="ration-info" flex="40">
             <div layout="row" flex="" ng-repeat="(key, data) in rationView.general.controls">
                 <label flex="50">{{::data.label}}</label>

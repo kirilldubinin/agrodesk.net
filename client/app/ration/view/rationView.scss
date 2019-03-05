@@ -21,6 +21,10 @@
 		    text-transform: uppercase;
 		    font-size: 12px;
 		}
+		.delete-btn {
+			min-width: 40px;
+			width: 40px;
+		}
 	}
 	.ration-sub-title {
 		margin: 1em 0 0 0;
@@ -55,9 +59,10 @@
 		.composition {
 			font-size: 12px;
 			text-align: right;
-			height: 100%;
 			background-color: #fdfdfd;
 			margin-top: 2em;
+			margin-bottom: 2em;
+			margin-right: 1em;
 			box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 			.scroll-wrapper {
 				overflow: auto;

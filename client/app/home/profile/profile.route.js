@@ -6,7 +6,7 @@
         $stateProvider
             .state('tenant.profile', {
                 url: '/profile',
-                templateUrl: 'app/profile/profileRoot/profile.html',
+                templateUrl: 'app/home/profile/profile.html',
                 abstract: true
             }).state('tenant.profile.view', {
                 url: '/view',

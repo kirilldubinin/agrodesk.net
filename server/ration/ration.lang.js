@@ -25,6 +25,7 @@ var langObj = {
     edit: 'редактировать',
     delete: 'удалить',
     print: 'печать',
+    copy: 'копировать',
 
     chartsRation: 'Аналитика',
     addRation: 'Добавить'

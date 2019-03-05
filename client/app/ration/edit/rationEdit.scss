@@ -158,9 +158,9 @@
 				}
 				.component-value {
 					input {
-						border: none;
 						&:disabled {
 							background-color: #eee;
+							border: none;
 						}
 					}
 				}
@@ -231,6 +231,12 @@
 			.empty-ration {
 				text-align: center;
 				margin: 5em 0;
+			}
+			.error-ration {
+				color: #ff5722;
+				text-align: center;
+				font-size: 14px;
+				margin: 2em 0;
 			}
 		}
 	}

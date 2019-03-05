@@ -147,6 +147,54 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
         });
     });
 
+    // copy ration
+    app.get('/api/rations/:ration_id/copy', isAuthenticated, function(req, res) {
+        Ration.findById(req.params.ration_id).lean().exec(function(err, ration) {
+            if (err) {
+                return errorHandler(err, req, res);
+            }
+
+            if (ration === null) {
+                return res.status(406).json({
+                    message: 'Нет рациона с таким идентификатором.'
+                });
+            }
+
+            if (checkUserRightForRation(ration, req, res)) {
+                var copyRation = new Ration();
+                copyRation.createdAt = new Date();
+                copyRation.changeAt = new Date();
+                // set userId and tenantId
+                copyRation.createdBy = {
+                    userId: req.user._id,
+                    tenantId: req.user.tenantId
+                }
+                copyRation.general = ration.general;
+                copyRation.general.number = 'Копия-' + ration.general.number;
+                copyRation.general.name = 'Копия-' + ration.general.name;
+
+                copyRation.composition = ration.composition;
+
+                console.log(copyRation);
+
+                copyRation.save(function(err, newRation) {
+                    if (err) {
+                        return errorHandler(err, req, res);
+                    } else {
+                        res.json({
+                            message: 'OK',
+                            id: newRation._id
+                        });
+                    }
+                });
+            }  else {
+                return res.status(406).json({
+                    message: 'Недостаточно прав.'
+                })
+            }
+        });
+    });
+
     // update ration by id
     app.put('/api/rations/:ration_id', isAuthenticated, function(req, res) {
         var canEdit = req.user.permissions.indexOf('admin') > -1 || req.user.permissions.indexOf('write') > -1;

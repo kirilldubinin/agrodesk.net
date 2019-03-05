@@ -37,5 +37,16 @@
                 'rationId': rationId
             });
         };
+
+        vm.copy = function() {
+            rationFactory.copyRation(rationId).then(function(response) {
+                if (response.message === 'OK') {
+                    $state.go('tenant.ration.instance', {
+                        'rationId': response.id
+                    });
+                }
+            });
+            
+        };
     }
 })();
