@@ -26,13 +26,14 @@
         </span>
         <!--</div>-->
         <div class="actions" flex="">
-            <!--<md-button class="md-raised" ng-click="feedView.copy()">
-        Copy
-      </md-button>-->
-            <md-button class="md-{{action.buttonType}} {{action.key}}-btn" ng-click="feedView[action.key]()" ng-repeat="action in feedView.actions">
-                <ng-md-icon ng-if="action.icon" class="print-icon" icon="{{action.icon}}" size="24">
+            <md-button ng-repeat="action in feedView.actions"
+                class="md-{{action.buttonType}} {{action.key}}-btn" 
+                ng-click="feedView[action.key]()">
+                <ng-md-icon ng-if="action.icon" icon="{{action.icon}}" size="24">
                 </ng-md-icon>
-                {{action.key === 'print' ? '' : action.label}}
+                <md-tooltip md-direction="bottom">
+                    {{action.label}}    
+                </md-tooltip>
             </md-button>
         </div>
     </div>

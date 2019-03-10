@@ -1,7 +1,18 @@
 <div class="diff-card" layout="column">
-    <div class="diff-title" layout="row">
-        <h2 flex="25">
-            Сравнение
+    <div class="title" layout="row">
+        <h2  flex="">
+            Сравнение кормов
+        </h2>
+        <div class="actions">
+            <md-button class="md-raised" ng-click="diff.print()">
+                <ng-md-icon icon="local_print_shop" size="24">
+                </ng-md-icon>
+            </md-button>
+        </div>
+    </div>
+    <div class="diff-title" layout="row" id="diff-title">
+        <h2 flex="30">
+            Параметры
         </h2>
         <div class="feed-header" flex="" ng-repeat="header in diff.headers">
             {{header.name}}
@@ -17,7 +28,7 @@
             </span>
         </div>
     </div>
-    <div class="diff-dashboard" flex="" layout="row">
+    <div class="diff-dashboard" flex="" layout="row"  id="diff-dashboard">
         <div flex class="mode-description" ng-if="!diff.diffRows.length">
             <p>
                 Данный модуль позволяет Вам оперативно проводить сравнение кормов по любому показателю, присутствующему в корме.
@@ -41,7 +52,7 @@
                 </h4>
                 <ul ng-if="property.children && !property.hidden">
                     <li class="property-values" layout="row" ng-repeat="child in ::property.children" ng-switch="child.key">
-                        <span class="property-label" flex="25">
+                        <span class="property-label" flex="30">
                             {{child.label}} {{child.dimension}}
                         </span>
                         <span class="property-value" flex="" layout="row" ng-init="valueIdx = $index" ng-repeat="value in ::child.values">

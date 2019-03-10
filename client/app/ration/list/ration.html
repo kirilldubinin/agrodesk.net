@@ -1,6 +1,6 @@
 <div class="ration" layout="row">
     <md-card class="navigator" flex="20" md-theme="default" layout="column" md-theme-watch="">
-        <section ng-if="!ration.editMode">
+        <section ng-if="!ration.editMode" layout="column">
             <div class="list-header">
                 <!-- HEADER -->
                 <div layout="row">
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <md-list flex class="ration-list">
-                <md-list-item class="md-3-line ration-item" 
+                <md-list-item class="ration-item" 
                     ng-repeat="rationItem in ration.rationItems"
                     ng-class="{'done': rationItem.done}">
                     <div class="md-list-item-text" layout="column" ng-click="ration.onRationClick(rationItem)">
@@ -28,8 +28,8 @@
                             <span class="ration-uid">
                                 <b>#{{rationItem.number}}</b>
                             </span>
-                            <span class="ration-type">{{rationItem.rationType}}</span>
-                            <span class="ration-target">
+                            <span class="ration-type {{rationItem.rationType}}">{{rationItem.rationTypeName}}</span>
+                            <span class="ration-target" ng-if="rationItem.estimatedProductivity">
                                 {{rationItem.estimatedProductivity}} литра
                             </span>
                         </div>
@@ -37,9 +37,6 @@
                             {{rationItem.name}}
                         </div>
                         <div class="third-line" layout="row">
-                            <span class="ration-date" flex>
-                                {{rationItem.startDate | date}}
-                            </span>
                             <span ng-if="rationItem.dryMaterialConsumption">
                                 СВ: {{rationItem.dryMaterialConsumption}} кг
                             </span>
@@ -49,6 +46,9 @@
                             <span ng-if="rationItem.ratio">
                                 {{rationItem.ratio || ''}}
                             </span>
+                        </div>
+                        <div class="last-line" layout="row">
+                            {{rationItem.startDate | date}}
                         </div>
                     </div>
                 </md-list-item>
@@ -135,7 +135,15 @@
                 ng-click="ration[action.key]()" >
                 {{action.label}}
             </md-button>
-             <md-card class="dashboard-card" layout-padding="" 
+
+            <md-card class="dashboard-card all-rations" layout-padding="">
+                <div layout="row" class="dashboard-card__title">
+                    <h2>Действующие рационы</h2>
+                </div>
+                <div id="all-rations"></div>
+            </md-card>
+
+            <md-card class="dashboard-card" layout-padding="" 
                 ng-repeat="rationObj in ration.dashboard.rations">
                 <div layout="row" class="dashboard-card__title">
                     <b>#{{rationObj.general.number}}</b>
@@ -149,7 +157,7 @@
                         {{rationObj.showChart ? 'скрыть график' : 'показать график'}}
                     </md-button>
                 </div>
-                <div ng-show="rationObj.showChart" id="container-{{rationObj.general.number}}"></div>
+                <div ng-show="rationObj.showChart" id="container-{{rationObj._id}}"></div>
             </md-card>
         </md-content>
     </md-card>

@@ -34,6 +34,10 @@
 	    padding-top: 0;
 
 		.ration-item {
+			cursor: pointer;
+			background-color: #fff;
+			border-bottom: 1px solid #eee;
+			padding: 0 12px;
 			&:hover {
 				background-color: #f0f0f0;
 			}
@@ -48,9 +52,7 @@
 			&.selected {
 				background-color: #BBDEFB !important;
 			}
-			cursor: pointer;
-			background-color: #fff;
-			border-bottom: 1px solid #eee;
+			
 			button {
 				&.md-no-style {
 					min-height: 68px;
@@ -69,14 +71,14 @@
 			}
 			.first-line {
 				.ration-uid {
-					max-width: 60px;
-					width: 50px;
+					max-width: 40px;
+					width: 40px;
 					text-overflow: ellipsis;
 					overflow: hidden;
 				}
 				.ration-type {
 					margin: 0 8px;
-					background-color: #2196F3;
+					
 				    color: #fff;
 				    padding: 4px 8px;
 				    border-radius: 3px;
@@ -84,9 +86,16 @@
 				    font-size: 10px;
 					line-height: 1.3em;
 					height: 2em;
+
+					&.milk {
+						background-color: #2196F3;
+					}
+					&.dry {
+						background-color: #f18364;
+					}
+
 				}
 				.ration-target {
-					margin: 0 8px;
 					background-color: #009688;
 				    color: #fff;
 				    padding: 1px 8px;
@@ -95,8 +104,9 @@
 				}
 			}
 			.second-line {
-				margin: 12px 0 10px 0;
+				margin: 12px 0 10px;
 				color: #3f51b5;
+				font-size: 16px;
 			}
 			.third-line {
 				span {
@@ -104,9 +114,10 @@
 					color: #555;
 					padding-right: 8px;
 				}
-				.ration-date {
-					font-weight: bold;
-				}
+				
+			}
+			.last-line {
+				font-weight: bold;
 			}
 		}
 	}

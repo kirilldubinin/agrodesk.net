@@ -2,12 +2,10 @@
     'use strict';
     angular.module('feed').controller('DiffController', DiffController);
 
-    function DiffController($scope, $state, feedFactory, $stateParams, _) {
+    function DiffController($state, feedFactory, authFactory, _) {
 
     	var vm = this;
         vm._ = _;
-
-        var feeds = $stateParams.feeds;
     	function updateDiffRows(feedsForDiff) {
 
     		if (!feedsForDiff.length) {
@@ -25,5 +23,31 @@
     	}	
 
         updateDiffRows(_.filter($state.params.feeds.split(':'), Boolean));
+
+        vm.print = function () {
+            authFactory.getSessionData().then(function(data) {
+
+                var diffTitlePrint = document.getElementById('diff-title');
+                var diffDashboardPrint = document.getElementById('diff-dashboard');
+
+                var popupWin = window.open('', '_blank');
+                popupWin.document.open();
+                popupWin.document.write(
+                    '<html style="background-color: #fff;">'+
+                        '<title>AGRODESK:печать</title>'+
+                        '<head>'+
+                            '<link rel="stylesheet" type="text/css" href="app.css"/>'+
+                            '<link rel="stylesheet" type="text/css" href="libs.css"/>'+
+                        '</head>'+
+                        '<body onload="setTimeout(function() {window.print(); window.close();}, 500)" class="diff print">' + 
+                            '<div class="layout-row print-title"><h2 class="flex">' + data.user.tenantFullName + ' Сравнение кормов</h2><h2>agrodesk.net</h2></div>' +
+                            (diffTitlePrint ? diffTitlePrint.outerHTML  : '') + 
+                            (diffDashboardPrint ? diffDashboardPrint.outerHTML : '') +
+                        '</body>'+
+                    '</html>');
+                popupWin.document.close();
+                //popupWin.onfocus=function(){ popupWin.close();}
+            });
+        }
     }
 })();

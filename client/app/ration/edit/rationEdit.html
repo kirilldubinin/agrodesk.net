@@ -42,7 +42,7 @@
                 </div>
                 <div class="component-name" flex="">
                     Компонент
-                    <ng-md-icon icon="note_add" class="add-component" ng-click="rationEdit.addComponent()">
+                    <ng-md-icon icon="add_box" class="add-component" ng-click="rationEdit.addComponent()">
                         <md-tooltip md-direction="bottom">
                             Добавить новый компонент
                         </md-tooltip>
@@ -89,22 +89,25 @@
                             ng-blur="rationEdit.update()"/>
                     </div>
                     <div class="component-value" flex="10">
-                        <input type="number" ng-disabled="component.componentType !== 'mk'" 
+                        <input type="number" 
+                            ng-disabled="component.componentType !== 'mk' || !rationEdit.sa" 
                             ng-blur="rationEdit.update()"
                             ng-model="component.value"/>
                     </div>
                     <div class="" flex="10">
-                        <input type="number" ng-model="component.proportion" 
+                        <input type="number" 
+                            ng-disabled="!rationEdit.sa" 
+                            ng-model="component.proportion" 
                             ng-blur="rationEdit.update()" 
                             ng-if="component.componentType !== 'mk'"/>
                     </div>
                 </div>
-                <div class="error-ration" ng-if="rationEdit.error">
-                    {{rationEdit.error}}
-                </div>
             </div>  
             <div class="empty-ration" ng-if="!rationEdit.rationComposition.initialItem.length" flex>
                 <md-button class="md-raised md-primary" ng-click="rationEdit.addComponent()">добавить компонент</md-button>
+            </div>
+            <div class="error-box" ng-if="rationEdit.error">
+                {{rationEdit.error}}
             </div>
         </div>
     </div>

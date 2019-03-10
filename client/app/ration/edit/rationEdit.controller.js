@@ -1,12 +1,9 @@
 (function() {
     'use strict';
-    RationEditController.$inject = ['$scope', '$stateParams', 'RATION_TYPES', 'RATION_COMPONENT_TYPES', 'rationFactory', '_', '$state']
     angular.module('ration').controller('RationEditController', RationEditController);
 
-    function RationEditController($scope, $stateParams, RATION_TYPES, RATION_COMPONENT_TYPES, rationFactory, _, $state) {
+    function RationEditController($scope, $stateParams, RATION_TYPES, RATION_COMPONENT_TYPES, rationFactory, authFactory, _, $state) {
         var vm = this;
-
-
         $scope.$on('ADD_FEED_TO_RATION', function (e, feedItem) {
             vm.addComponent({
                 _id: feedItem._id,
@@ -29,14 +26,19 @@
             vm.update();
         });
 
+        authFactory.getSessionData().then(function(data) {
+            vm.sa = data.user.permissions.indexOf('sa') > -1;
+            console.log(vm.sa);
+        });
+
         function _sort (a, b) {
             return b.value - a.value;
         }
 
         vm.sort = function () {
-            var ok = _.filter(vm.rationComposition.initialItem, {componentType: 'ok'}).sort(_sort);
-            var kk = _.filter(vm.rationComposition.initialItem, {componentType: 'kk'}).sort(_sort);
-            var mk = _.filter(vm.rationComposition.initialItem, {componentType: 'mk'}).sort(_sort);
+            var ok = _.filter(vm.rationComposition.initialItem, {componentType: 'ok'});
+            var kk = _.filter(vm.rationComposition.initialItem, {componentType: 'kk'});
+            var mk = _.filter(vm.rationComposition.initialItem, {componentType: 'mk'});
 
             vm.rationComposition.initialItem = ok.concat(kk).concat(mk);
             vm.rationComposition.initialItem = _.map(vm.rationComposition.initialItem, function (item, index) {
@@ -84,7 +86,7 @@
             var proportionInvalid = 0;
             var dryMaterialInvalid = false;
             _.map(vm.rationComposition.initialItem, function (component) {
-                proportionInvalid += component.proportion;
+                component.componentType !== 'mk' && (proportionInvalid += component.proportion);
                 dryMaterialInvalid = dryMaterialInvalid || (component.dryMaterial > 1);
             });
 
@@ -122,7 +124,7 @@
             });
 
             if (_.isNumber(fullPrice) && !_.isNaN(fullPrice)) {
-                vm.rationGeneral.initialItem.rationPrice = Math.round(fullPrice * 100) / 100;
+                vm.rationGeneral.initialItem.rationPrice = Math.round(fullPrice * 10) / 10;
             }
             
             if (_.isNumber(OK) && OK !== 0) {
@@ -134,7 +136,7 @@
                 vm.rationGeneral.initialItem.ratio = '0';
             }
 
-            vm.rationGeneral.initialItem.dryMaterialTMR = Math.round((100-((rawMat-dryMat)/rawMat * 100)) * 100) / 100;
+            vm.rationGeneral.initialItem.dryMaterialTMR = Math.round((100-((rawMat-dryMat)/rawMat * 100)) * 10) / 10;
 
             // efficiency
             if (vm.rationGeneral.initialItem.milkPrice && 

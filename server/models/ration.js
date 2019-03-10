@@ -55,6 +55,11 @@ var RationSchema = new Schema({
             required: true
         },
         // estimated productivity
+        productivityRate: {
+            type: Number,
+            required: true
+        },
+        // productivity rate
         estimatedProductivity: {
             type: Number,
             required: true
@@ -117,6 +122,7 @@ var RationSchema = new Schema({
         dryMaterialConsumption: { type: Number },
         estimatedProductivity: { type: Number },
         actualProductivity: { type: Number },
+        productivityRate: { type: Number },
         dryMaterialTMR: { type: Number },
         ratio: { type: String },
         fat: { type: Number },
@@ -131,7 +137,7 @@ var goldObject = {
     general: {
         number: '01',
         startDate: new Date(),
-        endDate: Date,
+        endDate: new Date,
         rationType: 'milk',
         name: '',
         groupName: '',
@@ -139,6 +145,7 @@ var goldObject = {
         dryMaterialConsumption: 0,
         estimatedProductivity: 0,
         actualProductivity: 0,
+        productivityRate: 1,
         dryMaterialTMR: 0,
         ratio: '',
         fat: 0,

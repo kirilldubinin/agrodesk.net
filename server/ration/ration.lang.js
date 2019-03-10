@@ -21,6 +21,8 @@ var langObj = {
     endDate: 'Дата окончания кормления',
     proportion: 'Доля',
     milk: 'дойный',
+    dry: 'сухостой',
+    productivityRate: 'Коэфициент продуктивности',
 
     edit: 'редактировать',
     delete: 'удалить',

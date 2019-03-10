@@ -25,11 +25,10 @@
 		.actions {
 			line-height: 58px;
     		text-align: right;
-
-    		.print-btn {
-    			min-width: 60px;
-    			color: #555;
-    		}
+			.delete-btn {
+				min-width: 40px;
+				width: 40px;
+			}
 		}
 
 		&.done {
@@ -155,7 +154,7 @@
 	}
 }
 
-.print {
+.feed.print {
 	background-color: #fff; 
 	ul, li {
 		padding: 0;

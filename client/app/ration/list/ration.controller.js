@@ -29,7 +29,7 @@
             if (!ration.chartRender && _.size(ration.series)) {
                 setTimeout(function () {
                     ration.chartRender = true;
-                    Highcharts.chart('container-' + ration.general.number, {
+                    Highcharts.chart('container-' + ration._id, {
                         legend: {
                             itemStyle: {
                                 fontWeight: '400'
@@ -47,7 +47,18 @@
                             categories: ration.categories
                         },
                         yAxis: {
-                            title: false
+                            title: false,
+                            /*plotBands: [{
+                                from: 34,
+                                to: 35,
+                                color: 'rgba(68, 170, 213, 0.1)',
+                                label: {
+                                    text: 'Расчетная продуктивность',
+                                    style: {
+                                        color: '#606060'
+                                    }
+                                }
+                            }]*/
                         },
                         series: ration.series
                     });

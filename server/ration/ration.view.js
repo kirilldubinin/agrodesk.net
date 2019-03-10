@@ -1,6 +1,8 @@
 var _ = require('lodash');
 var Ration = require('../models/ration');
 var lang = require('./ration.lang');
+var lang = require('./ration.lang');
+var rationUtils = require('./ration.utils');
 var dimension = require('./ration.dimension');
 
 function convertValue(key, val) {
@@ -15,6 +17,12 @@ function convertValue(key, val) {
 function convertToControl(item) {
 	var viewObj = {};
     _.each(item, function(value, key) {
+
+        // check field by rationType
+        if (item.rationType === 'dry' && rationUtils.milkOnlyFields[key]) {
+            return;
+        }
+
         // check if value not empty
         if (_.isBoolean(value) || _.isNumber(value) || value) {
             viewObj[key] = {

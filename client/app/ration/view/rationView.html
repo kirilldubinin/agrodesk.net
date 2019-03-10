@@ -24,7 +24,7 @@
         <h2 class="text-center" flex="">СОСТАВ</h2>
     </div>
     <div class="ration-view-content" flex layout="row">
-        <div class="ration-info" flex="40">
+        <div class="ration-info" flex="40" id="general">
             <div layout="row" flex="" ng-repeat="(key, data) in rationView.general.controls">
                 <label flex="50">{{::data.label}}</label>
                 <span>
@@ -32,7 +32,7 @@
                 </span>
             </div>
         </div>  
-        <div class="composition" flex layout="column">
+        <div class="composition" flex layout="column" id="composition">
             <div class="composition-title" layout="row">
                 <div class="component-index" flex="2">
                     #
@@ -73,7 +73,7 @@
                         {{component.value}}
                     </div>
                     <div class="rate" flex="15">
-                        {{component.proportion}}
+                        {{component.componentType !== 'mk' ? component.proportion : ''}}
                     </div>
                 </div>
             </div>  

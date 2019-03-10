@@ -6,13 +6,18 @@
         $stateProvider
             .state('admin', {
                 url: '/admin',
+                abstract: true
+            })
+            .state('admin.dashboard', {
+                url: '/dashboard',
                 templateUrl: 'app/home/admin/admin.html',
                 controller: 'AdminController',
                 controllerAs: 'admin',
                 data: {
                     module: 'admin'
                 }
-            }).state('admin.tenant', {
+            })
+            .state('admin.tenant', {
                 url: '/:tenant_id',
                 templateUrl: 'app/home/admin/tenant.html',
                 controller: 'TenantController',

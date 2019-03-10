@@ -97,7 +97,7 @@ module.exports = function(app, isAuthenticated, errorHandler) {
         }
 
         authStrategy.authenticate(req, function(err, user, tenant) {
-            if (!err && user && tenant && user.tenantId.equals(tenant._id)) {
+            if (!err && user && tenant) {
                 // set tenant data for user object
                 var sessionUser = {
                     name: user.name,
@@ -194,13 +194,20 @@ module.exports = function(app, isAuthenticated, errorHandler) {
         });
     });
     app.post('/api/users', isAuthenticated, function(req, res) {
+
+        //check password
+        if (req.body.password.length < 5) {
+            return res.status(406).json({
+                message: 'пароль не может быть меньше 5 символов'
+            });
+        }
         
         // check if this tenant allready has a user with name req.body.name
         User.findOne({
             name: req.body.name,
             tenantId: req.user.tenantId
         }).exec(function(err, _user) {
-            if (err) {
+            if (!_user) {
                 var user = new User();
                 user.tenantId = req.user.tenantId;
                 user.createdAt = new Date();

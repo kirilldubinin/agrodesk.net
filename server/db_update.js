@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var database = require('./config/database');
 var _ = require('lodash');
 var Feed = require('./models/feed');
+var Ration = require('./models/ration');
 var Tenant = require('./models/tenant');
 var Tariff = require('./models/tariff');
 
@@ -16,7 +17,7 @@ db.on('error', function(err) {
 });
 db.once('open', function callback() {
     console.log("Connected to DB!");
-    addField_autoDecrement_for_FEED_feeding();
+    addField_productivityRate_for_RATION_general();
 });
 
 function add_Tariff_Plans (ready) {
@@ -30,6 +31,33 @@ function add_Tariff_Plans (ready) {
         } else {
             console.log(newTariff);
         }   
+    });
+}
+
+function addField_productivityRate_for_RATION_general () {
+    Ration.find().then(function(rations) {
+        rations.forEach(function (r){
+            r.general.productivityRate = 1;
+            r.save(function(err, _feed) {
+                if (err) {
+                    console.log(err);
+                }
+            });  
+        });
+    });
+}
+
+function addField_endDate_for_RATION_general () {
+    Ration.find().then(function(rations) {
+        rations.forEach(function (r){
+            
+            r.general.endDate = null;
+            r.save(function(err, _feed) {
+                if (err) {
+                    console.log(err);
+                }
+            });  
+        });
     });
 }
 

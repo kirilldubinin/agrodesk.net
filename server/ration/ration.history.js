@@ -7,10 +7,11 @@ var formatter = require('../formatter');
 
 function history (rations) {
 
-    const allSeries = ['dryMaterialConsumption', 'actualProductivity', 'dryMaterialTMR', 'ratio', 
+    const allSeries = ['dryMaterialConsumption', 'actualProductivity', 'estimatedProductivity', 'dryMaterialTMR', 'ratio', 
         'fat', 'protein', 'rationPrice', 'milkPrice', 'efficiency'];
     const defaultSeries = ['actualProductivity'];
-
+    
+    rations = _.filter(rations, (r) => { return r.general.rationType === 'milk' });
     return _.map(rations, (ration) => {
 
         var series = _.map(allSeries, (serie) => {
@@ -38,6 +39,7 @@ function history (rations) {
         });
 
         return {
+            _id: ration._id,
             showChart: false,
             general: ration.general,
             categories: _.map(ration.history, (h) => {

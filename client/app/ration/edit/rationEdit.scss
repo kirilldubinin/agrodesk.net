@@ -156,12 +156,10 @@
 						margin-left: -6px;
 					}
 				}
-				.component-value {
-					input {
-						&:disabled {
-							background-color: #eee;
-							border: none;
-						}
+				input {
+					&:disabled {
+						background-color: #eee;
+						border: none;
 					}
 				}
 
@@ -232,11 +230,20 @@
 				text-align: center;
 				margin: 5em 0;
 			}
-			.error-ration {
+			.error-box {
+				position: absolute;
+				bottom: 5em;
+				right: 5em;
+				width: 250px;
+				font-size: 12px;
+				text-align: left;
+				line-height: 1.5em;
+				background-color: #fefefe;
 				color: #ff5722;
-				text-align: center;
-				font-size: 14px;
-				margin: 2em 0;
+				border: 2px solid #ff5722;
+				border-radius: 4px;
+				padding: 4px 8px;
+				opacity: 0.8;
 			}
 		}
 	}

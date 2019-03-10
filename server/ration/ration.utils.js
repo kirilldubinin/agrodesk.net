@@ -23,7 +23,9 @@ var enumFields = {
 var disabledFields = {
     'general.ratio': 'disabled',
     'general.rationPrice': 'disabled',
-    'general.efficiency': 'disabled'
+    'general.efficiency': 'disabled',
+    'general.estimatedProductivity': 'disabled',
+    'general.dryMaterialTMR': 'disabled'
 };
 
 var historyFields = {
@@ -38,6 +40,16 @@ var historyFields = {
     'rationPrice': 'history',
     'milkPrice': 'history',
     'efficiency': 'history'
+};
+
+var milkOnlyFields = {
+    'estimatedProductivity': 'milk',
+    'actualProductivity': 'milk',
+    'fat': 'milk',
+    'protein': 'milk',
+    'milkPrice': 'milk',
+    'efficiency': 'milk',
+    'estimatedProductivity': 'milk'
 };
 
 /*var enumFields = {
@@ -55,5 +67,6 @@ module.exports = {
     enumFields: enumFields,
     requiredFields: requiredFields,
     disabledFields: disabledFields,
-    historyFields: historyFields
+    historyFields: historyFields,
+    milkOnlyFields: milkOnlyFields
 };

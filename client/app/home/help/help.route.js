@@ -6,7 +6,7 @@
         $stateProvider
             .state('tenant.help', {
                 url: '/help',
-                templateUrl: 'app//home/help/help.html',
+                templateUrl: 'app/home/help/help.html',
                 controller: 'HelpController',
                 controllerAs: 'help',
                 data: {

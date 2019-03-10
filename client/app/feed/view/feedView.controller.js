@@ -32,25 +32,43 @@
                         '<body onload="setTimeout(function() {window.print(); window.close();}, 500)" class="feed print">' + 
                             (analysisPrint ? 
                                 ('<div class="print-title"><h2>' + data.user.tenantFullName + 
-                                '</h2><label class="key">анализы:  </label>' + vm.feed.name + '&nbsp;&nbsp;&nbsp;' + vm.feed.year + '&nbsp;&nbsp;&nbsp;' +  vm.feed.storage + '</div>' +
+                                '</h2><label class="key">анализы:  </label>' + vm.feed.name + vm.feed.year + '&nbsp;&nbsp;&nbsp;' +  vm.feed.storage + '</div>' +
                                 '<br/>' +
                                 analysisPrint.innerHTML + 
                                 '<div class="break"></div>') : ''
                             ) +
                             (generalPrint ? 
-                                ('<div class="print-title"><h2>' + data.user.tenantFullName + '</h2><label class="key">основные:  </label>' + vm.feed.name + '   ' + vm.feed.year + '</div>' +
+                                ('<div class="print-title"><h2>' + 
+                                    data.user.tenantFullName + 
+                                    '</h2><label class="key">основные:  </label>' + 
+                                    vm.feed.name + '   ' + 
+                                    vm.feed.year + '&nbsp;&nbsp;&nbsp;' +
+                                    vm.feed.storage +
+                                '</div>' +
                                 '<br/>' +
                                 generalPrint.innerHTML + 
                                 '<br/>') : ''
                             ) +
                             (harvestPrint ? 
-                                ('<div class="print-title"><h2>' + data.user.tenantFullName + '</h2><label class="key">заготовка:  </label>' + vm.feed.name + '   ' + vm.feed.year + '</div>' +
+                                ('<div class="print-title"><h2>' + 
+                                    data.user.tenantFullName + 
+                                    '</h2><label class="key">заготовка:  </label>' + 
+                                    vm.feed.name + '   ' + 
+                                    vm.feed.year + '&nbsp;&nbsp;&nbsp;' +
+                                    vm.feed.storage +
+                                '</div>' +
                                 '<br/>' +
                                 harvestPrint.innerHTML + 
                                 '<br/>') : '' 
                             ) +
                             (feedingPrint ? 
-                                ('<div class="print-title"><h2>' + data.user.tenantFullName + '</h2><label class="key">кормление:  </label>' + vm.feed.name + '   ' + vm.feed.year + '</div>' +
+                                ('<div class="print-title"><h2>' + 
+                                    data.user.tenantFullName + 
+                                    '</h2><label class="key">кормление:  </label>' + 
+                                    vm.feed.name + '   ' + 
+                                    vm.feed.year +  '&nbsp;&nbsp;&nbsp;' +
+                                    vm.feed.storage +
+                                '</div>' +
                                 '<br/>' +
                                 feedingPrint.innerHTML) : ''
                             ) + 

@@ -87,11 +87,9 @@ gulp.task('build_app_js', function(){
 
 gulp.task('build_libs_css', function(){
 
-	var libsCSS = ['node_modules/angular-material/angular-material.css',
+	var libsCSS = ['node_modules/angular-material/angular-material.min.css',
 				'node_modules/angular-material-icons/angular-material-icons.css',
-				'node_modules/angular-ui-carousel/dist/ui-carousel.css',
-				'node_modules/font-awesome/css/font-awesome.min.css',
-				'node_modules/nvd3/build/nv.d3.css'];
+				'node_modules/font-awesome/css/font-awesome.min.css'];
 
     return gulp.src(libsCSS)
         .pipe(concat('libs.css'))

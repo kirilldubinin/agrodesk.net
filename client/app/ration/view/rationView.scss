@@ -156,3 +156,30 @@
 		}
 	}
 }
+
+
+.ration-view.print {
+	background-color: #fff; 
+	font-size: 12px;
+	a, ul, li {
+		padding: 0;
+		margin: 0;
+		color: #000;
+		background-color: #fff;
+		text-decoration: none;
+	}
+	.composition {
+		.layout-row {
+			border-bottom: 1px solid #999;
+			.component-index {
+				margin-right: 1em;
+			}
+		}
+	}
+	.layout-row {
+		padding: 4px 0;
+	}
+	.break {
+		page-break-after: always;
+	}
+}

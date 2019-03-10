@@ -127,6 +127,13 @@ function convert(feed, sessionData) {
         }
     }
 
+    var actionsIcon = {
+        print: 'local_print_shop',
+        copy: 'content_copy',
+        edit: 'edit',
+        delete: 'delete_forever'
+    };
+
     // add name if name is empty
     if (!feed.general.name) {
         feed.general.name = lang(feed.general.feedType) + ': ' + feed.general.composition;
@@ -137,7 +144,7 @@ function convert(feed, sessionData) {
             return {
                 key: action,
                 label: lang(action),
-                icon: action === 'print' ? 'local_print_shop' : '',
+                icon: actionsIcon[action] || '',
                 buttonType: action === 'delete' ? 
                     'warn' : 'raised'
             };

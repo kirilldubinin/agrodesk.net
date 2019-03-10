@@ -1,1 +1,44 @@
 <h4 class="text-center">в разработке</h4>
+<!--div class="field" layout="row">
+    <md-card class="navigator" flex="20" md-theme="default" layout="column" md-theme-watch="">
+        <section>
+            <div class="list-header">
+                <div layout="row">
+                    <div class="module-name" flex>
+                        Поля
+                        <span class="field-amount" ng-if="field.fieldItems.length">
+                            (14)
+                        </span>
+                    </div>
+                    <md-button class="md-fab md-mini md-primary add-ration-button" ng-click="field.addField()">
+                        <md-tooltip md-direction="bottom">
+                            Добавить новое поле
+                        </md-tooltip>
+                        <ng-md-icon class="add-icon" icon="plus_one" size="24">
+                        </ng-md-icon>
+                    </md-button>
+                </div>
+            </div>
+            <md-list flex class="field-list">
+                <md-list-item class="md-3-line field-item" 
+                    ng-repeat="item in field.fieldItems"
+                    ng-class="{'done': item.done}">
+                    <div class="md-list-item-text" layout="column" ng-click="field.onFiledClick(item)">
+                        <div class="first-line" layout="row">
+                            <span class="filed-number">{{item.number}}</span>
+                            <span class="ration-size">
+                                {{item.square}} ГА
+                            </span>
+                        </div>
+                        <div layout="row" class="second-line name">
+                        </div>
+                        <div class="third-line" layout="row">
+                        </div>
+                    </div>
+                </md-list-item>
+                <md-divider>
+                </md-divider>
+            </md-list>
+        </section>
+    </md-card>
+</div-->

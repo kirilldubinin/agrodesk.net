@@ -42,7 +42,7 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
 
     // get ration skeleton
     app.post('/api/rations/new', isAuthenticated, function(req, res) {
-        res.json(edit());
+        res.json(edit(null, req.user));
     });
 
     // delete feed by id
@@ -138,7 +138,7 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
             }
 
             if (checkUserRightForRation(ration, req, res)) {
-                res.json(edit(ration));
+                res.json(edit(ration, req.user));
             }  else {
                 return res.status(406).json({
                     message: 'Недостаточно прав.'

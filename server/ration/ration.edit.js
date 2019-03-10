@@ -8,6 +8,12 @@ function convertToControl(item, parentKey) {
 
     var editObj = {};
     _.each(item, function(value, key) {
+
+        // check field by rationType
+        if (item.rationType === 'dry' && rationUtils.milkOnlyFields[key]) {
+            return;
+        }
+
         if (item.hasOwnProperty(key)) {
             editObj[key] = {
 
@@ -63,8 +69,7 @@ function convert(ration) {
                 {
                     label: lang('kiloPerDay')
                 }
-            ],
-            body: ration.composition
+            ]
         }
     ];
 }
