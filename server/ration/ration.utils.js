@@ -11,7 +11,8 @@ var requiredFields = {
     'general.cowsNumber': 'required',
     'general.dryMaterialConsumption': 'required',
     'general.estimatedProductivity': 'required',
-    'general.actualProductivity': 'required'
+    'general.actualProductivity': 'required',
+    'general.productivityRate': 'required'
 };
 
 var enumFields = {
@@ -49,7 +50,7 @@ var milkOnlyFields = {
     'protein': 'milk',
     'milkPrice': 'milk',
     'efficiency': 'milk',
-    'estimatedProductivity': 'milk'
+    'productivityRate': 'milk'
 };
 
 /*var enumFields = {

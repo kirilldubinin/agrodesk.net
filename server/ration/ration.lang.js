@@ -22,6 +22,7 @@ var langObj = {
     proportion: 'Доля',
     milk: 'дойный',
     dry: 'сухостой',
+    young: 'молодняк',
     productivityRate: 'Коэфициент продуктивности',
 
     edit: 'редактировать',

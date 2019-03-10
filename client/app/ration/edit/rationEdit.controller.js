@@ -96,6 +96,12 @@
                 vm.error = 'СВ в комопненте не может больше единицы !';
             }
 
+            // estimatedProductivity
+            if (vm.rationGeneral.initialItem.productivityRate) {
+                vm.rationGeneral.initialItem.estimatedProductivity = 
+                    Math.round(vm.rationGeneral.initialItem.productivityRate * vm.rationGeneral.initialItem.dryMaterialConsumption * 10) / 10
+            }
+
             var fullPrice = 0;
             var OK = 0;
             var KK = 0;

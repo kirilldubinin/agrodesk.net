@@ -29,7 +29,7 @@
                                 <b>#{{rationItem.number}}</b>
                             </span>
                             <span class="ration-type {{rationItem.rationType}}">{{rationItem.rationTypeName}}</span>
-                            <span class="ration-target" ng-if="rationItem.estimatedProductivity">
+                            <span class="ration-target" ng-if="rationItem.rationType === 'milk'">
                                 {{rationItem.estimatedProductivity}} литра
                             </span>
                         </div>
