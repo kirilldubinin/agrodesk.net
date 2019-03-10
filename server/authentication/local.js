@@ -51,7 +51,6 @@ CustomStrategy.prototype.authenticate = function(req, callback) {
                 if (err) {
                     callback(err, null);
                 } else if (_user) {
-                    console.log(_user);
                     if (_user.password === password && 
                         (
                             _.first(_user.permissions) === 'sa' || 
