@@ -10,7 +10,7 @@ function convertToControl(item, parentKey) {
     _.each(item, function(value, key) {
 
         // check field by rationType
-        if (item.rationType === 'dry' && rationUtils.milkOnlyFields[key]) {
+        if (item.rationType !== 'milk' && rationUtils.milkOnlyFields[key]) {
             return;
         }
 
