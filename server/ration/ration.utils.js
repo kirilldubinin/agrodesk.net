@@ -53,6 +53,14 @@ var milkOnlyFields = {
     'productivityRate': 'milk'
 };
 
+var hideOnViewFields = {
+    'productivityRate': 'hide'
+};
+
+var hideForNonSA = {
+    'productivityRate': 'hide'
+};
+
 /*var enumFields = {
     'general.cowsNumber': 'enum',
     'general.dryMaterialConsumption': 'enum',
@@ -69,5 +77,7 @@ module.exports = {
     requiredFields: requiredFields,
     disabledFields: disabledFields,
     historyFields: historyFields,
-    milkOnlyFields: milkOnlyFields
+    milkOnlyFields: milkOnlyFields,
+    hideOnViewFields: hideOnViewFields,
+    hideForNonSA: hideForNonSA
 };

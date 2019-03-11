@@ -12,14 +12,23 @@
 			margin: auto;
 		}
 		.ration-type {
-			background-color: #2196F3;
 		    color: #fff;
 		    border-radius: 3px;
 		    padding: 6px 8px;
 		    height: 26px;
 		    margin: auto 20px auto 0;
 		    text-transform: uppercase;
-		    font-size: 12px;
+			font-size: 12px;
+			
+			&.milk {
+				background-color: #2196F3;
+			}
+			&.dry {
+				background-color: #f18364;
+			}
+			&.young {
+				background-color: #429a1c;
+			}
 		}
 		.delete-btn {
 			min-width: 40px;

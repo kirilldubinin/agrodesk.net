@@ -2,12 +2,11 @@ var lang = require('./ration.lang');
 var _ = require('lodash');
 
 function sortRations (a,b) {
-    return b.createdAt.getTime() - a.createdAt.getTime();
+    return +a.number - (+b.number);
 }
 
 function list(rations) {
-    var sortedRations = rations.sort(sortRations);
-    var shortRations = _.map(sortedRations, function(ration) {
+    var shortRations = _.map(rations, function(ration) {
         return {
             _id: ration._id,
             number: ration.general.number,
@@ -25,18 +24,18 @@ function list(rations) {
 
     // in progress
     var inProgress = shortRations.filter((r) => { return  !r.endDate });
-    const inProgressMilk = inProgress.filter((r) => { return  r.rationType === 'milk' });
-    const inProgressDry = inProgress.filter((r) => { return  r.rationType === 'dry' });
-    const inProgressYoung = inProgress.filter((r) => { return  r.rationType === 'young' });
-    const inProgressFattening = inProgress.filter((r) => { return  r.rationType === 'fattening' });
+    const inProgressMilk = inProgress.filter((r) => { return  r.rationType === 'milk' }).sort(sortRations);
+    const inProgressDry = inProgress.filter((r) => { return  r.rationType === 'dry' }).sort(sortRations);
+    const inProgressYoung = inProgress.filter((r) => { return  r.rationType === 'young' }).sort(sortRations);
+    const inProgressFattening = inProgress.filter((r) => { return  r.rationType === 'fattening' }).sort(sortRations);
 
     inProgress = _.concat(inProgressMilk, inProgressDry, inProgressYoung, inProgressFattening);
 
-    var done = shortRations.filter((r) => { return  r.endDate });
-    const doneMilk = done.filter((r) => { return  r.rationType === 'milk' });
-    const doneDry = done.filter((r) => { return  r.rationType === 'dry' });
-    const doneYoung = done.filter((r) => { return  r.rationType === 'young' });
-    const doneFattening = done.filter((r) => { return  r.rationType === 'fattening' });
+    var done = shortRations.filter((r) => { return  r.endDate }).sort(sortRations);
+    const doneMilk = done.filter((r) => { return  r.rationType === 'milk' }).sort(sortRations);
+    const doneDry = done.filter((r) => { return  r.rationType === 'dry' }).sort(sortRations);
+    const doneYoung = done.filter((r) => { return  r.rationType === 'young' }).sort(sortRations);
+    const doneFattening = done.filter((r) => { return  r.rationType === 'fattening' }).sort(sortRations);
 
     done = _.concat(doneMilk, doneDry, doneYoung, doneFattening);
 

@@ -1,7 +1,7 @@
 <div class="ration-view" layout="column">
     <div class="ration-title" layout="row">
         <b>#{{::rationView.general.controls.number.value}}</b>
-        <div class="ration-type">
+        <div class="ration-type {{rationView.general.initialItem.rationType}}">
             {{::rationView.general.controls.rationType.value}}
         </div>
         <h2 class="ration-name" flex="">

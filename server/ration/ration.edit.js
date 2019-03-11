@@ -14,6 +14,11 @@ function convertToControl(item, parentKey) {
             return;
         }
 
+        // check if field should hide on edit mode
+        if (rationUtils.hideForNonSA[key]) {
+            return;
+        }
+
         if (item.hasOwnProperty(key)) {
             editObj[key] = {
 

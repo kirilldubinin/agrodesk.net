@@ -23,6 +23,11 @@ function convertToControl(item) {
             return;
         }
 
+        // check if field should hide on view mode
+        if (rationUtils.hideOnViewFields[key]) {
+            return;
+        }
+
         // check if value not empty
         if (_.isBoolean(value) || _.isNumber(value) || value) {
             viewObj[key] = {
@@ -55,6 +60,8 @@ function convert(ration, sessionData) {
         var perms = sessionData.permissions;
         if (_.indexOf(perms, 'admin') !== -1 || _.indexOf(perms, 'write') !== -1) {
             actions.push('edit');
+        }
+        if (_.indexOf(perms, 'sa') !== -1) {
             actions.push('delete');    
         }
     }
@@ -79,6 +86,9 @@ function convert(ration, sessionData) {
         general: {
             label: lang('general'),
             key: 'general',
+            initialItem: {
+                rationType: ration.general.rationType
+            },
             controls: Ration.sort(convertToControl(ration.general), 'general')
         },
         composition: {
