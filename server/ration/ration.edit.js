@@ -4,9 +4,10 @@ var rationUtils = require('./ration.utils');
 var Ration = require('../models/ration');
 var dimension = require('./ration.dimension');
 
-function convertToControl(item, parentKey) {
+function convertToControl(item, parentKey, user) {
 
     var editObj = {};
+    var sa = _.indexOf(user.permissions, 'sa') !== -1; 
     _.each(item, function(value, key) {
 
         // check field by rationType
@@ -15,7 +16,7 @@ function convertToControl(item, parentKey) {
         }
 
         // check if field should hide on edit mode
-        if (rationUtils.hideForNonSA[key]) {
+        if (!sa && rationUtils.hideForNonSA[key]) {
             return;
         }
 
@@ -39,20 +40,17 @@ function convertToControl(item, parentKey) {
     return editObj;
 };
 
-function convert(ration) {
+function convert(ration, user) {
     if (!ration) {
         ration = Ration.getEmptyRation();
     }
-
-    // sort field
-    var goldRation = Ration.getEmptyRation();
 
     return [
         {
             label: lang('general'),
             key: 'general',
             initialItem: ration.general,
-            controls: Ration.sort(convertToControl(ration.general, 'general'), 'general')
+            controls: Ration.sort(convertToControl(ration.general, 'general', user), 'general')
         },
         {
             label: lang('composition'),
