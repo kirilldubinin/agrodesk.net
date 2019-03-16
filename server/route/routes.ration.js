@@ -270,7 +270,7 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
 
             return res.status(200)
                 .json({
-                    rations: history(rations),
+                    history: history(rations),
                     actions: _.map(actions, function(f) {
                         return {
                             key: f,

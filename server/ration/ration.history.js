@@ -10,8 +10,48 @@ function history (rations) {
     const allSeries = ['dryMaterialConsumption', 'actualProductivity', 'estimatedProductivity', 'dryMaterialTMR', 'ratio', 
         'fat', 'protein', 'rationPrice', 'milkPrice', 'efficiency'];
     const defaultSeries = ['actualProductivity'];
-    
-    rations = _.filter(rations, (r) => { return r.general.rationType === 'milk' });
+    const serie = 'actualProductivity';
+    rations = _.filter(rations, (r) => { return r.general.rationType === 'milk' && _.size(r.history) });
+
+    var categories = [];
+    var allRationsHistory = _.map(rations, (ration) => {
+        
+        var historyByRation = {}
+        _.forEach(ration.history, (h) => {
+            var data;
+            if (serie === 'ratio') {
+                const ratio = h['ratio'].split('/');
+                data = Math.round(+ratio[0]/+ratio[1] * 100)/100;
+            } else {
+                data = h[serie];
+            }
+
+            const formatDate = formatter.formatDate(h.date)
+            categories.push(formatDate);
+            historyByRation[formatDate] = data;
+        });
+        return {
+            name: ration.general.name,
+            history: historyByRation
+        };
+    })
+
+    categories = _.uniq(categories);
+    categories.sort();
+    var series = _.map(allRationsHistory, (h) => {
+        return {
+            name: h.name,
+            data: _.map(categories, (c) => {
+                return h.history[c] || null;
+            })
+        }
+    })
+
+    return {
+        categories: categories,
+        series: series
+    };
+
     return _.map(rations, (ration) => {
 
         var series = _.map(allSeries, (serie) => {
@@ -36,6 +76,10 @@ function history (rations) {
         // filter, have to be any values in series
         series = _.filter(series, (serie) => {
             return serie.data && _.size(_.filter(serie.data, Boolean))
+        });
+
+        var categories = _.map(ration.history, (h) => {
+            return formatter.formatDate(h.date);
         });
 
         return {

@@ -84,12 +84,45 @@
             else if (newState.name === 'tenant.ration') {
                 rationFactory.getRationDashboard().then(function (dashboard) {
                     vm.dashboard = dashboard;
-                    vm.rations = dashboard.rations;
+                    vm.history = dashboard.history;
                     
+                    setTimeout(function () {
+                        Highcharts.chart('all-rations', {
+                            legend: {
+                                itemStyle: {
+                                    fontWeight: '400'
+                                }
+                            },
+                            chart: { type: 'spline' },
+                            title: false,
+                            plotOptions: {
+                                spline: {
+                                    lineWidth: 4,
+                                    marker: { enabled: false }
+                                }
+                            },
+                            xAxis: {
+                                categories: vm.history.categories
+                            },
+                            yAxis: {
+                                title: false,
+                                /*plotBands: [{
+                                    from: 34,
+                                    to: 35,
+                                    color: 'rgba(68, 170, 213, 0.1)',
+                                    label: {
+                                        text: 'Расчетная продуктивность',
+                                        style: {
+                                            color: '#606060'
+                                        }
+                                    }
+                                }]*/
+                            },
+                            series: vm.history.series
+                        });
+                    }, 100);
                 });
             }
-
-
         });
     }
 })();
