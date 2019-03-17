@@ -138,14 +138,14 @@
 
             <h2 ng-if="ration.dashboard.rations.length">Действующие рационы</h2>
 
-            <md-card class="dashboard-card all-rations" layout-padding="">
+            <!--md-card class="dashboard-card all-rations" layout-padding="">
                 <div layout="row" class="dashboard-card__title">
                     
                 </div>
                 <div id="all-rations"></div>
-            </md-card>
+            </md-card-->
 
-            <!--md-card class="dashboard-card" layout-padding="" 
+            <md-card class="dashboard-card" layout-padding="" 
                 ng-repeat="rationObj in ration.dashboard.rations">
                 <div layout="row" class="dashboard-card__title">
                     <b>#{{rationObj.general.number}}</b>
@@ -160,7 +160,7 @@
                     </md-button>
                 </div>
                 <div ng-show="rationObj.showChart" id="container-{{rationObj._id}}"></div>
-            </md-card-->
+            </md-card>
 
         </md-content>
     </md-card>

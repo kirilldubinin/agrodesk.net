@@ -10,9 +10,11 @@ function history (rations) {
     const allSeries = ['dryMaterialConsumption', 'actualProductivity', 'estimatedProductivity', 'dryMaterialTMR', 'ratio', 
         'fat', 'protein', 'rationPrice', 'milkPrice', 'efficiency'];
     const defaultSeries = ['actualProductivity'];
-    const serie = 'actualProductivity';
-    rations = _.filter(rations, (r) => { return r.general.rationType === 'milk' && _.size(r.history) });
+    
+    rations = _.filter(rations, (r) => { return r.general.rationType === 'milk' });
 
+    /*
+    const serie = 'actualProductivity';
     var categories = [];
     var allRationsHistory = _.map(rations, (ration) => {
         
@@ -48,9 +50,15 @@ function history (rations) {
     })
 
     return {
+        history: _.map(rations, (r) => {
+            return {
+                name: r.general.name,
+                history: r.history
+            }
+        }),
         categories: categories,
         series: series
-    };
+    };*/
 
     return _.map(rations, (ration) => {
 

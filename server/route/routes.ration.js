@@ -218,7 +218,7 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
                         {
                             date: new Date()
                         },
-                        _.pick(ration.general, _.keys(utils.historyFields))
+                        _.pick(req.body.general, _.keys(utils.historyFields))
                     ));
                 }
 
@@ -270,7 +270,7 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
 
             return res.status(200)
                 .json({
-                    history: history(rations),
+                    rations: history(rations),
                     actions: _.map(actions, function(f) {
                         return {
                             key: f,

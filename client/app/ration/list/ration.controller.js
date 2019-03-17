@@ -86,7 +86,7 @@
                     vm.dashboard = dashboard;
                     vm.history = dashboard.history;
                     
-                    setTimeout(function () {
+                    /*setTimeout(function () {
                         Highcharts.chart('all-rations', {
                             legend: {
                                 itemStyle: {
@@ -105,22 +105,11 @@
                                 categories: vm.history.categories
                             },
                             yAxis: {
-                                title: false,
-                                /*plotBands: [{
-                                    from: 34,
-                                    to: 35,
-                                    color: 'rgba(68, 170, 213, 0.1)',
-                                    label: {
-                                        text: 'Расчетная продуктивность',
-                                        style: {
-                                            color: '#606060'
-                                        }
-                                    }
-                                }]*/
+                                title: false
                             },
                             series: vm.history.series
                         });
-                    }, 100);
+                    }, 100);*/
                 });
             }
         });

@@ -137,7 +137,7 @@ var goldObject = {
     general: {
         number: '01',
         startDate: new Date(),
-        endDate: new Date,
+        endDate: null,
         rationType: 'milk',
         name: '',
         groupName: '',
