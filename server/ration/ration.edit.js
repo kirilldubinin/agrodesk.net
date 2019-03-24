@@ -50,7 +50,7 @@ function convert(ration, user) {
             label: lang('general'),
             key: 'general',
             initialItem: ration.general,
-            controls: Ration.sort(convertToControl(ration.general, 'general', user), 'general')
+            controls:  Ration.sort(convertToControl(ration.general, 'general', user), 'general')
         },
         {
             label: lang('composition'),

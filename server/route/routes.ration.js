@@ -1,9 +1,6 @@
-// set up ======================================================================
 var Q = require('q');
 var _ = require('lodash');
-// models ======================================================================
 var Ration = require('../models/ration');
-// helpers =====================================================================
 var edit = require('../ration/ration.edit');
 var list = require('../ration/ration.list');
 var view = require('../ration/ration.view');

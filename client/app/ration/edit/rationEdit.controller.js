@@ -109,13 +109,20 @@
             var dryMat = 0;
             _.forEach(vm.rationComposition.initialItem, function (component) {
                 // values
-                if (component.componentType !== 'mk') {
+                if (component.componentType === 'ok') {
                     component.value = 
                     Math.round(
                         (component.proportion * vm.rationGeneral.initialItem.dryMaterialConsumption) / 
                         (100 * component.dryMaterial)
                     * 10) / 10;
+                } else if (component.componentType === 'kk') {
+                    component.value = 
+                    Math.round(
+                        (component.proportion * vm.rationGeneral.initialItem.dryMaterialConsumption) / 
+                        (100 * component.dryMaterial)
+                    * 100) / 100;
                 }
+
                 // price
                 fullPrice += (component.price * component.value) || 0;
 

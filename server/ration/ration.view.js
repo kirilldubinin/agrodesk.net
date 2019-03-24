@@ -55,14 +55,15 @@ function convertToControl(item) {
 
 function convert(ration, sessionData) {
 
-    var actions = ['print', 'copy'];
+    var actions = ['print'];
     if (sessionData) {
         var perms = sessionData.permissions;
         if (_.indexOf(perms, 'admin') !== -1 || _.indexOf(perms, 'write') !== -1) {
             actions.push('edit');
         }
         if (_.indexOf(perms, 'sa') !== -1) {
-            actions.push('delete');    
+            actions.push('copy');
+            actions.push('delete');
         }
     }
 
@@ -73,6 +74,11 @@ function convert(ration, sessionData) {
         delete: 'delete_forever'
     };
 
+    var allControls = Ration.sort(convertToControl(ration.general), 'general');
+    var controls = {
+        left: _.pick(allControls, _.keys(rationUtils.viewLeftFields)),
+        right: _.pick(allControls, _.keys(rationUtils.viewRightFields))
+    };
 	return {
         actions: _.map(actions, function (action) {
             return {
@@ -115,7 +121,21 @@ function convert(ration, sessionData) {
                 }
             ],
             body: ration.composition
-        }
+        },
+        history: {
+            labels: _.map(rationUtils.historyFields, (value, key) => {
+                return {
+                    name: lang(key),
+                    code: key
+                };
+            }),
+            values: _.map(rationUtils.historyFieldsy, (value, key) => {
+                return {
+                    code: key,
+                    values: _.map(ration.history, 'key')
+                }
+            })
+        } 
     };
 }
 

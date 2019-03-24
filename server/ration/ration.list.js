@@ -12,7 +12,7 @@ function list(rations) {
             number: ration.general.number,
             rationTypeName: lang(ration.general.rationType),
             rationType: ration.general.rationType,
-            estimatedProductivity: ration.general.estimatedProductivity,
+            actualProductivity: ration.general.actualProductivity,
             name: ration.general.name,
             dryMaterialConsumption: ration.general.dryMaterialConsumption,
             rationPrice: ration.general.rationPrice,

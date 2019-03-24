@@ -60,17 +60,28 @@ function history (rations) {
         series: series
     };*/
 
-    return _.map(rations, (ration) => {
+    var allRations = _.map(rations, (ration) => {
+
+        // uniq date
+        ration.history = _.reverse(ration.history);
+        ration.history = _.map(ration.history, (hist) => {
+            hist.date = formatter.formatDate(hist.date)
+            return hist;
+        });
+        ration.history = _.uniqBy(ration.history, 'date');
+        ration.history = _.reverse(ration.history);
 
         var series = _.map(allSeries, (serie) => {
             var data;
             if (serie === 'ratio') {
                 data = _.map(ration.history, (hist) => {
                     const ratio = hist['ratio'].split('/');
-                    return Math.round(+ratio[0]/+ratio[1] * 100)/100;
+                    return Math.round(+ratio[0]/+ratio[1] * 100)/100
                 });
             } else {
-                data = _.map(ration.history, serie);
+                data = _.map(ration.history, (hist) => {
+                    return hist[serie]
+                });
             }
 
             return {
@@ -86,20 +97,20 @@ function history (rations) {
             return serie.data && _.size(_.filter(serie.data, Boolean))
         });
 
-        var categories = _.map(ration.history, (h) => {
-            return formatter.formatDate(h.date);
-        });
+        var categories = _.map(ration.history, 'date');
+        categories = _.uniq(categories);
 
         return {
             _id: ration._id,
             showChart: false,
             general: ration.general,
-            categories: _.map(ration.history, (h) => {
-                return formatter.formatDate(h.date);
-            }),
+            categories: categories,
             series: series
         }
     })
+
+    allRations = _.sortBy(allRations, 'general.number')
+    return allRations;
 }
 
 module.exports = history;

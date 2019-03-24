@@ -136,10 +136,10 @@ var RationSchema = new Schema({
 var goldObject = {
     general: {
         number: '01',
-        startDate: new Date(),
-        endDate: null,
         rationType: 'milk',
         name: '',
+        startDate: new Date(),
+        endDate: null,
         groupName: '',
         cowsNumber: 0,
         dryMaterialConsumption: 0,

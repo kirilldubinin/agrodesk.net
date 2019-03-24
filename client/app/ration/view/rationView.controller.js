@@ -15,6 +15,7 @@
             rationFactory.getRationView(rationId).then(function(rationView) {
                 vm.general = rationView.general;
                 vm.composition = rationView.composition;
+                vm.history = rationView.history;
                 vm.actions = rationView.actions;
             });
         });

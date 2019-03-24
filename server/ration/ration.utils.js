@@ -61,6 +61,29 @@ var hideForNonSA = {
     'productivityRate': 'hide'
 };
 
+var viewLeftFields = {
+    'number': 'left',
+    'name': 'left',
+    'rationType': 'left',
+    'startDate': 'left',
+    'endDate': 'left',
+    'groupName': 'left',
+    'cowsNumber': 'left',
+    'rationPrice': 'left',
+    'milkPrice': 'left'
+};
+var viewRightFields = {
+    'dryMaterialConsumption': 'right',
+    'estimatedProductivity': 'right',
+    'actualProductivity': 'right',
+    'productivityRate': 'right',
+    'dryMaterialTMR': 'right',
+    'ratio': 'right',
+    'fat': 'right',
+    'protein': 'right',
+    'efficiency': 'left'
+};
+
 /*var enumFields = {
     'general.cowsNumber': 'enum',
     'general.dryMaterialConsumption': 'enum',
@@ -79,5 +102,7 @@ module.exports = {
     historyFields: historyFields,
     milkOnlyFields: milkOnlyFields,
     hideOnViewFields: hideOnViewFields,
-    hideForNonSA: hideForNonSA
+    hideForNonSA: hideForNonSA,
+    viewLeftFields: viewLeftFields,
+    viewRightFields: viewRightFields
 };
