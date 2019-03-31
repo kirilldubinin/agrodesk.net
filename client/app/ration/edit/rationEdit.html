@@ -1,116 +1,115 @@
 <div class="ration-edit" layout="column">
-    <!-- HEADER -->
-    <div class="ration-sub-title" layout="row">
-        <h2 flex="25">ПАРАМЕТРЫ</h2>
-        <h2 class="text-center" flex="">СОСТАВ</h2>
-    </div>
-    <!-- CONTENT -->
-    <div class="ration-view-content" flex layout="row">
-        <div class="ration-info" flex="25" layout="column">
-            <md-input-container class="ration-property" 
-                flex="" 
-                ng-repeat="(key, data) in rationEdit.rationGeneral.controls"
-                ng-class="{booleanProperty : data.isBoolean, required: data.isRequired}" >
-                <!-- LABEL -->
-                <label class="property-name" ng-if="!data.isBoolean">
-                    {{data.label + (data.dimension ? (', ' + data.dimension) : '')}}
-                </label>
-                <!-- SELECT -->
-                <md-select ng-if="data.isEnum && data.key === 'rationType'" ng-model="rationEdit.rationGeneral.initialItem[data.key]">
-                    <md-option ng-repeat="type in rationEdit.rationTypes" ng-value="type.value">
-                        {{type.name}}
-                    </md-option>
-                </md-select>
-                <!-- INPUT NUMBER -->
-                <input ng-disabled="data.isDisabled" ng-if="data.isNumber" 
-                    ng-change="rationEdit.update()"
-                    ng-model="rationEdit.rationGeneral.initialItem[data.key]" 
-                    type="number"/>
-                <!-- INPUT DATE -->
-                <md-datepicker class="date-picker" ng-if="data.isDate" ng-model="rationEdit.rationGeneral.initialItem[data.key]">
-                </md-datepicker>
-                <!-- INPUT OTHER -->
-                <input ng-disabled="data.isDisabled" ng-if="!data.isBoolean && !data.isNumber && !data.isEnum && !data.isDate" 
-                    ng-model="rationEdit.rationGeneral.initialItem[data.key]"/>
-            </md-input-container>
-            
-        </div>  
-        <div class="composition" flex layout="column">
-            <div class="composition-title" layout="row">
-                <div class="component-index" flex="2">
-                    #
-                </div>
-                <div class="component-name" flex="">
-                    Компонент
-                    <ng-md-icon icon="add_box" class="add-component" ng-click="rationEdit.addComponent()">
-                        <md-tooltip md-direction="bottom">
-                            Добавить новый компонент
-                        </md-tooltip>
-                    </ng-md-icon>
-                </div>
-                <div class="" flex="15">
-                    Цена, руб./кг.
-                </div>
-                <div class="" flex="15">
-                    СВ в 1 кг, кг.
-                </div>
-                <div class="" flex="10">
-                    Вес, кг.
-                </div>
-                <div class="" flex="10">
-                    Доля, %.
-                </div>
-            </div>  
-            <div ng-if="rationEdit.rationComposition.initialItem.length" class="scroll-wrapper" flex>
-                <div class="composition-item" layout="row" 
-                    ng-repeat="component in rationEdit.rationComposition.initialItem track by $index">
-                    <div class="component-index" flex="2">
-                        <span>{{component.number}}</span>
-                        <ng-md-icon icon="delete_forever" ng-click="rationEdit.removeComponent(component)" class="remove-item">
-                            <md-tooltip md-direction="bottom">
-                                Удалить компонент
-                            </md-tooltip>
-                        </ng-md-icon>
-                    </div>
-                    <div class="component-name" flex="">
-                        <input ng-model="component.name" class="{{component.componentType}}"/>
-                        <md-select ng-model="component.componentType" class="component-type" ng-change="rationEdit.update();">
-                            <md-option ng-repeat="type in rationEdit.feedTypes" ng-value="type.value">
+    <md-tabs flex class="ration-view-content">
+        <md-tab label="ПАРАМЕТРЫ">
+            <md-content class="md-padding ration-info" layout="row">
+                <section flex="33" layout="column" 
+                    ng-repeat="controls in rationEdit.rationGeneral.controls">
+                    <md-input-container class="ration-property" 
+                        ng-repeat="(key, data) in controls"
+                        ng-class="{booleanProperty : data.isBoolean, required: data.isRequired}" >
+                        <!-- LABEL -->
+                        <label class="property-name" ng-if="!data.isBoolean">
+                            {{data.label + (data.dimension ? (', ' + data.dimension) : '')}}
+                        </label>
+                        <!-- SELECT -->
+                        <md-select ng-if="data.isEnum && data.key === 'rationType'" ng-model="rationEdit.rationGeneral.initialItem[data.key]">
+                            <md-option ng-repeat="type in rationEdit.rationTypes" ng-value="type.value">
                                 {{type.name}}
                             </md-option>
                         </md-select>
+                        <!-- INPUT NUMBER -->
+                        <input ng-disabled="data.isDisabled" ng-if="data.isNumber" 
+                            ng-change="rationEdit.update()"
+                            ng-model="rationEdit.rationGeneral.initialItem[data.key]" 
+                            type="number"/>
+                        <!-- INPUT DATE -->
+                        <md-datepicker class="date-picker" ng-if="data.isDate" ng-model="rationEdit.rationGeneral.initialItem[data.key]">
+                        </md-datepicker>
+                        <!-- INPUT OTHER -->
+                        <input ng-disabled="data.isDisabled" ng-if="!data.isBoolean && !data.isNumber && !data.isEnum && !data.isDate" 
+                            ng-model="rationEdit.rationGeneral.initialItem[data.key]"/>
+                    </md-input-container>
+                </section>
+            </md-content>
+        </md-tab>
+        <md-tab label="СОСТАВ">
+            <md-content class="md-padding composition" flex layout="column" id="composition">
+                <div class="composition-title" layout="row">
+                    <div class="component-index" flex="2">
+                        #
+                    </div>
+                    <div class="component-name" flex="">
+                        Компонент
+                        <ng-md-icon icon="add_box" class="add-component" ng-click="rationEdit.addComponent()">
+                            <md-tooltip md-direction="bottom">
+                                Добавить новый компонент
+                            </md-tooltip>
+                        </ng-md-icon>
                     </div>
                     <div class="" flex="15">
-                        <input type="number" ng-model="component.price" 
-                            ng-blur="rationEdit.update()"/>
+                        Цена, руб./кг.
                     </div>
                     <div class="" flex="15">
-                        <input type="number" ng-model="component.dryMaterial"
-                            ng-blur="rationEdit.update()"/>
-                    </div>
-                    <div class="component-value" flex="10">
-                        <input type="number" 
-                            ng-disabled="component.componentType !== 'mk' || !rationEdit.sa" 
-                            ng-blur="rationEdit.update()"
-                            ng-model="component.value"/>
+                        СВ в 1 кг, кг.
                     </div>
                     <div class="" flex="10">
-                        <input type="number" 
-                            ng-disabled="!rationEdit.sa" 
-                            ng-model="component.proportion" 
-                            ng-blur="rationEdit.update()" 
-                            ng-if="component.componentType !== 'mk'"/>
+                        Вес, кг.
                     </div>
+                    <div class="" flex="10">
+                        Доля, %.
+                    </div>
+                </div>  
+                <div ng-if="rationEdit.rationComposition.initialItem.length" class="scroll-wrapper" flex>
+                    <div class="composition-item" layout="row" 
+                        ng-repeat="component in rationEdit.rationComposition.initialItem track by $index">
+                        <div class="component-index" flex="2">
+                            <span>{{component.number}}</span>
+                            <ng-md-icon icon="delete_forever" ng-click="rationEdit.removeComponent(component)" class="remove-item">
+                                <md-tooltip md-direction="bottom">
+                                    Удалить компонент
+                                </md-tooltip>
+                            </ng-md-icon>
+                        </div>
+                        <div class="component-name" flex="">
+                            <input ng-model="component.name" class="{{component.componentType}}"/>
+                            <md-select ng-model="component.componentType" class="component-type" ng-change="rationEdit.update();">
+                                <md-option ng-repeat="type in rationEdit.feedTypes" ng-value="type.value">
+                                    {{type.name}}
+                                </md-option>
+                            </md-select>
+                        </div>
+                        <div class="" flex="15">
+                            <input type="number" ng-model="component.price" 
+                                ng-blur="rationEdit.update()"/>
+                        </div>
+                        <div class="" flex="15">
+                            <input type="number" ng-model="component.dryMaterial"
+                                ng-blur="rationEdit.update()"/>
+                        </div>
+                        <div class="component-value" flex="10">
+                            <input type="number" 
+                                ng-disabled="component.componentType !== 'mk' || !rationEdit.sa" 
+                                ng-blur="rationEdit.update()"
+                                ng-model="component.value"/>
+                        </div>
+                        <div class="" flex="10">
+                            <input type="number" 
+                                ng-disabled="!rationEdit.sa" 
+                                ng-model="component.proportion" 
+                                ng-blur="rationEdit.update()" 
+                                ng-if="component.componentType !== 'mk'"/>
+                        </div>
+                    </div>
+                </div>  
+                <div class="empty-ration" ng-if="!rationEdit.rationComposition.initialItem.length" flex>
+                    <md-button class="md-raised md-primary" ng-click="rationEdit.addComponent()">добавить компонент</md-button>
                 </div>
-            </div>  
-            <div class="empty-ration" ng-if="!rationEdit.rationComposition.initialItem.length" flex>
-                <md-button class="md-raised md-primary" ng-click="rationEdit.addComponent()">добавить компонент</md-button>
-            </div>
-            <div class="error-box" ng-if="rationEdit.error">
-                {{rationEdit.error}}
-            </div>
-        </div>
-    </div>
+                <div class="error-box" ng-if="rationEdit.error">
+                    {{rationEdit.error}}
+                </div>
+            </md-content>
+        </md-tab>
+    </md-tabs>
     <!-- ACTIONS -->
     <div class="ration-edit-actions" layout="row" layout-align="center left" layout-sm="column" layout-wrap="">
         <md-button class="md-raised" ng-click="rationEdit.cancel()">

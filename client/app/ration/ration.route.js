@@ -42,6 +42,17 @@
                 data: {
                     module: 'ration'
                 }
+            }).state('tenant.ration.print', {
+                url: '/print/:rations',
+                templateUrl: 'app/ration/print/rationPrint.html',
+                controller: 'RationPrintController',
+                controllerAs: 'rationPrint',
+                params: {
+                    rations: undefined
+                },
+                data: {
+                    module: 'feed'
+                }
             });
     }
 })();

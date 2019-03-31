@@ -6,6 +6,7 @@ function dimension(key) {
         estimatedProductivity: 'л',
         actualProductivity: 'л',
         rationPrice: 'руб',
+        priceInRation: 'руб',
         milkPrice: 'руб/л',
         dryMaterialTMR: '%'
     };

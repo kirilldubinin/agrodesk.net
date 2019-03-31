@@ -1,11 +1,11 @@
 <div class="ration-view" layout="column">
     <div class="ration-title" layout="row">
-        <b>#{{::rationView.general.controls.number.value}}</b>
+        <b>#{{::rationView.general.controls.left.number.value}}</b>
         <div class="ration-type {{rationView.general.initialItem.rationType}}">
-            {{::rationView.general.controls.rationType.value}}
+            {{::rationView.general.controls.left.rationType.value}}
         </div>
         <h2 class="ration-name" flex="">
-            {{::rationView.general.controls.name.value}}
+            {{::rationView.general.controls.left.name.value}}
         </h2>
         <div class="actions">
             <md-button ng-repeat="action in rationView.actions"
@@ -14,70 +14,82 @@
                 <ng-md-icon ng-if="action.icon" icon="{{action.icon}}" size="24">
                 </ng-md-icon>
                 <md-tooltip md-direction="bottom">
-                    {{action.label}}    
+                    {{action.label}}   
                 </md-tooltip>
             </md-button>
         </div>
     </div>
-    <div class="ration-sub-title" layout="row">
-        <h2 class="text-center" flex="40">ПАРАМЕТРЫ</h2>
-        <h2 class="text-center" flex="">СОСТАВ</h2>
-    </div>
-    <div class="ration-view-content" flex layout="row">
-        <div class="ration-info" flex="40" id="general">
-            <div layout="row" flex="" ng-repeat="(key, data) in rationView.general.controls">
-                <label flex="50">{{::data.label}}</label>
-                <span>
-                    {{::data.value}} {{::data.dimension}}
-                </span>
-            </div>
-        </div>  
-        <div class="composition" flex layout="column" id="composition">
-            <div class="composition-title" layout="row">
-                <div class="component-index" flex="2">
-                    #
-                </div>
-                <div class="component-name" flex="">
-                    Компонент
-                </div>
-                <div class="" flex="10">
-                    Цена, руб./кг.
-                </div>
-                <div class="" flex="10">
-                    СВ в 1 кг, кг.
-                </div>
-                <div class="" flex="15">
-                    Вес, кг.
-                </div>
-                <div class="" flex="15">
-                    Доля, %.
-                </div>
-            </div>  
-            <div class="scroll-wrapper" flex>
-                <div ng-class="component.componentType" class="composition-item" layout="row" 
-                    ng-repeat="component in rationView.composition.body">
+    <md-tabs flex class="ration-view-content">
+        <md-tab label="ПАРАМЕТРЫ">
+            <md-content class="md-padding ration-info" layout="row">
+                <section flex="50">
+                    <div layout="row" ng-repeat="(key, data) in rationView.general.controls.left">
+                        <label flex="50">{{::data.label}} {{::data.dimension ? (', ' + data.dimension) : ''}}</label>
+                        <span>{{::data.value}}</span>
+                    </div>
+                </section>
+                <section flex="50">
+                    <div layout="row" ng-repeat="(key, data) in rationView.general.controls.right">
+                        <label flex="50">{{::data.label}} {{::data.dimension ? (', ' + data.dimension) : ''}}</label>
+                        <span>{{::data.value}}</span>
+                    </div>
+                </section>
+            </md-content>
+        </md-tab>
+        <md-tab label="СОСТАВ">
+            <md-content class="md-padding composition" flex layout="column" id="composition">
+                <div class="composition-title" layout="row">
                     <div class="component-index" flex="2">
-                        {{component.number}}
+                        #
                     </div>
                     <div class="component-name" flex="">
-                        <a ng-if="component._id" href="#{{rationView.sessionData.user.tenantName}}/feed/{{component._id}}">{{component.name}}</a>  
-                        <span ng-if="!component._id">{{component.name}}</span>
+                        Компонент
                     </div>
                     <div class="" flex="10">
-                        {{component.price}}
+                        Цена, руб./кг.
+                    </div>
+                    <div class="" flex="15">
+                        Цена в рационе, руб.
                     </div>
                     <div class="" flex="10">
-                        {{component.dryMaterial}}
+                        СВ в 1 кг, кг.
                     </div>
-                    <div class="rate" flex="15">
-                        {{component.value}}
+                    <div class="" flex="15">
+                        Вес, кг.
                     </div>
-                    <div class="rate" flex="15">
-                        {{component.componentType !== 'mk' ? component.proportion : ''}}
+                    <div class="" flex="15">
+                        Доля, %.
                     </div>
-                </div>
-            </div>  
-        </div>
-    </div>
+                </div>  
+                <div class="scroll-wrapper" flex>
+                    <div ng-class="component.componentType" class="composition-item" layout="row" 
+                        ng-repeat="component in ::rationView.composition.body">
+                        <div class="component-index" flex="2">
+                            {{component.number}}
+                        </div>
+                        <div class="component-name" flex="">
+                            <a ng-if="component._id" href="#{{rationView.sessionData.user.tenantName}}/feed/{{component._id}}">{{component.name}}</a>  
+                            <span ng-if="!component._id">{{component.name}}</span>
+                        </div>
+                        <div class="" flex="10">
+                            {{component.price}}
+                        </div>
+                        <div class="" flex="15">
+                            {{component.priceInRation}}
+                        </div>
+                        <div class="" flex="10">
+                            {{component.dryMaterial}}
+                        </div>
+                        <div class="rate" flex="15">
+                            {{component.value}}
+                        </div>
+                        <div class="rate" flex="15">
+                            {{component.componentType !== 'mk' ? component.proportion : ''}}
+                        </div>
+                    </div>
+                </div>  
+            </md-content>
+        </md-tab>
+    </md-tabs>
     </div>
 </div>

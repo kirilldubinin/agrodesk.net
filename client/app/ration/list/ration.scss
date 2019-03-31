@@ -42,12 +42,15 @@
 				background-color: #f0f0f0;
 			}
 			&.done {
+				color: #999;
 				background-color: #ddd;
-				.ration-target,
-				.ration-type {
-					opacity: 0.5;
+				span.ration-target,
+				span.ration-type {
+					background-color: #999 !important;
 				}
-
+				.second-line {
+					color: #999;
+				}
 			}
 			&.selected {
 				background-color: #BBDEFB !important;

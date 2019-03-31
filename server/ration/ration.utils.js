@@ -81,7 +81,36 @@ var viewRightFields = {
     'ratio': 'right',
     'fat': 'right',
     'protein': 'right',
+    'efficiency': 'left',
+    'productivityRate': 'right'
+};
+
+var editLeftFields = {
+    'number': 'left',
+    'name': 'left',
+    'rationType': 'left',
+    'cowsNumber': 'left',
+    'startDate': 'left',
+    'endDate': 'left',
+    'groupName': 'left'
+};
+
+var editCenterFields = {
+    'dryMaterialConsumption': 'right',
+    'estimatedProductivity': 'right',
+    'actualProductivity': 'right',
+    'productivityRate': 'right',
+    'dryMaterialTMR': 'right',
+    'ratio': 'right',
     'efficiency': 'left'
+};
+
+var editRightFields = {
+    'productivityRate': 'right',
+    'rationPrice': 'left',
+    'milkPrice': 'left',
+    'fat': 'right',
+    'protein': 'right'
 };
 
 /*var enumFields = {
@@ -104,5 +133,8 @@ module.exports = {
     hideOnViewFields: hideOnViewFields,
     hideForNonSA: hideForNonSA,
     viewLeftFields: viewLeftFields,
-    viewRightFields: viewRightFields
+    viewRightFields: viewRightFields,
+    editLeftFields: editLeftFields,
+    editCenterFields: editCenterFields,
+    editRightFields: editRightFields
 };

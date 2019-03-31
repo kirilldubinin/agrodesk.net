@@ -1,10 +1,10 @@
+
 @import "../../variables";
 .ration-view {
-	padding: 0 20px;
 	height: 100%;
 	color: #212121;
 	.ration-title {
-		padding: 10px 0px 0px 4px;
+		padding: .5em 1em 0 1em;
 		b {
 			margin: 15px 20px 0 0px;
 		}
@@ -46,13 +46,12 @@
 	}
 	.ration-info {
 		font-size: 12px;
-		margin-top: 2em;
-		
+		background: transparent;
 		label {
 			display: inline-block;
 			color: #555;
 			padding: 8px 0;
-			font-size: 11px;
+			font-size: 12px;
 			text-align: right;
 			margin-right: 2em;
 		}
@@ -65,14 +64,12 @@
 	}
 	.ration-view-content {
 		overflow: auto;
+		height: calc(100% - 59px) !important;
+    	min-height: calc(100% - 59px) !important;
 		.composition {
 			font-size: 12px;
 			text-align: right;
 			background-color: #fdfdfd;
-			margin-top: 2em;
-			margin-bottom: 2em;
-			margin-right: 1em;
-			box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 			.scroll-wrapper {
 				overflow: auto;
 			}

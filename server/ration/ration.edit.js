@@ -45,12 +45,19 @@ function convert(ration, user) {
         ration = Ration.getEmptyRation();
     }
 
+    var allControls = Ration.sort(convertToControl(ration.general, 'general', user), 'general');
+    var controls = [
+        _.pick(allControls, _.keys(rationUtils.editLeftFields)),
+        _.pick(allControls, _.keys(rationUtils.editCenterFields)),
+        _.pick(allControls, _.keys(rationUtils.editRightFields))
+    ];
+
     return [
         {
             label: lang('general'),
             key: 'general',
             initialItem: ration.general,
-            controls:  Ration.sort(convertToControl(ration.general, 'general', user), 'general')
+            controls: controls// Ration.sort(convertToControl(ration.general, 'general', user), 'general')
         },
         {
             label: lang('composition'),

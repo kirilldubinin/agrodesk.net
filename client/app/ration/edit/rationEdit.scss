@@ -15,14 +15,12 @@
 	}
 	.ration-info {
 		font-size: 12px;
-		margin-top: 2em;
-		margin-right: 2em;
-
+		background: transparent;
 		input {
 			font-family: Montserrat,sans-serif;
 		}
 		.ration-property {
-			margin-top: 2.2em;
+			margin-bottom: 0px;
 			&._md-datepicker-has-calendar-icon {
 				.property-name {
 					left: 40px !important;

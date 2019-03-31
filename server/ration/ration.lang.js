@@ -15,6 +15,7 @@ var langObj = {
     actualProductivity: 'Фактическая продуктивность',
     dryMaterialTMR: 'СВ в TMR',
     rationPrice: 'Цена рациона',
+    priceInRation: 'Цена в рационе',
     efficiency: 'Коэффициент эффективности',
     ratio: 'Соотношение ОК/КК',
     startDate: 'Дата начала кормления',

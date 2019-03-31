@@ -79,6 +79,12 @@ function convert(ration, sessionData) {
         left: _.pick(allControls, _.keys(rationUtils.viewLeftFields)),
         right: _.pick(allControls, _.keys(rationUtils.viewRightFields))
     };
+
+    ration.composition = _.map(ration.composition, (item) => {
+        item.priceInRation = Math.round(item.price * item.value * 100)/ 100
+        return item;
+    })
+
 	return {
         actions: _.map(actions, function (action) {
             return {
@@ -95,7 +101,7 @@ function convert(ration, sessionData) {
             initialItem: {
                 rationType: ration.general.rationType
             },
-            controls: Ration.sort(convertToControl(ration.general), 'general')
+            controls: controls// Ration.sort(convertToControl(ration.general), 'general')
         },
         composition: {
             label: lang('composition'),
