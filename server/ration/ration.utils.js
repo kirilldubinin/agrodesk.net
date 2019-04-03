@@ -29,6 +29,13 @@ var disabledFields = {
     'general.dryMaterialTMR': 'disabled'
 };
 
+var disabledFieldsForNonSA = {
+    'general.startDate': 'disabled',
+    'general.endDate': 'disabled',
+    'general.rationType': 'disabled'
+};
+
+
 var historyFields = {
     'cowsNumber': 'history',
     'dryMaterialConsumption': 'history',
@@ -128,6 +135,7 @@ module.exports = {
     enumFields: enumFields,
     requiredFields: requiredFields,
     disabledFields: disabledFields,
+    disabledFieldsForNonSA: disabledFieldsForNonSA,
     historyFields: historyFields,
     milkOnlyFields: milkOnlyFields,
     hideOnViewFields: hideOnViewFields,

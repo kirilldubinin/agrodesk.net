@@ -23,7 +23,8 @@
     // config
     angular.module('agrodesk').config(['$mdDateLocaleProvider', function($mdDateLocaleProvider) {
         $mdDateLocaleProvider.formatDate = function(date) {
-            return moment(date).format('DD-MM-YYYY');
+            var tempDate = moment(date);
+            return (tempDate.isValid() ? tempDate.format('DD/MM/YYYY') : '');
         };
     }]);
     angular.module('agrodesk').config(['$httpProvider', function($httpProvider) {

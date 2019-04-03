@@ -1,8 +1,9 @@
 <div class="ration-edit" layout="column">
     <md-tabs flex class="ration-view-content">
         <md-tab label="ПАРАМЕТРЫ">
-            <md-content class="md-padding ration-info" layout="row">
+            <md-content class="ration-info" layout="row">
                 <section flex="33" layout="column" 
+                    class="md-padding"
                     ng-repeat="controls in rationEdit.rationGeneral.controls">
                     <md-input-container class="ration-property" 
                         ng-repeat="(key, data) in controls"
@@ -12,7 +13,8 @@
                             {{data.label + (data.dimension ? (', ' + data.dimension) : '')}}
                         </label>
                         <!-- SELECT -->
-                        <md-select ng-if="data.isEnum && data.key === 'rationType'" ng-model="rationEdit.rationGeneral.initialItem[data.key]">
+                        <md-select ng-if="data.isEnum && data.key === 'rationType'" ng-disabled="data.isDisabled" 
+                            ng-model="rationEdit.rationGeneral.initialItem[data.key]">
                             <md-option ng-repeat="type in rationEdit.rationTypes" ng-value="type.value">
                                 {{type.name}}
                             </md-option>
@@ -23,7 +25,8 @@
                             ng-model="rationEdit.rationGeneral.initialItem[data.key]" 
                             type="number"/>
                         <!-- INPUT DATE -->
-                        <md-datepicker class="date-picker" ng-if="data.isDate" ng-model="rationEdit.rationGeneral.initialItem[data.key]">
+                        <md-datepicker class="date-picker" ng-if="data.isDate" ng-disabled="data.isDisabled" 
+                            ng-model="rationEdit.rationGeneral.initialItem[data.key]">
                         </md-datepicker>
                         <!-- INPUT OTHER -->
                         <input ng-disabled="data.isDisabled" ng-if="!data.isBoolean && !data.isNumber && !data.isEnum && !data.isDate" 
@@ -40,7 +43,7 @@
                     </div>
                     <div class="component-name" flex="">
                         Компонент
-                        <ng-md-icon icon="add_box" class="add-component" ng-click="rationEdit.addComponent()">
+                        <ng-md-icon ng-if="rationEdit.sa" icon="add_box" class="add-component" ng-click="rationEdit.addComponent()">
                             <md-tooltip md-direction="bottom">
                                 Добавить новый компонент
                             </md-tooltip>
@@ -62,9 +65,9 @@
                 <div ng-if="rationEdit.rationComposition.initialItem.length" class="scroll-wrapper" flex>
                     <div class="composition-item" layout="row" 
                         ng-repeat="component in rationEdit.rationComposition.initialItem track by $index">
-                        <div class="component-index" flex="2">
+                        <div class="component-index" flex="2" ng-class={'sa': rationEdit.sa}>
                             <span>{{component.number}}</span>
-                            <ng-md-icon icon="delete_forever" ng-click="rationEdit.removeComponent(component)" class="remove-item">
+                            <ng-md-icon ng-if="rationEdit.sa" icon="delete_forever" ng-click="rationEdit.removeComponent(component)" class="remove-item">
                                 <md-tooltip md-direction="bottom">
                                     Удалить компонент
                                 </md-tooltip>
@@ -72,7 +75,7 @@
                         </div>
                         <div class="component-name" flex="">
                             <input ng-model="component.name" class="{{component.componentType}}"/>
-                            <md-select ng-model="component.componentType" class="component-type" ng-change="rationEdit.update();">
+                            <md-select ng-disabled="!rationEdit.sa" ng-model="component.componentType" class="component-type" ng-change="rationEdit.update();">
                                 <md-option ng-repeat="type in rationEdit.feedTypes" ng-value="type.value">
                                     {{type.name}}
                                 </md-option>

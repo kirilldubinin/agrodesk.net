@@ -21,12 +21,20 @@ function convertToControl(item, parentKey, user) {
         }
 
         if (item.hasOwnProperty(key)) {
+
+            if (key === 'startDate') {
+                console.log(rationUtils.disabledFields[parentKey + '.' + key])
+                console.log(rationUtils.disabledFieldsForNonSA[parentKey + '.' + key])
+                console.log(sa)
+            }
+
             editObj[key] = {
 
                 isEnum: rationUtils.enumFields[parentKey + '.' + key],
                 isNumber: _.isNumber(value),
                 isBoolean: value === true || value === false,
-                isDisabled: rationUtils.disabledFields[parentKey + '.' + key],
+                isDisabled: rationUtils.disabledFields[parentKey + '.' + key] || 
+                    (rationUtils.disabledFieldsForNonSA[parentKey + '.' + key] && !sa),
                 isRequired: rationUtils.requiredFields[parentKey + '.' + key],
                 isDate: rationUtils.dateFields[parentKey + '.' + key],
 

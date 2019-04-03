@@ -256,14 +256,11 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
             'createdBy.tenantId': req.user.tenantId,
             'general.endDate': null
         }).lean().exec(function(err, rations) {
-            var actions = ['chartsRation'];
-            var canAdd = (req.user.permissions.indexOf('admin') > -1 || req.user.permissions.indexOf('write') > -1);
-            if (canAdd) {
-                actions.unshift('addRation');
-            }
+            var actions = [];
+            req.user.permissions.indexOf('sa') > -1 && actions.unshift('addRation');
 
             // remove actions for now
-            actions = [];
+            //actions = [];
 
             return res.status(200)
                 .json({

@@ -7,7 +7,7 @@ var formatter = require('../formatter');
 
 function history (rations) {
 
-    const allSeries = ['dryMaterialConsumption', 'actualProductivity', 'estimatedProductivity', 'dryMaterialTMR', 'ratio', 
+    const allSeries = ['dryMaterialConsumption', 'actualProductivity', 'estimatedProductivity', 'dryMaterialTMR',
         'fat', 'protein', 'rationPrice', 'milkPrice', 'efficiency'];
     const defaultSeries = ['actualProductivity'];
     
@@ -80,7 +80,7 @@ function history (rations) {
                 });
             } else {
                 data = _.map(ration.history, (hist) => {
-                    return hist[serie]
+                    return Math.round(hist[serie] * 10)/10
                 });
             }
 

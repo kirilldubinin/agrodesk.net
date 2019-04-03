@@ -10,7 +10,9 @@
                             ({{::ration.rationItems.length}})
                         </span>
                     </div>
-                    <md-button class="md-fab md-mini md-primary add-ration-button" ng-click="ration.addRation()">
+                    <md-button class="md-fab md-mini md-primary add-ration-button" 
+                        ng-if="ration.sa"
+                        ng-click="ration.addRation()">
                         <md-tooltip md-direction="bottom">
                             Добавить новый рацион
                         </md-tooltip>

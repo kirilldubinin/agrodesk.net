@@ -2,13 +2,17 @@
     'use strict';
     angular.module('ration').controller('RationController', RationController);
 
-    function RationController($scope, $window, $state, rationFactory, feedFactory, $mdDialog) {
+    function RationController($scope, $state, rationFactory, feedFactory, authFactory) {
         var vm = this;
         function getRationsList() {
             rationFactory.getRations().then(function(result) {
                 vm.rationItems = result.rations;
             });
         }
+
+        authFactory.getSessionData().then(function(data) {
+            vm.sa = data.user.permissions.indexOf('sa') > -1;
+        });
 
         vm.onRationClick = function(rationItem) {
             vm.selectedItemId = rationItem._id;
@@ -85,6 +89,7 @@
                 rationFactory.getRationDashboard().then(function (dashboard) {
                     vm.dashboard = dashboard;
                     vm.history = dashboard.history;
+                    vm.actions = dashboard.actions;
                     
                     /*setTimeout(function () {
                         Highcharts.chart('all-rations', {
