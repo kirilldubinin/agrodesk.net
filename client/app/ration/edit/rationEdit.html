@@ -65,7 +65,7 @@
                 <div ng-if="rationEdit.rationComposition.initialItem.length" class="scroll-wrapper" flex>
                     <div class="composition-item" layout="row" 
                         ng-repeat="component in rationEdit.rationComposition.initialItem track by $index">
-                        <div class="component-index" flex="2" ng-class={'sa': rationEdit.sa}>
+                        <div class="component-index" flex="2" ng-class="{sa: rationEdit.sa}">
                             <span>{{component.number}}</span>
                             <ng-md-icon ng-if="rationEdit.sa" icon="delete_forever" ng-click="rationEdit.removeComponent(component)" class="remove-item">
                                 <md-tooltip md-direction="bottom">

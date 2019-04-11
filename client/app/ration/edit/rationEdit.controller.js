@@ -28,6 +28,7 @@
 
         authFactory.getSessionData().then(function(data) {
             vm.sa = data.user.permissions.indexOf('sa') > -1;
+            console.log('=========', vm.sa)
         });
 
         vm.sort = function () {

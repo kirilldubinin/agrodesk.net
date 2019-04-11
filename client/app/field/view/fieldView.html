@@ -1,0 +1,45 @@
+<div class="field-view" layout="column">
+    <div class="field-title" layout="row">
+        <h2 class="field-name">
+            {{::fieldView.field.name}}
+            <p>2018 <span class="seedType">травосмесь</span></p>
+        </h2>
+        <h2 class="field-square">{{::fieldView.field.square}} ГА</h2>    
+        <div class="actions" flex="">
+            <md-button ng-repeat="action in fieldView.actions"
+                class="md-{{action.buttonType}} {{action.key}}-btn" 
+                ng-click="fieldView[action.key]()">
+                <ng-md-icon ng-if="action.icon" icon="{{action.icon}}" size="24">
+                </ng-md-icon>
+                <md-tooltip md-direction="bottom">
+                    {{action.label}}    
+                </md-tooltip>
+            </md-button>
+        </div>
+    </div>
+    <!-- HEADER -->
+    <div class="field-view-header" layout="row">
+        <div flex="{{block.width}}" ng-repeat="block in ::fieldView.fieldItemSections">
+            <label class="title">
+                {{::block.label}}
+            </label>
+        </div>
+    </div>
+    <!-- CONTENT -->
+    <div class="field-view-content" flex="" layout="row">
+        <div flex="{{block.width}}" id="{{block.key}}" ng-repeat="block in ::fieldView.fieldItemSections">
+            <ul class="field-properties" ng-class="block.key">
+                <li class="property {{key}}" layout="row" ng-repeat="(key, data) in ::block.controls">
+                    <!-- LABEL -->
+                    <label flex="">
+                        {{::data.label}}  {{::data.dimension}}
+                    </label>
+                    <!-- SINGLE VALUE -->
+                    <div class="value" flex="" ng-if="!data.values">
+                        {{::data.value}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

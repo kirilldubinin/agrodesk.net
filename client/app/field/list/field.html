@@ -1,5 +1,4 @@
-<h4 class="text-center">в разработке</h4>
-<!--div class="field" layout="row">
+<div class="field" layout="row">
     <md-card class="navigator" flex="20" md-theme="default" layout="column" md-theme-watch="">
         <section>
             <div class="list-header">
@@ -7,7 +6,7 @@
                     <div class="module-name" flex>
                         Поля
                         <span class="field-amount" ng-if="field.fieldItems.length">
-                            (14)
+                            (01)
                         </span>
                     </div>
                     <md-button class="md-fab md-mini md-primary add-ration-button" ng-click="field.addField()">
@@ -21,18 +20,22 @@
             </div>
             <md-list flex class="field-list">
                 <md-list-item class="md-3-line field-item" 
-                    ng-repeat="item in field.fieldItems"
-                    ng-class="{'done': item.done}">
+                    ng-repeat="item in field.fields">
                     <div class="md-list-item-text" layout="column" ng-click="field.onFiledClick(item)">
                         <div class="first-line" layout="row">
-                            <span class="filed-number">{{item.number}}</span>
-                            <span class="ration-size">
-                                {{item.square}} ГА
+                            <p flex>{{item.cadastral}}</p>
+                            <span class="analysis-length">
+                                <i aria-hidden="true" class="fa fa-flask"></i>
+                                {{item.analysis}}
                             </span>
+                            <p>{{item.square}} ГА</p>
                         </div>
-                        <div layout="row" class="second-line name">
+                        <div class="second-line" layout="row">
+                            <span class="field-name">{{item.name}}</span>
                         </div>
                         <div class="third-line" layout="row">
+                            <p>{{item.currentSeed.year}}</p>
+                            <span class="type">{{item.currentSeed.type}}</span>
                         </div>
                     </div>
                 </md-list-item>
@@ -41,4 +44,7 @@
             </md-list>
         </section>
     </md-card>
-</div-->
+    <md-card class="dashboard" flex="80" md-theme="default" md-theme-watch="" ui-view="">
+        
+    </md-card>
+</div>
