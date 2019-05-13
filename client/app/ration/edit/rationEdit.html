@@ -4,7 +4,7 @@
             <md-content class="ration-info" layout="row">
                 <section flex="33" layout="column" 
                     class="md-padding"
-                    ng-repeat="controls in rationEdit.rationGeneral.controls">
+                    ng-repeat="controls in rationEdit.general.controls">
                     <md-input-container class="ration-property" 
                         ng-repeat="(key, data) in controls"
                         ng-class="{booleanProperty : data.isBoolean, required: data.isRequired}" >
@@ -14,7 +14,7 @@
                         </label>
                         <!-- SELECT -->
                         <md-select ng-if="data.isEnum && data.key === 'rationType'" ng-disabled="data.isDisabled" 
-                            ng-model="rationEdit.rationGeneral.initialItem[data.key]">
+                            ng-model="rationEdit.general.initialItem[data.key]">
                             <md-option ng-repeat="type in rationEdit.rationTypes" ng-value="type.value">
                                 {{type.name}}
                             </md-option>
@@ -22,15 +22,15 @@
                         <!-- INPUT NUMBER -->
                         <input ng-disabled="data.isDisabled" ng-if="data.isNumber" 
                             ng-change="rationEdit.update()"
-                            ng-model="rationEdit.rationGeneral.initialItem[data.key]" 
+                            ng-model="rationEdit.general.initialItem[data.key]" 
                             type="number"/>
                         <!-- INPUT DATE -->
                         <md-datepicker class="date-picker" ng-if="data.isDate" ng-disabled="data.isDisabled" 
-                            ng-model="rationEdit.rationGeneral.initialItem[data.key]">
+                            ng-model="rationEdit.general.initialItem[data.key]">
                         </md-datepicker>
                         <!-- INPUT OTHER -->
                         <input ng-disabled="data.isDisabled" ng-if="!data.isBoolean && !data.isNumber && !data.isEnum && !data.isDate" 
-                            ng-model="rationEdit.rationGeneral.initialItem[data.key]"/>
+                            ng-model="rationEdit.general.initialItem[data.key]"/>
                     </md-input-container>
                 </section>
             </md-content>
@@ -62,9 +62,9 @@
                         Доля, %.
                     </div>
                 </div>  
-                <div ng-if="rationEdit.rationComposition.initialItem.length" class="scroll-wrapper" flex>
+                <div ng-if="rationEdit.composition.initialItem.length" class="scroll-wrapper" flex>
                     <div class="composition-item" layout="row" 
-                        ng-repeat="component in rationEdit.rationComposition.initialItem track by $index">
+                        ng-repeat="component in rationEdit.composition.initialItem track by $index">
                         <div class="component-index" flex="2" ng-class="{sa: rationEdit.sa}">
                             <span>{{component.number}}</span>
                             <ng-md-icon ng-if="rationEdit.sa" icon="delete_forever" ng-click="rationEdit.removeComponent(component)" class="remove-item">
@@ -104,11 +104,84 @@
                         </div>
                     </div>
                 </div>  
-                <div class="empty-ration" ng-if="!rationEdit.rationComposition.initialItem.length" flex>
+                <div class="empty-ration" ng-if="!rationEdit.composition.initialItem.length" flex>
                     <md-button class="md-raised md-primary" ng-click="rationEdit.addComponent()">добавить компонент</md-button>
                 </div>
                 <div class="error-box" ng-if="rationEdit.error">
                     {{rationEdit.error}}
+                </div>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="РАЗДАЧА">
+            <md-content class="md-padding ration-info distribution" flex layout="row" 
+                ng-class="{'error': rationEdit.distributionError}"
+                id="distribution">
+                <div layout="column" flex="20">
+
+                    <md-input-container class="ration-property">
+                        <label class="property-name">Общий вес корма, кг</label>
+                        <input type="number" ng-disabled="true" ng-model="rationEdit.distribution.initialItem.totalWeight"/>
+                    </md-input-container>
+
+                    <md-input-container class="ration-property">
+                        <label class="property-name">Размер миксера, кг</label>
+                        <input type="number" ng-change="rationEdit.update();" ng-model="rationEdit.distribution.initialItem.mixerSize"/>
+                    </md-input-container>
+
+                    <div class="distribution-item" layout="row" 
+                        ng-repeat="item in rationEdit.distribution.initialItem.ratio track by $index">
+                        <md-input-container class="ration-property">
+                            <label class="property-name">Раздача #0{{$index + 1}}, %</label>
+                            <input type="number" ng-change="rationEdit.update();" ng-model="rationEdit.distribution.initialItem.ratio[$index]"/>
+                        </md-input-container>
+                        <ng-md-icon  icon="clear" class="remove-item" ng-click="rationEdit.removeDistributionItem($index)">
+                            <md-tooltip md-direction="bottom">
+                                Удалить раздачу
+                            </md-tooltip>
+                        </ng-md-icon>
+                    </div>
+
+                    <p class="error" ng-if="rationEdit.distributionError">{{rationEdit.distributionError}}</p>
+
+                    <md-button class="md-raised" ng-click="rationEdit.addDistrubutionItem()">
+                        добавить раздачу
+                    </md-button>
+
+                </div>
+                <div class="distribution-grid" flex>
+                    <div layout="row" class="distribution-grid--title">
+                        <div flex="30" class="first">РАЗДАЧИ</div>
+                        <div flex class="text-center mixer-column" 
+                            ng-repeat="item in rationEdit.distribution.initialItem.ratio track by $index">
+                            #0{{$index + 1}}, {{item}}%
+                        </div>
+                    </div>
+                    <div layout="row" class="distribution-grid--by-mixer">
+                        <div flex="30" class="first">МИКСЕРА, (кг)</div>
+                        <div flex layout="row" class="mixer-column"
+                            ng-repeat="mixers in rationEdit.distribution.initialItem.byMixers track by $index">
+                            <div class="value" flex layout="row" ng-repeat="mixer in mixers track by $index">
+                                <label class="text-right" flex>{{mixer}}</label>
+                            </div>  
+                        </div>
+                    </div>
+                    <div layout="row" class="distribution-grid--by-compositions">
+                        <div flex="30">
+                            <div ng-repeat="component in rationEdit.composition.initialItem track by $index" 
+                                class="text-left value {{component.componentType}}">
+                                {{component.name}}, (кг)
+                            </div>
+                        </div>
+                        <div flex class="mixer-column"
+                            ng-repeat="allDistributions in rationEdit.distribution.initialItem.byCompositions">
+                            <div layout="row">
+                                <div flex ng-repeat="ditribution in allDistributions">
+                                    <div ng-repeat="item in ditribution track by $index" class="text-right value">{{item}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </md-content>
         </md-tab>
@@ -118,7 +191,9 @@
         <md-button class="md-raised" ng-click="rationEdit.cancel()">
             Отмена
         </md-button>
-        <md-button class="md-raised md-primary" ng-disabled="rationEdit.error" ng-click="rationEdit.save()">
+        <md-button class="md-raised md-primary" 
+            ng-disabled="rationEdit.error || rationEdit.distributionError" 
+            ng-click="rationEdit.save()">
             Сохранить
         </md-button>
     </div>

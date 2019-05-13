@@ -68,14 +68,14 @@
                     });
                 }, 100);
             }
-        }
+        };
 
         $scope.$on('$stateChangeSuccess', function (event, newState, params, oldState) {
             vm.editMode = (newState.name === 'tenant.ration.new' || 
                             newState.name === 'tenant.ration.edit');
 
             // update list
-            if (!vm.editMode && newState.data.module === 'ration') {
+            if (!vm.editMode && newState.data && newState.data.module === 'ration') {
                 getRationsList();
             }
 
@@ -88,11 +88,10 @@
             else if (newState.name === 'tenant.ration') {
                 rationFactory.getRationDashboard().then(function (dashboard) {
                     vm.dashboard = dashboard;
-                    vm.history = dashboard.history;
                     vm.actions = dashboard.actions;
                     
-                    /*setTimeout(function () {
-                        Highcharts.chart('all-rations', {
+                    setTimeout(function () {
+                        Highcharts.chart('milk-rations', {
                             legend: {
                                 itemStyle: {
                                     fontWeight: '400'
@@ -107,14 +106,14 @@
                                 }
                             },
                             xAxis: {
-                                categories: vm.history.categories
+                                categories: vm.dashboard.milkRationHistroy.categories
                             },
                             yAxis: {
                                 title: false
                             },
-                            series: vm.history.series
+                            series: vm.dashboard.milkRationHistroy.series
                         });
-                    }, 100);*/
+                    }, 100);
                 });
             }
         });

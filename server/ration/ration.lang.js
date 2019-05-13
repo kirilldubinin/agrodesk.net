@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var langObj = {
     general: 'Парметры',
+    distribution: 'Раздача',
     number: 'Номер',
     rationType: 'Тип',
     milkPrice: 'Цена молока',

@@ -116,6 +116,10 @@ var RationSchema = new Schema({
         proportion: Number, // for by dry materail
         dryMaterial: Number
     }],
+    distribution: {
+        mixerSize: Number,
+        ratio: [Number] 
+    },
     history: [{
         date: Date,
         cowsNumber: {type: Number },

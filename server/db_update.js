@@ -17,8 +17,30 @@ db.on('error', function(err) {
 });
 db.once('open', function callback() {
     console.log("Connected to DB!");
-    addField_productivityRate_for_RATION_general();
+    add_Ration_Distributions();
 });
+
+function add_Ration_Distributions (ready) {
+    
+    Ration.find().then(function(rations) {
+        rations.forEach(function (r){
+            r.general.distribution = null;
+            delete r.general.distribution;
+            
+            r.distribution = {
+                mixerSize: 5000,
+                ratio: [100]
+            };
+            r.save(function(err, _feed) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(r.general.name);
+                }
+            });  
+        });
+    });
+}
 
 function add_Tariff_Plans (ready) {
     var tariff = new Tariff();

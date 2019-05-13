@@ -35,6 +35,9 @@ angular.module('ration')
     rationFactory.getRationHistory = function(rationId) {
         return $http.get(urlBaseRation + rationId + '/history');
     };
+    rationFactory.getRationsDistribution = function(rationIds) {
+        return $http.post(urlBaseRation + 'distribution', {rationIds: rationIds});
+    };
 
     return rationFactory;
 }]);

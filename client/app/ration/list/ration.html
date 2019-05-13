@@ -119,36 +119,35 @@
     <md-card class="dashboard" flex md-theme="default" md-theme-watch="" ui-view="" layout="column">
         <md-content layout-padding="" flex>
             
-            <div ng-if="!ration.dashboard.rations.length" class="text-center">
+            <div ng-if="!ration.dashboard.currentRations.length" class="text-center">
                 <br/><br/><br/>
                 У Вас нет рационов в прогрессе на данный момент
                 <br/><br/>
                 <md-button  
                     class="md-primary" 
                     md-no-ink="" 
-                    ng-click="ration.addRation()" >
+                    ng-click="ration.addRation()">
                     добавить рацион
                 </md-button>
             </div>
 
-            <md-button ng-repeat="action in ::ration.dashboard.actions" 
+            <!--md-button ng-repeat="action in ::ration.dashboard.actions" 
                 class="md-primary" 
                 md-no-ink="" 
                 ng-click="ration[action.key]()" >
                 {{action.label}}
-            </md-button>
+            </md-button-->
 
-            <h2 ng-if="ration.dashboard.rations.length">Действующие рационы</h2>
+            <h2 ng-if="ration.dashboard.milkRationHistroy">Фактическая продуктивность текущих рационов</h2>
+                <md-card class="dashboard-card all-rations" layout-padding="">
+                    <div layout="row" class="dashboard-card__title"></div>
+                    <div id="milk-rations"></div>
+                </md-card>
 
-            <!--md-card class="dashboard-card all-rations" layout-padding="">
-                <div layout="row" class="dashboard-card__title">
-                    
-                </div>
-                <div id="all-rations"></div>
-            </md-card-->
-
+            <!--
+            <h2 ng-if="ration.dashboard.currentRations.length">Действующие рационы</h2>
             <md-card class="dashboard-card" layout-padding="" 
-                ng-repeat="rationObj in ration.dashboard.rations">
+                ng-repeat="rationObj in ration.dashboard.currentRations">
                 <div layout="row" class="dashboard-card__title">
                     <b>#{{rationObj.general.number}}</b>
                     <h2>{{rationObj.general.name}}</h2>
@@ -163,6 +162,7 @@
                 </div>
                 <div ng-show="rationObj.showChart" id="container-{{rationObj._id}}"></div>
             </md-card>
+            -->
 
         </md-content>
     </md-card>

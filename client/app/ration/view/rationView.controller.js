@@ -15,8 +15,32 @@
             rationFactory.getRationView(rationId).then(function(rationView) {
                 vm.general = rationView.general;
                 vm.composition = rationView.composition;
+                vm.distribution = rationView.distribution;
                 vm.history = rationView.history;
                 vm.actions = rationView.actions;
+
+                Highcharts.chart('chart-container', {
+                    legend: {
+                        itemStyle: {
+                            fontWeight: '400'
+                        }
+                    },
+                    chart: { type: 'spline' },
+                    title: false,
+                    plotOptions: {
+                        spline: {
+                            lineWidth: 4,
+                            marker: { enabled: false }
+                        }
+                    },
+                    xAxis: {
+                        categories: vm.history.categories
+                    },
+                    yAxis: {
+                        title: false
+                    },
+                    series: vm.history.series
+                });
             });
         });
 

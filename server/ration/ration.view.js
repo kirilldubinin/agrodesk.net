@@ -4,6 +4,7 @@ var lang = require('./ration.lang');
 var lang = require('./ration.lang');
 var rationUtils = require('./ration.utils');
 var dimension = require('./ration.dimension');
+var history = require('../ration/ration.history');
 
 function convertValue(key, val) {
     if (key === 'rationType') {
@@ -83,6 +84,36 @@ function convert(ration, sessionData) {
     ration.composition = _.map(ration.composition, (item) => {
         item.priceInRation = Math.round(item.price * item.value * 100)/ 100
         return item;
+    });
+
+    const totalWeight =  Math.ceil(_.sumBy(ration.composition, 'value') * ration.general.cowsNumber / 10) * 10;
+    const mixerSize = ration.distribution.mixerSize;
+    const distributionRatio = ration.distribution.ratio;
+    
+    const byMixers = _.map(distributionRatio, (distribution) => {
+        var weight = Math.ceil((totalWeight * (distribution / 100)));
+        var fullMuxers = Math.floor(weight/mixerSize);
+        if (fullMuxers === 0) {
+            return [weight];
+        } else {
+            var notFull = weight - (fullMuxers * mixerSize);
+            var result = [];
+            for (var i = 0; i < fullMuxers; i++) {
+                result.push(mixerSize);
+            }
+            result.push(notFull);
+            return result;
+        }
+    });
+
+    const byComposition = _.map(byMixers, (mixer) => {
+        return _.map(mixer, function(weight) {
+            var map = _.map(ration.composition, function(item) {
+                var v = (weight * item.value * ration.general.cowsNumber) / totalWeight; 
+                return item.componentType === 'mk' ? Math.round(v * 10) / 10 : Math.round(v);
+            });
+            return map;
+        });
     })
 
 	return {
@@ -126,22 +157,23 @@ function convert(ration, sessionData) {
                     label: lang('portion')
                 }
             ],
-            body: ration.composition
+            body: ration.composition,
+            total: {
+                price: Math.round(_.sumBy(ration.composition, 'priceInRation')),
+                weight: Math.round(_.sumBy(ration.composition, 'value')),
+                proportion: Math.round(_.sumBy(ration.composition, (p) => {
+                    return p.componentType === 'mk' ? 0 : p.proportion;
+                }))
+            }
         },
-        history: {
-            labels: _.map(rationUtils.historyFields, (value, key) => {
-                return {
-                    name: lang(key),
-                    code: key
-                };
-            }),
-            values: _.map(rationUtils.historyFieldsy, (value, key) => {
-                return {
-                    code: key,
-                    values: _.map(ration.history, 'key')
-                }
-            })
-        } 
+        distribution: {
+            label: lang('distribution'),
+            key: 'distribution',
+            ratio: ration.distribution.ratio,
+            byMixers: byMixers,
+            byComposition: byComposition
+        },
+        history: history.getHistoryForRation(ration)
     };
 }
 

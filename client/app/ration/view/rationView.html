@@ -87,9 +87,76 @@
                             {{component.componentType !== 'mk' ? component.proportion : ''}}
                         </div>
                     </div>
+                    <div class="total composition-item" layout="row">
+                        <div class="component-index" flex="2">
+                        </div>
+                        <div class="component-name" flex="">
+                            ИТОГО
+                        </div>
+                        <div class="" flex="10">
+                            
+                        </div>
+                        <div class="" flex="15">
+                            {{rationView.composition.total.price}}
+                        </div>
+                        <div class="" flex="10">
+                        </div>
+                        <div class="rate" flex="15">
+                            {{rationView.composition.total.weight}}
+                        </div>
+                        <div class="rate" flex="15">
+                            {{rationView.composition.total.proportion}}
+                        </div>
+                    </div>
                 </div>  
             </md-content>
         </md-tab>
+
+        <md-tab label="РАЗДАЧА">
+            <md-content class="md-padding distribution" flex id="distribution">
+                <div class="distribution-grid" flex>
+                    <div layout="row" class="distribution-grid--title">
+                        <div flex="30" class="first">РАЗДАЧИ</div>
+                        <div flex class="text-center mixer-column" 
+                            ng-repeat="item in ::rationView.distribution.ratio track by $index">
+                            #0{{$index + 1}}, {{item}}%
+                        </div>
+                    </div>
+                    <div layout="row" class="distribution-grid--by-mixer">
+                        <div flex="30" class="first">МИКСЕРА, (кг)</div>
+                        <div flex layout="row" class="mixer-column"
+                            ng-repeat="mixers in ::rationView.distribution.byMixers track by $index">
+                            <div class="value" flex layout="row" ng-repeat="mixer in mixers track by $index">
+                                <label class="text-right" flex>{{mixer}}</label>
+                            </div>  
+                        </div>
+                    </div>
+                    <div layout="row" class="distribution-grid--by-compositions">
+                        <div flex="30">
+                            <div ng-repeat="component in ::rationView.composition.body" 
+                                class="text-left value {{component.componentType}}">
+                                {{component.name}}, (кг)
+                            </div>
+                        </div>
+                        <div flex class="mixer-column"
+                            ng-repeat="allDistributions in ::rationView.distribution.byComposition">
+                            <div layout="row">
+                                <div flex ng-repeat="ditribution in ::allDistributions">
+                                    <div ng-repeat="item in ::ditribution track by $index" class="text-right value">{{item}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </md-content>   
+        </md-tab>
+
+        <md-tab label="ИСТОРИЯ">
+            <md-content class="md-padding history" flex id="history">
+                <div id="chart-container"></div>
+            </md-content>   
+        </md-tab>
+
     </md-tabs>
     </div>
 </div>

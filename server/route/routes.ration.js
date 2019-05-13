@@ -7,6 +7,7 @@ var view = require('../ration/ration.view');
 var lang = require('../ration/ration.lang');
 var utils = require('../ration/ration.utils');
 var history = require('../ration/ration.history');
+var feeding = require('../ration/ration.feeding');
 
 
 module.exports = function(app, isAuthenticated, errorHandler, log) {
@@ -222,6 +223,7 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
                 // !!! do not update createdBy and createdAt !!!
                 ration.general = req.body.general;
                 ration.composition = req.body.composition;
+                ration.distribution = req.body.distribution;
                 ration.changeAt = new Date();
 
                 ration.save((err, updatedRation) => {
@@ -262,9 +264,20 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
             // remove actions for now
             //actions = [];
 
+            const milkRations = _.filter(rations, (r) => { return r.general.rationType === 'milk' });
             return res.status(200)
                 .json({
-                    rations: history(rations),
+                    milkRationHistroy: history.getMilkHistory(milkRations),
+                    currentRations: _.map(rations, (ration) => {
+                        const rationHistory = history.getHistoryForRation(ration);
+                        return {
+                            _id: ration._id,
+                            showChart: false,
+                            general: ration.general,
+                            categories: rationHistory.categories,
+                            series: rationHistory.series
+                        }
+                    }),
                     actions: _.map(actions, function(f) {
                         return {
                             key: f,
@@ -272,6 +285,22 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
                         };
                 })
             });
+        });
+    });
+
+    // get feeding
+    app.post('/api/rations/distribution', isAuthenticated, function(req, res) {
+        var rationIds = req.body.rationIds;
+        var promises = _.map(rationIds, (id) => {
+            return Ration.findById(id);
+        });
+        Q.all(promises).then(function(rations) {
+            rations = _.filter(rations, (r) => {
+                return checkUserRightForRation(r, req);
+            });
+            res.status(200).json(feeding(rations));
+        }, function(err) {
+            res.send(err);
         });
     });
 }

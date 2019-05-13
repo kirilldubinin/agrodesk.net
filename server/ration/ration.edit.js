@@ -88,6 +88,10 @@ function convert(ration, user) {
                     label: lang('kiloPerDay')
                 }
             ]
+        }, {
+            label: lang('distribution'),
+            key: 'distribution',
+            initialItem: ration.distribution,
         }
     ];
 }

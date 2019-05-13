@@ -245,4 +245,87 @@
 		border-top: 3px solid #fdae39;
 		padding: 6px 0;
 	}
+
+	.distribution {
+		.distribution-item {
+			border: 1px solid #ccc;
+			padding: 0 0.6em;
+			border-radius: 5px;
+			margin-bottom: 1em;
+			position: relative;
+			.remove-item {
+				right: 5px;
+				top: 5px;
+				position: absolute;
+				cursor: pointer;
+				color: #ff5722;
+			}
+		}
+		&.error {
+			.distribution-item {
+				border-color: #ff5722;
+			}
+		}
+		p.error {
+			color: #ff5722;
+		}
+	}
+	.distribution-grid {
+		padding: 0 0 0 2em;
+		&--title {
+			border-bottom: 1px solid #ddd;
+			font-weight: bold;
+			.first {
+				font-weight: bold;
+			}
+			div {
+				border-right: 1px solid #ddd;
+				padding: 6px 4px 6px 13px;
+			}
+			.mixer-column {
+				&:nth-child(2n+3) {
+					background: #eee;
+				}
+			}	
+		}
+		&--by-mixer {
+			border-bottom: 1px solid #ddd;
+			font-weight: bold;
+			.first {
+				font-weight: bold;
+				border-right: 1px solid #ddd;
+				padding: 6px 4px 6px 13px;
+			}
+			.value {
+				border-right: 1px solid #ddd;
+				padding: 6px 4px 6px 0px;
+			}	
+			.mixer-column {
+				&:nth-child(2n+3) {
+					background: #eee;
+				}
+			}	
+		}
+		&--by-compositions {
+			.value {
+				border-bottom: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				padding: 6px 4px 6px 8px;
+				&.mk {
+					border-left: 5px solid #969c28;
+				}
+				&.kk {
+					border-left: 5px solid #f37136;
+				}
+				&.ok {
+					border-left: 5px solid #009688;
+				}
+			}
+			.mixer-column {
+				&:nth-child(2n+3) {
+					background: #eee;
+				}
+			}	
+		}
+	}
 }

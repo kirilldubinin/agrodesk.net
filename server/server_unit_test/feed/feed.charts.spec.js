@@ -50,7 +50,7 @@ describe('feed.charts', function() {
         done();
     });
 
-    it.only('charts with empty values', function(done) {
+    it('charts with empty values', function(done) {
         var feeds = [{
             _id: '1',
             general: {

@@ -4,16 +4,58 @@ var color = require('./ration.color');
 var lang = require('./ration.lang');
 var formatter = require('../formatter');
 
+const defaultSeries = ['actualProductivity'];
 
-function history (rations) {
-
-    const allSeries = ['dryMaterialConsumption', 'actualProductivity', 'estimatedProductivity', 'dryMaterialTMR',
-        'fat', 'protein', 'rationPrice', 'milkPrice', 'efficiency'];
-    const defaultSeries = ['actualProductivity'];
+function getHistoryForRation(ration) {
+    const allSeries = ration.general.rationType === 'milk' ?
+        ['dryMaterialConsumption', 'actualProductivity', 'estimatedProductivity', 'dryMaterialTMR', 'fat', 'protein', 'rationPrice', 'milkPrice', 'efficiency'] :
+        ['dryMaterialConsumption', 'dryMaterialTMR', 'rationPrice'];
     
-    rations = _.filter(rations, (r) => { return r.general.rationType === 'milk' });
+    // uniq date
+    ration.history = _.reverse(ration.history);
+    ration.history = _.map(ration.history, (hist) => {
+        hist.date = formatter.formatDate(hist.date);
+        return hist;
+    });
+    ration.history = _.uniqBy(ration.history, 'date');
+    ration.history = _.reverse(ration.history);
 
-    /*
+    var series = _.map(allSeries, (serie) => {
+        var data;
+        if (serie === 'ratio') {
+            data = _.map(ration.history, (hist) => {
+                const ratio = hist['ratio'].split('/');
+                return Math.round(+ratio[0]/+ratio[1] * 100)/100
+            });
+        } else {
+            data = _.map(ration.history, (hist) => {
+                return Math.round(hist[serie] * 10)/10
+            });
+        }
+
+        return {
+            color: color(serie),
+            visible: defaultSeries.indexOf(serie) > -1,
+            name: lang(serie) + (dimension(serie) && ', ' + dimension(serie)),
+            data: data.length && data
+        }
+    });
+
+    // filter, have to be any values in series
+    series = _.filter(series, (serie) => {
+        return serie.data && _.size(_.filter(serie.data, Boolean))
+    });
+
+    var categories = _.map(ration.history, 'date');
+    categories = _.uniq(categories);
+
+    return {
+        categories: categories,
+        series: series
+    }
+}
+
+function getMilkHistory(rations) {
     const serie = 'actualProductivity';
     var categories = [];
     var allRationsHistory = _.map(rations, (ration) => {
@@ -38,8 +80,13 @@ function history (rations) {
         };
     })
 
+    const reverseDateRepresentation = date => {
+        let parts = date.split('/');
+        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    };
+    categories = categories.map(reverseDateRepresentation).sort().map(reverseDateRepresentation);
     categories = _.uniq(categories);
-    categories.sort();
+
     var series = _.map(allRationsHistory, (h) => {
         return {
             name: h.name,
@@ -58,59 +105,10 @@ function history (rations) {
         }),
         categories: categories,
         series: series
-    };*/
-
-    var allRations = _.map(rations, (ration) => {
-
-        // uniq date
-        ration.history = _.reverse(ration.history);
-        ration.history = _.map(ration.history, (hist) => {
-            hist.date = formatter.formatDate(hist.date)
-            return hist;
-        });
-        ration.history = _.uniqBy(ration.history, 'date');
-        ration.history = _.reverse(ration.history);
-
-        var series = _.map(allSeries, (serie) => {
-            var data;
-            if (serie === 'ratio') {
-                data = _.map(ration.history, (hist) => {
-                    const ratio = hist['ratio'].split('/');
-                    return Math.round(+ratio[0]/+ratio[1] * 100)/100
-                });
-            } else {
-                data = _.map(ration.history, (hist) => {
-                    return Math.round(hist[serie] * 10)/10
-                });
-            }
-
-            return {
-                color: color(serie),
-                visible: defaultSeries.indexOf(serie) > -1,
-                name: lang(serie) + (dimension(serie) && ', ' + dimension(serie)),
-                data: data && data.length && data
-            }
-        });
-
-        // filter, have to be any values in series
-        series = _.filter(series, (serie) => {
-            return serie.data && _.size(_.filter(serie.data, Boolean))
-        });
-
-        var categories = _.map(ration.history, 'date');
-        categories = _.uniq(categories);
-
-        return {
-            _id: ration._id,
-            showChart: false,
-            general: ration.general,
-            categories: categories,
-            series: series
-        }
-    })
-
-    allRations = _.sortBy(allRations, 'general.number')
-    return allRations;
+    };
 }
 
-module.exports = history;
+module.exports = {
+    getHistoryForRation: getHistoryForRation,
+    getMilkHistory: getMilkHistory
+};
