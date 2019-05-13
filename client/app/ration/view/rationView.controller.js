@@ -47,7 +47,7 @@
         vm.delete = function(ev) {
             var confirm = $mdDialog.confirm()
                 .title('Удаление')
-                .textContent('Вы хотите удалить рацион "' + vm.general.controls.name.value + '" ?')
+                .textContent('Вы хотите удалить рацион "' + vm.general.controls.left.name.value + '" ?')
                 .targetEvent(ev).ok('Да').cancel('Отменить');
             $mdDialog.show(confirm).then(function() {
                 rationFactory.deleteRation(rationId).then(function(res) {
@@ -77,6 +77,8 @@
 
                 var generalPrint = document.getElementById('general');
                 var compositionPrint = document.getElementById('composition');
+                var distributionPrint = document.getElementById('distribution');
+                var historyPrint = document.getElementById('history');
 
                 var popupWin = window.open('', '_blank');
                 popupWin.document.open();
@@ -86,15 +88,21 @@
                         '<head>'+
                             '<link rel="stylesheet" type="text/css" href="app.css"/>'+
                             '<link rel="stylesheet" type="text/css" href="libs.css"/>'+
-                            '<style type="text/css" media="print">@page { size: landscape; }</style>' +
+                            //'<style type="text/css" media="print">@page { size: landscape; }</style>' +
                         '</head>'+
                         '<body onload="setTimeout(function() {window.print(); window.close();}, 500)" class="ration-view print">' + 
                             '<div class="layout-row ration-title"><h2 class="flex">' + data.user.tenantFullName + ' Рационы</h2><h2>agrodesk.net</h2></div>' +
-                            '<div class="layout-row"><h2 class="flex">' + vm.general.controls.name.value + '</h2></div>' +
-                            '<div class="layout-row">' + 
-                                '<div class="flex-35">' + (generalPrint ? generalPrint.innerHTML  : '') + '</div>' +
-                                '<div class="flex">' + (compositionPrint ? compositionPrint.outerHTML : '') + '</div>' +
-                            '</div>' +
+                            '<div class="layout-row"><h2 class="flex">' + vm.general.controls.left.name.value + ' ПАРАМЕТРЫ</h2></div>' +
+                            '<div>' + (generalPrint ? generalPrint.innerHTML  : '') + '</div><div class="break"></div>' +
+                            '<div class="layout-row ration-title"><h2 class="flex">' + data.user.tenantFullName + ' Рационы</h2><h2>agrodesk.net</h2></div>' +
+                            '<div class="layout-row"><h2 class="flex">' + vm.general.controls.left.name.value + ' СОСТАВ</h2></div>' +
+                            '<div>' + (compositionPrint ? compositionPrint.outerHTML : '') + '</div><div class="break"></div>' +
+                            '<div class="layout-row ration-title"><h2 class="flex">' + data.user.tenantFullName + ' Рационы</h2><h2>agrodesk.net</h2></div>' +
+                            '<div class="layout-row"><h2 class="flex">' + vm.general.controls.left.name.value + ' РАЗДАЧА</h2></div>' +
+                            '<div>' + (distributionPrint ? distributionPrint.outerHTML : '') + '</div><div class="break"></div>' +
+                            '<div class="layout-row ration-title"><h2 class="flex">' + data.user.tenantFullName + ' Рационы</h2><h2>agrodesk.net</h2></div>' +
+                            '<div class="layout-row"><h2 class="flex">' + vm.general.controls.left.name.value + ' ИСТОРИЯ</h2></div>' +
+                            '<div>' + (historyPrint ? historyPrint.outerHTML : '') + '</div><div class="break"></div>' +
                         '</body>'+
                     '</html>');
                 popupWin.document.close();

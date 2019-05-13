@@ -21,7 +21,7 @@
     </div>
     <md-tabs flex class="ration-view-content">
         <md-tab label="ПАРАМЕТРЫ">
-            <md-content class="md-padding ration-info" layout="row">
+            <md-content class="md-padding ration-info" layout="row" id="general">
                 <section flex="50">
                     <div layout="row" ng-repeat="(key, data) in rationView.general.controls.left">
                         <label flex="50">{{::data.label}} {{::data.dimension ? (', ' + data.dimension) : ''}}</label>
