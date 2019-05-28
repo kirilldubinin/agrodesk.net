@@ -267,8 +267,8 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
             const milkRations = _.filter(rations, (r) => { return r.general.rationType === 'milk' });
             return res.status(200)
                 .json({
-                    milkRationHistroy: history.getMilkHistory(milkRations),
-                    currentRations: _.map(rations, (ration) => {
+                    charts: history.getHistoryForRations(milkRations)
+                    /*currentRations: _.map(rations, (ration) => {
                         const rationHistory = history.getHistoryForRation(ration);
                         return {
                             _id: ration._id,
@@ -283,7 +283,7 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
                             key: f,
                             label: lang(f)
                         };
-                })
+                    })*/
             });
         });
     });

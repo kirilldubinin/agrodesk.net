@@ -55,7 +55,7 @@ function getHistoryForRation(ration) {
     }
 }
 
-function getMilkHistory(rations) {
+function getHistoryForRations(rations) {
     const allSeries = [
         'dryMaterialConsumption', 
         'actualProductivity', 
@@ -117,12 +117,6 @@ function getMilkHistory(rations) {
             key: serie,
             label: lang(serie),
             dimension: dimension(serie),
-            history: _.map(rations, (r) => {
-                return {
-                    name: r.general.name,
-                    history: r.history
-                }
-            }),
             categories: categories,
             series: series
         };
@@ -131,5 +125,5 @@ function getMilkHistory(rations) {
 
 module.exports = {
     getHistoryForRation: getHistoryForRation,
-    getMilkHistory: getMilkHistory
+    getHistoryForRations: getHistoryForRations
 };

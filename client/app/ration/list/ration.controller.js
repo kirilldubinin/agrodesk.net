@@ -29,48 +29,6 @@
             $scope.$broadcast('ADD_FEED_TO_RATION', feedItem);
         };
 
-        vm.toggleChart = function (ration) {
-            ration.showChart = !ration.showChart;
-            if (!ration.chartRender && _.size(ration.series)) {
-                setTimeout(function () {
-                    ration.chartRender = true;
-                    Highcharts.chart('container-' + ration._id, {
-                        legend: {
-                            itemStyle: {
-                                fontWeight: '400'
-                            }
-                        },
-                        chart: { type: 'spline' },
-                        title: false,
-                        plotOptions: {
-                            spline: {
-                                lineWidth: 4,
-                                marker: { enabled: false }
-                            }
-                        },
-                        xAxis: {
-                            categories: ration.categories
-                        },
-                        yAxis: {
-                            title: false,
-                            /*plotBands: [{
-                                from: 34,
-                                to: 35,
-                                color: 'rgba(68, 170, 213, 0.1)',
-                                label: {
-                                    text: 'Расчетная продуктивность',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }]*/
-                        },
-                        series: ration.series
-                    });
-                }, 100);
-            }
-        };
-
         vm.setChart = function (chart) {
             vm.currentChart = chart; 
             Highcharts.chart('milk-rations', {
@@ -114,8 +72,7 @@
             // get dashboard
             else if (newState.name === 'tenant.ration') {
                 rationFactory.getRationDashboard().then(function (dashboard) {
-                    vm.charts = dashboard.milkRationHistroy;
-                    vm.actions = dashboard.actions;
+                    vm.charts = dashboard.charts;
                     vm.setChart(_.filter(vm.charts, {key: 'actualProductivity'})[0]);
                 });
             }
