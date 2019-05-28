@@ -4,6 +4,7 @@
 
     function RationController($scope, $state, rationFactory, feedFactory, authFactory) {
         var vm = this;
+        vm.currentChart = null;
         function getRationsList() {
             rationFactory.getRations().then(function(result) {
                 vm.rationItems = result.rations;
@@ -70,6 +71,32 @@
             }
         };
 
+        vm.setChart = function (chart) {
+            vm.currentChart = chart; 
+            Highcharts.chart('milk-rations', {
+                legend: {
+                    itemStyle: {
+                        fontWeight: '400'
+                    }
+                },
+                chart: { type: 'spline' },
+                title: false,
+                plotOptions: {
+                    spline: {
+                        lineWidth: 4,
+                        marker: { enabled: false }
+                    }
+                },
+                xAxis: {
+                    categories: vm.currentChart.categories
+                },
+                yAxis: {
+                    title: false
+                },
+                series: vm.currentChart.series
+            });
+        };
+
         $scope.$on('$stateChangeSuccess', function (event, newState, params, oldState) {
             vm.editMode = (newState.name === 'tenant.ration.new' || 
                             newState.name === 'tenant.ration.edit');
@@ -87,33 +114,9 @@
             // get dashboard
             else if (newState.name === 'tenant.ration') {
                 rationFactory.getRationDashboard().then(function (dashboard) {
-                    vm.dashboard = dashboard;
+                    vm.charts = dashboard.milkRationHistroy;
                     vm.actions = dashboard.actions;
-                    
-                    setTimeout(function () {
-                        Highcharts.chart('milk-rations', {
-                            legend: {
-                                itemStyle: {
-                                    fontWeight: '400'
-                                }
-                            },
-                            chart: { type: 'spline' },
-                            title: false,
-                            plotOptions: {
-                                spline: {
-                                    lineWidth: 4,
-                                    marker: { enabled: false }
-                                }
-                            },
-                            xAxis: {
-                                categories: vm.dashboard.milkRationHistroy.categories
-                            },
-                            yAxis: {
-                                title: false
-                            },
-                            series: vm.dashboard.milkRationHistroy.series
-                        });
-                    }, 100);
+                    vm.setChart(_.filter(vm.charts, {key: 'actualProductivity'})[0]);
                 });
             }
         });

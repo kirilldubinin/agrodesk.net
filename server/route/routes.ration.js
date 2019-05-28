@@ -287,20 +287,4 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
             });
         });
     });
-
-    // get feeding
-    app.post('/api/rations/distribution', isAuthenticated, function(req, res) {
-        var rationIds = req.body.rationIds;
-        var promises = _.map(rationIds, (id) => {
-            return Ration.findById(id);
-        });
-        Q.all(promises).then(function(rations) {
-            rations = _.filter(rations, (r) => {
-                return checkUserRightForRation(r, req);
-            });
-            res.status(200).json(feeding(rations));
-        }, function(err) {
-            res.send(err);
-        });
-    });
 }

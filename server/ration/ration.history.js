@@ -56,56 +56,77 @@ function getHistoryForRation(ration) {
 }
 
 function getMilkHistory(rations) {
-    const serie = 'actualProductivity';
-    var categories = [];
-    var allRationsHistory = _.map(rations, (ration) => {
-        
-        var historyByRation = {}
-        _.forEach(ration.history, (h) => {
-            var data;
-            if (serie === 'ratio') {
-                const ratio = h['ratio'].split('/');
-                data = Math.round(+ratio[0]/+ratio[1] * 100)/100;
-            } else {
-                data = h[serie];
-            }
+    const allSeries = [
+        'dryMaterialConsumption', 
+        'actualProductivity', 
+        'estimatedProductivity', 
+        'dryMaterialTMR', 
+        'fat', 
+        'protein', 
+        'rationPrice', 
+        'milkPrice', 
+        'efficiency',
+        'ratio',
+        'marginality'
+    ];
 
-            const formatDate = formatter.formatDate(h.date)
-            categories.push(formatDate);
-            historyByRation[formatDate] = data;
-        });
-        return {
-            name: ration.general.name,
-            history: historyByRation
-        };
-    })
+    return _.map(allSeries, (serie) => {
+        //const serie = 'actualProductivity';
+        var categories = [];
+        var allRationsHistory = _.map(rations, (ration) => {
+            
+            var historyByRation = {}
+            _.forEach(ration.history, (h) => {
+                var data;
+                if (serie === 'ratio') {
+                    const ratio = h['ratio'].split('/');
+                    data = Math.round(+ratio[0]/+ratio[1] * 100)/100;
+                } else if (serie === 'marginality') {
+                    data = Math.round((h['milkPrice'] * h['actualProductivity'] - h['rationPrice']) * 10)/10 ;
+                } else {
+                    data = h[serie];
+                }
 
-    const reverseDateRepresentation = date => {
-        let parts = date.split('/');
-        return `${parts[2]}/${parts[1]}/${parts[0]}`;
-    };
-    categories = categories.map(reverseDateRepresentation).sort().map(reverseDateRepresentation);
-    categories = _.uniq(categories);
-
-    var series = _.map(allRationsHistory, (h) => {
-        return {
-            name: h.name,
-            data: _.map(categories, (c) => {
-                return h.history[c] || null;
-            })
-        }
-    })
-
-    return {
-        history: _.map(rations, (r) => {
+                const formatDate = formatter.formatDate(h.date)
+                categories.push(formatDate);
+                historyByRation[formatDate] = data;
+            });
             return {
-                name: r.general.name,
-                history: r.history
+                name: ration.general.name,
+                history: historyByRation
+            };
+        });
+
+        const reverseDateRepresentation = date => {
+            let parts = date.split('/');
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        };
+        categories = categories.map(reverseDateRepresentation).sort().map(reverseDateRepresentation);
+        categories = _.uniq(categories);
+
+        var series = _.map(allRationsHistory, (h) => {
+            return {
+                name: h.name,
+                data: _.map(categories, (c) => {
+                    return h.history[c] || null;
+                })
             }
-        }),
-        categories: categories,
-        series: series
-    };
+        })
+
+        return {
+            key: serie,
+            label: lang(serie),
+            dimension: dimension(serie),
+            history: _.map(rations, (r) => {
+                return {
+                    name: r.general.name,
+                    history: r.history
+                }
+            }),
+            categories: categories,
+            series: series
+        };
+    });
 }
 
 module.exports = {

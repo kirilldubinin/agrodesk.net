@@ -1,5 +1,5 @@
 (function () { 
  return angular.module("agrodesk")
-.constant("version", "0.0.227");
+.constant("version", "0.0.228");
 
 })();

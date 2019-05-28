@@ -119,7 +119,7 @@
     <md-card class="dashboard" flex md-theme="default" md-theme-watch="" ui-view="" layout="column">
         <md-content layout-padding="" flex>
             
-            <div ng-if="!ration.dashboard.currentRations.length" class="text-center">
+            <!--div ng-if="!ration.dashboard.currentRations.length" class="text-center">
                 <br/><br/><br/>
                 У Вас нет рационов в прогрессе на данный момент
                 <br/><br/>
@@ -131,39 +131,29 @@
                 </md-button>
             </div>
 
-            <!--md-button ng-repeat="action in ::ration.dashboard.actions" 
+            md-button ng-repeat="action in ::ration.dashboard.actions" 
                 class="md-primary" 
                 md-no-ink="" 
                 ng-click="ration[action.key]()" >
                 {{action.label}}
             </md-button-->
-
-            <h2 ng-if="ration.dashboard.milkRationHistroy">Фактическая продуктивность текущих рационов</h2>
-                <md-card class="dashboard-card all-rations" layout-padding="">
-                    <div layout="row" class="dashboard-card__title"></div>
-                    <div id="milk-rations"></div>
-                </md-card>
-
-            <!--
-            <h2 ng-if="ration.dashboard.currentRations.length">Действующие рационы</h2>
-            <md-card class="dashboard-card" layout-padding="" 
-                ng-repeat="rationObj in ration.dashboard.currentRations">
-                <div layout="row" class="dashboard-card__title">
-                    <b>#{{rationObj.general.number}}</b>
-                    <h2>{{rationObj.general.name}}</h2>
-                    <span class="ration-type" ng-class="">{{rationObj.general.rationType}}</span>
-                    <span class="ration-date">{{rationObj.general.startDate | date}}</span>
-                    <md-button class="toogle-chart-btn" 
-                        ng-if="rationObj.series.length"
-                        ng-click="ration.toggleChart(rationObj)"
-                        md-no-ink class="md-primary">
-                        {{rationObj.showChart ? 'скрыть график' : 'показать график'}}
-                    </md-button>
+            <h2 class="text-center">Текущие рационы</h2>
+            <div layout="row" class="mt-4 mb-4">
+                <label>Выберите показатель рациона</label>
+                <div flex class="ml-4 ">
+                    <md-select class="dashboard__select--chart" ng-if="ration.charts.length" ng-model="ration.currentChart">
+                        <md-option ng-repeat="chart in ration.charts" ng-value="chart" ng-click="ration.setChart(chart)">
+                            {{chart.label}}
+                            {{chart.dimension ? ' (' + chart.dimension + ')' : '' }}
+                        </md-option>
+                    </md-select>
                 </div>
-                <div ng-show="rationObj.showChart" id="container-{{rationObj._id}}"></div>
+            </div>
+            
+            <md-card class="dashboard-card all-rations" layout-padding="">
+                <div layout="row" class="dashboard-card__title"></div>
+                <div id="milk-rations"></div>
             </md-card>
-            -->
-
         </md-content>
     </md-card>
 </div>

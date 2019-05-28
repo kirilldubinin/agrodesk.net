@@ -136,34 +136,12 @@
 		}
 	}
 
-	.dashboard-card {
-		&__title {
-			line-height: 1em;
-			position: relative;
-			h2 {
-				margin: 0 1em;
-				padding-top: 4px;
-			}
-			b {
-				padding-top: 4px;
-				line-height: 20px;
-			}
-			.ration-type {
-				background-color: #2196F3;
-				color: #fff;
-				padding: 4px 8px;
-				border-radius: 3px;
-				text-transform: uppercase;
-				margin-right: 1em;
-			}
-			.ration-date {
-				padding-top: 5px;
-			}
-			.toogle-chart-btn {
-				position: absolute;
-				right: -4px;
-				top: -4px;
-			}
+	.dashboard {
+		&__select--chart {
+			width: 50%;
+			font-size: 16px;
+			color: #3f51b5;
+			margin: -8px 0 0 0;
 		}
 	}
 }

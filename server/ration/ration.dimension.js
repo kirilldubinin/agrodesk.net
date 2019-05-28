@@ -8,7 +8,8 @@ function dimension(key) {
         rationPrice: 'руб',
         priceInRation: 'руб',
         milkPrice: 'руб/л',
-        dryMaterialTMR: '%'
+        dryMaterialTMR: '%',
+        marginality: 'руб'
     };
 
     return dimensionObj[key] || '';

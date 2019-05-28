@@ -26,6 +26,7 @@ var langObj = {
     dry: 'сухостой',
     young: 'молодняк',
     productivityRate: 'Коэфициент продуктивности',
+    marginality: 'Маржинальность',
 
     edit: 'редактировать',
     delete: 'удалить',
