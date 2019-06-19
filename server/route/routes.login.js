@@ -98,6 +98,14 @@ module.exports = function(app, isAuthenticated, errorHandler) {
 
         authStrategy.authenticate(req, function(err, user, tenant) {
             if (!err && user && tenant) {
+
+                // if tenant.status = 'blocked'
+                if (tenant.status === 'blocked') {
+                    return res.status(401).send({
+                        message: 'Доступ ограничен'
+                    });    
+                }
+
                 // set tenant data for user object
                 var sessionUser = {
                     name: user.name,

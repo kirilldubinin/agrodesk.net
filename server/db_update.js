@@ -17,8 +17,139 @@ db.on('error', function(err) {
 });
 db.once('open', function callback() {
     console.log("Connected to DB!");
-    add_Ration_Distributions();
+    addField_status_for_TENANT();
 });
+
+function delete_Ration_History (ready) {
+    
+    Ration.find().then(function(rations) {
+
+        rations.forEach(function (r){
+            r.history.forEach(function (h) {
+
+                //console.log('h1', h);
+
+                h.cowsNumber = null;
+                delete h.cowsNumber;
+
+                h.dryMaterialConsumption = null;
+                delete h.dryMaterialConsumption;
+
+                h.estimatedProductivity = null;
+                delete h.estimatedProductivity;
+
+                h.actualProductivity = null;
+                delete h.actualProductivity;
+
+                h.productivityRate = null;
+                delete h.productivityRate;
+
+                h.dryMaterialTMR = null;
+                delete h.dryMaterialTMR;
+
+                h.ratio = null;
+                delete h.ratio;
+
+                h.fat = null;
+                delete h.fat;
+
+                h.protein = null;
+                delete h.protein;
+
+                h.rationPrice = null;
+                delete h.rationPrice;
+
+                h.milkPrice = null;
+                delete h.milkPrice;
+
+                h.efficiency = null;
+                delete h.efficiency;
+            });
+            
+            r.save(function(err, _feed) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(r.general.name);
+                }
+            });
+        });
+    });
+}
+
+function add_Ration_History (ready) {
+    
+    Ration.find().then(function(rations) {
+
+        rations.forEach(function (r){
+            r.history.forEach(function (h) {
+
+                //console.log('h1', h);
+
+                h.general = {
+                    cowsNumber: h.cowsNumber,
+                    dryMaterialConsumption: h.dryMaterialConsumption,
+                    estimatedProductivity: h.estimatedProductivity,
+                    actualProductivity: h.actualProductivity,
+                    productivityRate: h.productivityRate,
+                    dryMaterialTMR: h.dryMaterialTMR,
+                    ratio: h.ratio,
+                    fat: h.fat,
+                    protein: h.protein,
+                    rationPrice: h.rationPrice,
+                    milkPrice: h.milkPrice,
+                    efficiency: h.efficiency
+                };
+
+                h.composition = [];
+
+                h.cowsNumber = null;
+                delete h.cowsNumber;
+
+                h.dryMaterialConsumption = null;
+                delete h.dryMaterialConsumption;
+
+                h.estimatedProductivity = null;
+                delete h.estimatedProductivity;
+
+                h.actualProductivity = null;
+                delete h.actualProductivity;
+
+                h.productivityRate = null;
+                delete h.productivityRate;
+
+                h.dryMaterialTMR = null;
+                delete h.dryMaterialTMR;
+
+                h.ratio = null;
+                delete h.ratio;
+
+                h.fat = null;
+                delete h.fat;
+
+                h.protein = null;
+                delete h.protein;
+
+                h.rationPrice = null;
+                delete h.rationPrice;
+
+                h.milkPrice = null;
+                delete h.milkPrice;
+
+                h.efficiency = null;
+                delete h.efficiency;
+            });
+            
+            r.save(function(err, _feed) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(r.general.name);
+                }
+            });
+        });
+    });
+}
 
 function add_Ration_Distributions (ready) {
     
@@ -93,6 +224,21 @@ function addField_autoDecrement_for_FEED_feeding () {
             }
 
             feed.save(function(err, _feed) {
+                if (err) {
+                    console.log(err);
+                }
+            });  
+        });
+    });
+}
+
+function addField_status_for_TENANT () {
+
+    Tenant.find().then(function(tenants) {
+        tenants.forEach(function (tenant){
+
+            tenant.status = tenant.loginName === 'im-gorky' ? 'blocked' : 'paid';
+            tenant.save(function(err, _tenant) {
                 if (err) {
                     console.log(err);
                 }

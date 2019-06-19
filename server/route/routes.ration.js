@@ -104,6 +104,7 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
     // get ration by id for view mode
     app.get('/api/rations/:ration_id/view', isAuthenticated, function(req, res) {
         Ration.findById(req.params.ration_id).lean().exec(function(err, ration) {
+
             if (err) {
                 return errorHandler(err, req, res);
             }
@@ -209,15 +210,23 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
 
                 // update history
                 // if any history filed is chnaged
-                if (_.some(utils.historyFields, (value, key) => {
+                var newHistory = {};
+
+                // general
+                if (_.some(utils.historyFields.general, (value, key) => {
                     return req.body.general[key] !== ration.general[key];
                 })) {
-                    ration.history.push(_.merge(
-                        {
-                            date: new Date()
-                        },
-                        _.pick(req.body.general, _.keys(utils.historyFields))
-                    ));
+                    newHistory.general = _.pick(req.body.general, _.keys(utils.historyFields.general));
+                }
+
+                // composition
+                if (!_.isEqual(_.map(req.body.composition, 'name').sort(), _.map(ration.composition, 'name').sort())) {
+                    newHistory.composition = req.body.composition;
+                }   
+
+                if (!_.isEmpty(newHistory)) {
+                    newHistory.date = new Date();
+                    ration.history.push(newHistory);
                 }
 
                 // !!! do not update createdBy and createdAt !!!

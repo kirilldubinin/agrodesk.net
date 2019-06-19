@@ -133,7 +133,35 @@ var RationSchema = new Schema({
         protein: { type: Number },
         rationPrice: { type: Number },
         milkPrice: { type: Number },
-        efficiency: {type: Number }
+        efficiency: {type: Number },
+        general: {
+            cowsNumber: {type: Number },
+            dryMaterialConsumption: { type: Number },
+            estimatedProductivity: { type: Number },
+            actualProductivity: { type: Number },
+            productivityRate: { type: Number },
+            dryMaterialTMR: { type: Number },
+            ratio: { type: String },
+            fat: { type: Number },
+            protein: { type: Number },
+            rationPrice: { type: Number },
+            milkPrice: { type: Number },
+            efficiency: {type: Number }
+        },
+        composition: [{
+            // if from FEED
+            _id: {
+                type: Schema.Types.ObjectId,
+                required: false
+            },
+            number: String,
+            name: String,
+            componentType: String, // 'OK,KK,MK'
+            price: Number, // for kilo,
+            value: Number, // for cow per day kile
+            proportion: Number, // for by dry materail
+            dryMaterial: Number
+        }]
     }]
 });
 

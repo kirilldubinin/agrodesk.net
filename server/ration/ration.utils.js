@@ -37,17 +37,28 @@ var disabledFieldsForNonSA = {
 
 
 var historyFields = {
-    'cowsNumber': 'history',
-    'dryMaterialConsumption': 'history',
-    'estimatedProductivity': 'history',
-    'actualProductivity': 'history',
-    'dryMaterialTMR': 'history',
-    'ratio': 'history',
-    'fat': 'history',
-    'protein': 'history',
-    'rationPrice': 'history',
-    'milkPrice': 'history',
-    'efficiency': 'history'
+    general: {
+        'cowsNumber': 'history',
+        'dryMaterialConsumption': 'history',
+        'estimatedProductivity': 'history',
+        'actualProductivity': 'history',
+        'dryMaterialTMR': 'history',
+        'ratio': 'history',
+        'fat': 'history',
+        'protein': 'history',
+        'rationPrice': 'history',
+        'milkPrice': 'history',
+        'efficiency': 'history'
+    },
+    composition: {
+        '_id': '_id',
+        'name': 'name',
+        componentType: String, // 'OK,KK,MK'
+        price: Number, // for kilo,
+        value: Number, // for cow per day kile
+        proportion: Number, // for by dry materail
+        dryMaterial: Number
+    }
 };
 
 var milkOnlyFields = {

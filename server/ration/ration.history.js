@@ -24,12 +24,12 @@ function getHistoryForRation(ration) {
         var data;
         if (serie === 'ratio') {
             data = _.map(ration.history, (hist) => {
-                const ratio = hist['ratio'].split('/');
+                const ratio = hist.general['ratio'].split('/');
                 return Math.round(+ratio[0]/+ratio[1] * 100)/100
             });
         } else {
             data = _.map(ration.history, (hist) => {
-                return Math.round(hist[serie] * 10)/10
+                return Math.round(hist.general[serie] * 10)/10
             });
         }
 
@@ -79,12 +79,12 @@ function getHistoryForRations(rations) {
             _.forEach(ration.history, (h) => {
                 var data;
                 if (serie === 'ratio') {
-                    const ratio = h['ratio'].split('/');
+                    const ratio = h.general['ratio'].split('/');
                     data = Math.round(+ratio[0]/+ratio[1] * 100)/100;
                 } else if (serie === 'marginality') {
-                    data = Math.round((h['milkPrice'] * h['actualProductivity'] - h['rationPrice']) * 10)/10 ;
+                    data = Math.round((h.general['milkPrice'] * h.general['actualProductivity'] - h.general['rationPrice']) * 10)/10 ;
                 } else {
-                    data = h[serie];
+                    data = h.general[serie];
                 }
 
                 const formatDate = formatter.formatDate(h.date)

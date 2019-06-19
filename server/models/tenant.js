@@ -15,6 +15,9 @@ var TenantSchema = new Schema({
         required: true,
         unique: true
     },
+    status: {
+        type: String
+    },
     createdAt: {
         type: Date,
         default: Date.now
