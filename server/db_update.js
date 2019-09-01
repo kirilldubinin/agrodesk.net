@@ -237,7 +237,7 @@ function addField_status_for_TENANT () {
     Tenant.find().then(function(tenants) {
         tenants.forEach(function (tenant){
 
-            tenant.status = tenant.loginName === 'im-gorky' ? 'blocked' : 'paid';
+            tenant.status = tenant.loginName === 'im-gorky' ? 'paid' : 'paid';
             tenant.save(function(err, _tenant) {
                 if (err) {
                     console.log(err);

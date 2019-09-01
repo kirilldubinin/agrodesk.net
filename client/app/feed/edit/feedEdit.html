@@ -15,7 +15,7 @@
         </div>
     </div>
     <!-- CONTENT -->
-    <div class="feed-edit-content" flex="" layout="row">
+    <div class="feed-edit-content" flex layout="row">
         <div flex="{{block.width}}" layout="row" ng-repeat="block in feedEdit.feedItemSections">
             <div class="edit-block-sub-section" flex="" 
                 ng-if="block.key !== 'analysis' || feedEdit.currentAnalysis === subSection.initialItem" 

@@ -11,17 +11,28 @@
 	.user-name {
 		button {
 			margin-left: 0px;
-    		margin-right: 0px;
+			margin-right: 0px;
+			span {
+				vertical-align: middle;
+			}
 		}
 	}
 
 	.prokorm-title {
-		line-height: 46px;
-		font-size: 28px;
+		font-size: 22px;
+    	padding: 14px 0 0;
 		a {
 			text-decoration: none;
 			color: #fff;
 		}
+	}
+	.modules {
+		padding-top: 2px;
+	}
+
+	.tenant-name {
+		font-size: 16px;
+    	padding: 15px 2em 0 0;
 	}
 
 	.md-button {

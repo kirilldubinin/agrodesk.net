@@ -380,19 +380,190 @@ var mailOptionsEpam = {
         `
 }
 
+var mailOptionsVoerman = {
+    from: '<sales@prokorm.com>', // sender address 
+    to: 'sales@prokorm.com', // list of receivers 
+    subject: 'ПРОКОРМ: Изделия из высокопрочного пластика, производство Голландия', // Subject line 
+    html: `<meta charset="utf-8">
+    <html>
+        <table width="600px" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+            <tr>
+                <td style="padding: 10px 0;" colspan="2">
+                    Компания <b>ООО "ПРОКОРМ"</b> рада предложить Вам изделия из высокопрочного пластика, производство <b>Голландия</b>.
+                </td>
+            </tr>
+            <tr style="background: #306390; text-align: center; height: 90px; color: #fff;">
+                <td colspan="2">
+                    <h1 style="height: 20px;">VOERMAN</h1>
+                    <span style="padding-bottom: 10px;">изделия из высокопрочного пластика</span>
+                </td>
+            </tr>
+            <tr style="">
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img width="100px" src="http://prokorm.com/_nuxt/img/c4dd396.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px;">ВЕДРО 20 литров</div>
+                                <div style="font-size: 11px;">высокопрочный полиэтилен</div>
+                                <div style="font-size: 11px;">металлическая ручка 7 мм</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">600 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img style="margin-left: 20px;" width="100px" src="http://prokorm.com/_nuxt/img/b345cea.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px;">КОРМОВОЙ СОВОК</div>
+                                <div style="font-size: 11px;">полипропилен</div>
+                                <div style="font-size: 11px;"> 1.5 литра</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">190 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="">
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img width="100px" src="http://prokorm.com/_nuxt/img/8d3e492.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px;">ВЕДРО 12 литров</div>
+                                <div style="font-size: 11px;">высокопрочный полиэтилен</div>
+                                <div style="font-size: 11px;">металлическая ручка 5 мм</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">400 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img style="margin-left: 20px;" width="100px" src="http://prokorm.com/_nuxt/img/347b010.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px;">МЕРНЫЙ СОВОК</div>
+                                <div style="font-size: 11px;">полипропилен</div>
+                                <div style="font-size: 11px;"> 1.5 литра</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">240 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="">
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img width="100px" src="http://prokorm.com/_nuxt/img/8d3e492.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px;">ВЕДРО 7 литров</div>
+                                <div style="font-size: 11px;">высокопрочный полиэтилен</div>
+                                <div style="font-size: 11px;">металлическая ручка 4 мм</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">300 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img style="margin-left: 20px;" width="100px" src="http://prokorm.com/_nuxt/img/4b2ebbe.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px;">КУВШИН</div>
+                                <div style="font-size: 11px;">полипропилен</div>
+                                <div style="font-size: 11px;"> 1 литр</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">200 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="">
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img width="100px" src="http://prokorm.com/_nuxt/img/f3a60a7.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px; font-size: 12px;">ЯЩИК ДЛЯ ИНСТРУМЕНТОВ</div>
+                                <div style="font-size: 11px;">полипропилен</div>
+                                <div style="font-size: 11px;">алюминиевая ручка</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">800 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img style="margin-left: 20px;" width="100px" src="http://prokorm.com/_nuxt/img/f70fe45.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px;">КУВШИН МЕРНЫЙ</div>
+                                <div style="font-size: 11px;">полипропилен</div>
+                                <div style="font-size: 11px;"> 1 литр</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">200 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="">
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img width="100px" src="http://prokorm.com/_nuxt/img/e53627f.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px;">ВЕНЧИК</div>
+                                <div style="font-size: 11px;">нержавеющая сталь</div>
+                                <div style="font-size: 11px;">40 сантиметров, 16 прутков 2.3 мм</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">800 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <td><img style="margin-left: 20px;" width="100px" src="http://prokorm.com/_nuxt/img/9be11f0.jpg"/></td>
+                            <td style="text-align: right;">
+                                <div style="color: #306390; padding-bottom: 4px; font-size: 14px;">ИЗМЕРИТЕЛЬНАЯ ЧАША</div>
+                                <div style="font-size: 11px;">полипропилен</div>
+                                <div style="font-size: 11px;"> 1 литр</div>
+                                <div style="font-size: 18px;color: #306390;padding-top: 8px;">550 руб</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+    
+            <tr style="background: #306390; text-align: center; height: 80px; color: #fff;">
+                <td colspan="2">
+                    <h2 style="font-size: 22px; height: 20px;">ООО "ПРОКОРМ"</h2>
+                    <h2>8 929 052 37 38</h2>
+                </td>
+            </tr>
+        </table>
+    </html>
+    
+    `
+};
+
 var format = '10 * * * * *';
 
 // run each minute
 var i = 0;
-var emails = ['kirill_dubinin@epam.com']; // _.uniq(mordov);
+var emails = _.uniq(tatar);
 
 setInterval(function () {
     if (emails[i]) {
-        mailOptionsEpam.to = emails[i].trim();
+        mailOptionsVoerman.to = emails[i].trim();
         i++;
-        console.log(mailOptionsSilage.to);
-        console.log(mailOptionsSilage.subject);
-        transporter.sendMail(mailOptionsEpam, function(error, info){
+        console.log(mailOptionsVoerman.to);
+        console.log(mailOptionsVoerman.subject);
+        transporter.sendMail(mailOptionsVoerman, function(error, info){
             if(error){
                 console.log(error);
             } else if (info) {
