@@ -17,7 +17,7 @@ db.on('error', function(err) {
 });
 db.once('open', function callback() {
     console.log("Connected to DB!");
-    addField_status_for_TENANT();
+    removeHistory();
 });
 
 function delete_Ration_History (ready) {
@@ -401,3 +401,31 @@ function addField_CODE_for_FEED_ANALYSIS () {
         });
     });
 } 
+
+function removeHistory() {
+    //5dee7a2b06e25d478fa20c97
+
+    Ration.find().then(function(rations) {
+        rations.forEach(r => {
+            if (r._id.equals('5dee7a2b06e25d478fa20c97')) {
+                console.log(r.history.pull)
+                r.history.pull({ _id: '5e0ef3e206e25d478fa20cb0' })
+                r.save(function (err, _r) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(_r);
+                    }
+                });
+            }
+        })
+        /*r.history = r.history.filter(h => {
+            return h.general;
+        });
+
+        console.log(r.history);
+
+        r.save();*/
+    });
+
+}
