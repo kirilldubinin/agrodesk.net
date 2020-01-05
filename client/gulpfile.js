@@ -119,7 +119,7 @@ gulp.task('bump', function() {
           .pipe(gulp.dest('./'));
 });
 
-gulp.task('config', ['bump'], function() {
+gulp.task('config', gulp.series('bump'), function() {
 
 	return gulp.src('config.json')
 	.pipe(gulpNgConfig('agrodesk', {
@@ -129,13 +129,14 @@ gulp.task('config', ['bump'], function() {
 	.pipe(gulp.dest('./app/'));
 });
 
-gulp.task('release', 
-	['config',
+gulp.task('release', gulp.series(
+	'config',
 	'build_libs_js', 
 	'build_app_js', 
 	'build_libs_css', 
 	'build_app_css'
-	]);
+	)
+);
 
 gulp.task('styles', function () {
   return gulp.src('./app/**/*.scss')
@@ -151,12 +152,4 @@ gulp.task('index', function () {
   return target.pipe(inject(sources)).pipe(gulp.dest('./'));
 });
 
-gulp.task('build', ['styles', 'index']);
-
-/**
- *  Default task clean temporaries directories and launch the
- *  main optimization build task
- */
-gulp.task('default', function () {
-  gulp.start('build');
-});
+gulp.task('build', gulp.series('styles', 'index'));

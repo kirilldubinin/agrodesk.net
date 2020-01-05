@@ -10,6 +10,9 @@
       font-size: 12px; }
     .diff-card .feed-header .feed-storage {
       font-size: 12px; }
+  .diff-card .title {
+    padding: 1em 0 0;
+    line-height: 3em; }
   .diff-card .diff-title {
     color: #3F51B5;
     font-size: 20px;
@@ -64,7 +67,6 @@
       padding: 6px 20px;
       min-width: 60px;
       text-align: right;
-      border-left: 1px solid #fdae39;
       border-bottom: 1px solid #DDD;
       /*&.odd {
 			    	background-color: #f0f0f0;
@@ -72,3 +74,31 @@
       .diff-card .diff-dashboard .property-values .property-value .dry-switch {
         padding: 0;
         margin: 0; }
+
+.diff.print {
+  background-color: #fff; }
+  .diff.print a {
+    display: none; }
+  .diff.print ul, .diff.print li {
+    padding: 0;
+    margin: 0;
+    color: #000;
+    background-color: #fff; }
+  .diff.print .print-title {
+    margin-bottom: 2em; }
+  .diff.print .diff-title h2 {
+    color: transparent; }
+  .diff.print .diff-title .feed-header {
+    font-size: 12px;
+    text-align: right; }
+  .diff.print .property-list {
+    font-size: 12px; }
+    .diff.print .property-list .property-values {
+      padding: 6px 0;
+      border-bottom: 1px solid #999; }
+      .diff.print .property-list .property-values .property-value {
+        text-align: right; }
+        .diff.print .property-list .property-values .property-value .dry-switch .md-container {
+          display: none; }
+  .diff.print .break {
+    page-break-after: always; }

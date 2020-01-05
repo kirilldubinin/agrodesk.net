@@ -1,19 +1,13 @@
-.h-100 {
-  height: 100%;
-  overflow: hidden; }
-
-md-tab-content > div {
-  height: 100%; }
-
 .ration-view {
-  padding: 0 20px;
-  height: 100%; }
+  height: 100%;
+  color: #212121; }
   .ration-view .ration-title {
-    padding: 10px 0px 10px 4px; }
+    padding: .5em 1em 0 1em; }
     .ration-view .ration-title b {
       margin: 15px 20px 0 0px; }
+    .ration-view .ration-title h2 {
+      margin: auto; }
     .ration-view .ration-title .ration-type {
-      background-color: #2196F3;
       color: #fff;
       border-radius: 3px;
       padding: 6px 8px;
@@ -21,126 +15,182 @@ md-tab-content > div {
       margin: auto 20px auto 0;
       text-transform: uppercase;
       font-size: 12px; }
-    .ration-view .ration-title .ration-target {
-      background-color: #009688;
-      color: #fff;
-      border-radius: 3px;
-      padding: 6px 8px;
-      height: 26px;
-      margin: auto 14px auto 0;
-      text-transform: uppercase;
-      font-size: 12px; }
-    .ration-view .ration-title h2 {
-      margin: auto; }
-  .ration-view .ration-view-content ul.ration-info {
-    padding: 0 20px;
-    margin: 0;
-    font-size: 12px; }
-    .ration-view .ration-view-content ul.ration-info li {
-      padding: 4px 0; }
-      .ration-view .ration-view-content ul.ration-info li label {
-        min-width: 80px;
-        text-align: right;
-        margin-right: 10px;
-        color: rgba(0, 0, 0, 0.54); }
-  .ration-view .ration-view-content table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px; }
-    .ration-view .ration-view-content table th {
-      color: rgba(0, 0, 0, 0.54); }
-    .ration-view .ration-view-content table tr {
-      align-items: stretch; }
-      .ration-view .ration-view-content table tr.total {
-        font-weight: 700; }
-      .ration-view .ration-view-content table tr td, .ration-view .ration-view-content table tr th {
-        min-width: 120px;
-        border-bottom: 1px rgba(0, 0, 0, 0.12) solid;
-        text-align: right;
-        padding: 12px 18px; }
-        .ration-view .ration-view-content table tr td:first-child, .ration-view .ration-view-content table tr th:first-child {
-          width: 20px;
-          min-width: 20px; }
-        .ration-view .ration-view-content table tr td.feed-name, .ration-view .ration-view-content table tr th.feed-name {
-          width: 100%;
-          text-align: left; }
-        .ration-view .ration-view-content table tr td.property-name, .ration-view .ration-view-content table tr th.property-name {
-          width: 100%;
-          text-align: left; }
-        .ration-view .ration-view-content table tr td p, .ration-view .ration-view-content table tr th p {
-          padding: 0;
-          margin: 4px 0 0 0;
-          font-size: 11px;
-          color: rgba(0, 0, 0, 0.54); }
-    .ration-view .ration-view-content table tbody tr:hover {
-      background-color: #F0F0F0; }
-  .ration-view .ration-view-content .composition {
-    font-size: 12px;
-    text-align: right;
-    height: 100%; }
-    .ration-view .ration-view-content .composition .scroll-wrapper {
-      overflow: auto; }
-    .ration-view .ration-view-content .composition md-tab-content > div,
-    .ration-view .ration-view-content .composition md-content {
-      height: 100%;
-      overflow: hidden; }
-    .ration-view .ration-view-content .composition .component-index {
-      width: 40px;
-      text-align: left; }
-    .ration-view .ration-view-content .composition .component-name {
-      text-align: left;
-      padding-left: 1em; }
-      .ration-view .ration-view-content .composition .component-name a {
-        color: #3f51b5; }
-    .ration-view .ration-view-content .composition .composition-title {
-      font-size: 12px;
-      padding-bottom: 1em;
-      border-bottom: 2px solid #fdae39; }
-      .ration-view .ration-view-content .composition .composition-title div:first-child {
-        padding-left: 16px; }
-      .ration-view .ration-view-content .composition .composition-title div:last-child {
-        padding-right: 16px; }
-    .ration-view .ration-view-content .composition .composition-total {
-      padding-top: 12px;
+      .ration-view .ration-title .ration-type.milk {
+        background-color: #2196F3; }
+      .ration-view .ration-title .ration-type.dry {
+        background-color: #f18364; }
+      .ration-view .ration-title .ration-type.young {
+        background-color: #429a1c; }
+    .ration-view .ration-title .delete-btn {
+      min-width: 40px;
+      width: 40px; }
+  .ration-view .ration-sub-title {
+    margin: 1em 0 0 0;
+    border-bottom: 2px solid #fdae39; }
+    .ration-view .ration-sub-title h2 {
+      color: #212121;
       font-size: 16px;
+      margin-bottom: 6px; }
+  .ration-view .ration-info {
+    font-size: 12px;
+    background: transparent; }
+    .ration-view .ration-info label {
+      display: inline-block;
+      color: #555;
+      padding: 8px 0;
+      font-size: 12px;
       text-align: right;
+      margin-right: 2em; }
+    .ration-view .ration-info span {
+      display: inline-block;
+      color: #222;
+      padding: 8px 0; }
+  .ration-view .ration-view-content {
+    overflow: auto;
+    height: calc(100% - 59px) !important;
+    min-height: calc(100% - 59px) !important; }
+    .ration-view .ration-view-content .composition {
+      font-size: 12px;
+      text-align: right;
+      background-color: #fdfdfd; }
+      .ration-view .ration-view-content .composition .scroll-wrapper {
+        overflow: auto; }
+      .ration-view .ration-view-content .composition .component-index {
+        width: 40px;
+        text-align: left; }
+      .ration-view .ration-view-content .composition .component-name {
+        text-align: left; }
+        .ration-view .ration-view-content .composition .component-name a {
+          color: #3f51b5; }
+      .ration-view .ration-view-content .composition .composition-title {
+        font-size: 11px;
+        padding: 1em 0;
+        border-bottom: 2px solid #fdae39; }
+        .ration-view .ration-view-content .composition .composition-title > div {
+          padding: 0 8px; }
+        .ration-view .ration-view-content .composition .composition-title div:first-child {
+          padding-left: 16px; }
+        .ration-view .ration-view-content .composition .composition-title div:last-child {
+          padding-right: 16px; }
+      .ration-view .ration-view-content .composition .composition-item {
+        padding: 8px 0;
+        border-bottom: 2px solid #fff; }
+        .ration-view .ration-view-content .composition .composition-item > div {
+          padding: 0 8px; }
+        .ration-view .ration-view-content .composition .composition-item div:first-child {
+          padding-left: 16px; }
+        .ration-view .ration-view-content .composition .composition-item div:last-child {
+          padding-right: 16px; }
+        .ration-view .ration-view-content .composition .composition-item:hover {
+          background-color: #fff; }
+        .ration-view .ration-view-content .composition .composition-item .rate {
+          font-weight: bold;
+          font-size: 14px; }
+        .ration-view .ration-view-content .composition .composition-item.mk .component-name:before {
+          content: "MK";
+          display: inline-block;
+          background-color: #969c28;
+          border-radius: 4px;
+          font-size: 10px;
+          padding: 2px 6px;
+          color: #f0f0f0;
+          margin-right: 0.5em; }
+        .ration-view .ration-view-content .composition .composition-item.kk .component-name:before {
+          content: "KK";
+          display: inline-block;
+          background-color: #f37136;
+          border-radius: 4px;
+          font-size: 10px;
+          padding: 2px 6px;
+          color: #f0f0f0;
+          margin-right: 0.5em; }
+        .ration-view .ration-view-content .composition .composition-item.ok .component-name:before {
+          content: "OK";
+          display: inline-block;
+          background-color: #009688;
+          border-radius: 4px;
+          font-size: 10px;
+          padding: 2px 6px;
+          color: #f0f0f0;
+          margin-right: 0.5em; }
+    .ration-view .ration-view-content .distribution {
+      background: none; }
+      .ration-view .ration-view-content .distribution .distribution-grid {
+        font-size: 12px; }
+        .ration-view .ration-view-content .distribution .distribution-grid--title {
+          border-bottom: 1px solid #ddd;
+          font-weight: bold; }
+          .ration-view .ration-view-content .distribution .distribution-grid--title .first {
+            font-weight: bold; }
+          .ration-view .ration-view-content .distribution .distribution-grid--title div {
+            border-right: 1px solid #ddd;
+            padding: 6px 4px 6px 13px; }
+          .ration-view .ration-view-content .distribution .distribution-grid--title .mixer-column:nth-child(2n+3) {
+            background: #eee; }
+        .ration-view .ration-view-content .distribution .distribution-grid--by-mixer {
+          border-bottom: 1px solid #ddd;
+          font-weight: bold; }
+          .ration-view .ration-view-content .distribution .distribution-grid--by-mixer .first {
+            font-weight: bold;
+            border-right: 1px solid #ddd;
+            padding: 6px 4px 6px 13px; }
+          .ration-view .ration-view-content .distribution .distribution-grid--by-mixer .value {
+            border-right: 1px solid #ddd;
+            padding: 6px 4px 6px 0px; }
+          .ration-view .ration-view-content .distribution .distribution-grid--by-mixer .mixer-column:nth-child(2n+3) {
+            background: #eee; }
+        .ration-view .ration-view-content .distribution .distribution-grid--by-compositions .value {
+          border-bottom: 1px solid #ddd;
+          border-right: 1px solid #ddd;
+          padding: 6px 4px 6px 8px; }
+          .ration-view .ration-view-content .distribution .distribution-grid--by-compositions .value.mk {
+            border-left: 5px solid #969c28; }
+          .ration-view .ration-view-content .distribution .distribution-grid--by-compositions .value.kk {
+            border-left: 5px solid #f37136; }
+          .ration-view .ration-view-content .distribution .distribution-grid--by-compositions .value.ok {
+            border-left: 5px solid #009688; }
+        .ration-view .ration-view-content .distribution .distribution-grid--by-compositions .mixer-column:nth-child(2n+3) {
+          background: #eee; }
+  .ration-view .history {
+    background: none; }
+
+.ration-view.print {
+  background-color: #fff;
+  font-size: 12px; }
+  .ration-view.print a, .ration-view.print ul, .ration-view.print li {
+    padding: 0;
+    margin: 0;
+    color: #000;
+    background-color: #fff;
+    text-decoration: none; }
+  .ration-view.print .composition .layout-row {
+    padding: 4px 0;
+    border-bottom: 1px solid #ddd; }
+    .ration-view.print .composition .layout-row .component-index {
+      margin-right: 1em; }
+  .ration-view.print .distribution .distribution-grid {
+    font-size: 12px; }
+    .ration-view.print .distribution .distribution-grid--title {
+      border-bottom: 1px solid #ddd;
       font-weight: bold; }
-    .ration-view .ration-view-content .composition .composition-item {
-      padding: 12px 0;
-      border-bottom: 2px solid #fff; }
-      .ration-view .ration-view-content .composition .composition-item div:first-child {
-        padding-left: 16px; }
-      .ration-view .ration-view-content .composition .composition-item div:last-child {
-        padding-right: 16px; }
-      .ration-view .ration-view-content .composition .composition-item:hover {
-        background-color: #fff; }
-      .ration-view .ration-view-content .composition .composition-item .rate {
+      .ration-view.print .distribution .distribution-grid--title .first {
+        font-weight: bold; }
+      .ration-view.print .distribution .distribution-grid--title div {
+        border-right: 1px solid #ddd;
+        padding: 6px 4px 6px 13px; }
+    .ration-view.print .distribution .distribution-grid--by-mixer {
+      border-bottom: 1px solid #ddd;
+      font-weight: bold; }
+      .ration-view.print .distribution .distribution-grid--by-mixer .first {
         font-weight: bold;
-        font-size: 14px; }
-      .ration-view .ration-view-content .composition .composition-item.mk .component-name:before {
-        content: "MK";
-        display: inline-block;
-        background-color: #969c28;
-        border-radius: 4px;
-        font-size: 10px;
-        padding: 2px 6px;
-        color: #f0f0f0;
-        margin-right: 0.5em; }
-      .ration-view .ration-view-content .composition .composition-item.kk .component-name:before {
-        content: "KK";
-        display: inline-block;
-        background-color: #f37136;
-        border-radius: 4px;
-        font-size: 10px;
-        padding: 2px 6px;
-        color: #f0f0f0;
-        margin-right: 0.5em; }
-      .ration-view .ration-view-content .composition .composition-item.ok .component-name:before {
-        content: "OK";
-        display: inline-block;
-        background-color: #009688;
-        border-radius: 4px;
-        font-size: 10px;
-        padding: 2px 6px;
-        color: #f0f0f0;
-        margin-right: 0.5em; }
+        border-right: 1px solid #ddd;
+        padding: 6px 4px 6px 13px; }
+      .ration-view.print .distribution .distribution-grid--by-mixer .value {
+        border-right: 1px solid #ddd;
+        padding: 6px 4px 6px 0px; }
+    .ration-view.print .distribution .distribution-grid--by-compositions .value {
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      padding: 6px 4px 6px 8px; }
+  .ration-view.print .break {
+    page-break-after: always; }

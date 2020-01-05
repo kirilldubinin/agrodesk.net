@@ -53,6 +53,8 @@ function convert(ration, user) {
         ration = Ration.getEmptyRation();
     }
 
+    console.log('ration', ration);
+
     var allControls = Ration.sort(convertToControl(ration.general, 'general', user), 'general');
     var controls = [
         _.pick(allControls, _.keys(rationUtils.editLeftFields)),

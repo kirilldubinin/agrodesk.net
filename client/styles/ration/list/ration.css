@@ -14,6 +14,10 @@
 
 .ration {
   height: 100%; }
+  .ration .list-header .add-ration-button {
+    margin: 0.2em .5em; }
+  .ration .navigator__list {
+    height: 100%; }
   .ration .ration-list {
     font-size: 12px;
     overflow: auto;
@@ -21,44 +25,70 @@
     .ration .ration-list .ration-item {
       cursor: pointer;
       background-color: #fff;
-      border-bottom: 1px solid #eee; }
+      border-bottom: 1px solid #eee;
+      padding: 0 12px; }
+      .ration .ration-list .ration-item:hover {
+        background-color: #f0f0f0; }
       .ration .ration-list .ration-item.done {
+        color: #999;
         background-color: #ddd; }
-        .ration .ration-list .ration-item.done .ration-target,
-        .ration .ration-list .ration-item.done .ration-type {
-          opacity: 0.5; }
-      .ration .ration-list .ration-item .md-button {
-        padding: 0 10px; }
+        .ration .ration-list .ration-item.done span.ration-target,
+        .ration .ration-list .ration-item.done span.ration-type {
+          background-color: #999 !important; }
+        .ration .ration-list .ration-item.done .second-line {
+          color: #999; }
       .ration .ration-list .ration-item.selected {
         background-color: #BBDEFB !important; }
       .ration .ration-list .ration-item button.md-no-style {
         min-height: 68px; }
       .ration .ration-list .ration-item .md-list-item-text {
-        margin: 16px 0 6px 0; }
+        margin: 16px 0 6px 0;
+        width: 100%; }
       .ration .ration-list .ration-item b {
         color: #666; }
       .ration .ration-list .ration-item span {
-        line-height: 1.8em;
-        padding: 0 10px; }
+        line-height: 1.8em; }
+      .ration .ration-list .ration-item .first-line .ration-uid {
+        max-width: 40px;
+        width: 40px;
+        text-overflow: ellipsis;
+        overflow: hidden; }
       .ration .ration-list .ration-item .first-line .ration-type {
-        background-color: #2196F3;
+        margin: 0 8px;
         color: #fff;
         padding: 4px 8px;
         border-radius: 3px;
         text-transform: uppercase;
-        font-size: 12px;
+        font-size: 10px;
         line-height: 1.3em;
         height: 2em; }
+        .ration .ration-list .ration-item .first-line .ration-type.milk {
+          background-color: #2196F3; }
+        .ration .ration-list .ration-item .first-line .ration-type.dry {
+          background-color: #f18364; }
+        .ration .ration-list .ration-item .first-line .ration-type.young {
+          background-color: #429a1c; }
+      .ration .ration-list .ration-item .first-line .ration-target {
+        background-color: #009688;
+        color: #fff;
+        padding: 1px 8px;
+        border-radius: 3px;
+        font-size: 10px; }
       .ration .ration-list .ration-item .second-line {
-        margin: 12px 0 6px 0; }
-        .ration .ration-list .ration-item .second-line .ration-target {
-          background-color: #009688;
-          color: #fff;
-          padding: 1px 8px;
-          border-radius: 3px;
-          font-size: 12px; }
-      .ration .ration-list .ration-item .third-line {
+        margin: 12px 0 10px;
+        color: #3f51b5;
+        font-size: 16px; }
+      .ration .ration-list .ration-item .third-line span {
         font-size: 10px;
-        color: #999; }
-        .ration .ration-list .ration-item .third-line span {
-          padding: 0px; }
+        color: #555;
+        padding-right: 8px; }
+      .ration .ration-list .ration-item .last-line {
+        font-weight: bold; }
+  .ration .edit-mode .module-name {
+    text-align: center;
+    font-size: 14px; }
+  .ration .dashboard__select--chart {
+    width: 50%;
+    font-size: 16px;
+    color: #3f51b5;
+    margin: -8px 0 0 0; }

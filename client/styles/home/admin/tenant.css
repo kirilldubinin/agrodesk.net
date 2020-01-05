@@ -1,0 +1,12 @@
+.tenant .tenant-info p label {
+  color: #666;
+  display: inline-block;
+  min-width: 100px; }
+
+.tenant .tenant-feeds .feeds-length {
+  color: #666;
+  margin-left: 4px; }
+
+.tenant .tenant-users .user-permissions {
+  color: #666;
+  margin-left: 4px; }

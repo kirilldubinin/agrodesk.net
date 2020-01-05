@@ -194,7 +194,11 @@ var goldObject = {
         value: 1,
         proportion: 20,
         dryMaterial: 0.5
-    }]
+    }],
+    distribution: {
+        mixerSize: 1000,
+        ratio: [100] 
+    }
 };
 
 RationSchema.statics.getEmptyRation = function() {
@@ -212,8 +216,18 @@ RationSchema.statics.sort = function(object, rootProperty) {
 RationSchema.pre('validate', function(next) {
     // general properies
     if (!this.general.rationType || 
-        !this.general.name) {
-        return next(Error('"Тип" и "Имя" рациона обязательны для заполнения.'));
+        !this.general.name ||
+        !this.general.cowsNumber ||
+        !this.general.dryMaterialConsumption ||
+        !this.general.productivityRate ||
+        !this.general.estimatedProductivity ||
+        !this.general.actualProductivity ||
+        !this.general.ratio ||
+        !this.general.rationPrice ||
+        !this.general.milkPrice ||
+        !this.general.efficiency
+    ) {
+        return next(Error('Обязательные поля не заполнены !'));
     } 
 
     // VALIDATION OK

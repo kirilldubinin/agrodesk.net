@@ -175,9 +175,9 @@
                 }
 
                 // check mixer size, can not be < 1000
-                //if (vm.distribution.initialItem.mixerSize < 1000) {
-                    //vm.distribution.initialItem.mixerSize = 1000;
-                //}
+                if (vm.distribution.initialItem.mixerSize < 1000) {
+                    vm.distribution.initialItem.mixerSize = 1000;
+                }
 
                 var weightPerCow = 0;
                 _.forEach(vm.composition.initialItem, function(c) {

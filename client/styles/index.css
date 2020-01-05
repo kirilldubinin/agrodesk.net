@@ -58,3 +58,70 @@ h2 {
   height: 28px; }
   .md-select-menu-container md-option .md-text {
     font-size: 12px; }
+
+.text-center {
+  text-align: center !important; }
+
+.mb-2 {
+  margin-bottom: 0.5em !important; }
+
+.mb-4 {
+  margin-bottom: 1em !important; }
+
+.ml-2 {
+  margin-left: 0.5em !important; }
+
+.ml-4 {
+  margin-left: 1em !important; }
+
+.mt-2 {
+  margin-top: 0.5em !important; }
+
+.mt-4 {
+  margin-top: 1em !important; }
+
+.modules {
+  width: 800px;
+  margin: 0 auto; }
+  .modules .module {
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    opacity: .9;
+    border-radius: 5px;
+    margin: 8em 2em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+    .modules .module__icon {
+      background-image: url(../../img/MW01YT.jpg);
+      background-size: 600px;
+      background-repeat: no-repeat;
+      width: 120px;
+      height: 120px;
+      margin: 10px auto 0; }
+      .modules .module__icon.feed {
+        background-position: -439px -460px;
+        width: 140px; }
+      .modules .module__icon.ration {
+        background-position: -303px -317px; }
+      .modules .module__icon.field {
+        background-position: -27px -171px; }
+    .modules .module h4 {
+      color: #069cda;
+      margin: 0;
+      font-size: 26px;
+      text-align: center;
+      padding: .5em 0;
+      font-weight: 400;
+      text-transform: uppercase; }
+
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+  background: #fdae39; }
+
+.text-center {
+  text-align: center; }
+
+.text-left {
+  text-align: left; }
+
+.text-right {
+  text-align: right; }

@@ -1,0 +1,111 @@
+.field-view {
+  padding: 0 20px;
+  height: 100%;
+  overflow: hidden; }
+  .field-view .field-title {
+    color: #3F51B5;
+    font-size: 20px;
+    margin: 10px 0 20px 0; }
+    .field-view .field-title h2 {
+      margin: auto; }
+      .field-view .field-title h2.field-square {
+        color: #555;
+        margin-left: 1em;
+        font-size: 24px;
+        margin-top: 20px; }
+      .field-view .field-title h2 p {
+        margin: 0;
+        font-size: 16px;
+        position: absolute; }
+        .field-view .field-title h2 p .seedType {
+          margin-left: .5em;
+          background-color: #009688;
+          color: #fff;
+          padding: 1px 8px;
+          border-radius: 3px;
+          font-size: 10px; }
+    .field-view .field-title .actions {
+      line-height: 58px;
+      text-align: right; }
+      .field-view .field-title .actions .delete-btn {
+        min-width: 40px;
+        width: 40px; }
+    .field-view .field-title.done h2 {
+      color: #999; }
+  .field-view .field-view-header {
+    border-bottom: 3px solid #fdae39;
+    padding-bottom: 8px;
+    text-transform: uppercase;
+    color: #212121;
+    text-align: center;
+    margin-bottom: 6px; }
+  .field-view .field-view-content {
+    /*height: calc(100% - 126px);*/
+    overflow: auto; }
+  .field-view .field-properties {
+    width: 100%;
+    font-size: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /*&.analysis { 
+			label {
+				width: 150px;
+			}
+		}
+
+		&.process,
+		&.feeding {
+			label {
+				width: 100px;
+			}
+		}*/ }
+    .field-view .field-properties .title {
+      padding-bottom: 4px;
+      font-weight: 600;
+      line-height: 48px; }
+      .field-view .field-properties .title h4 {
+        display: inline-block;
+        text-transform: uppercase;
+        width: auto; }
+    .field-view .field-properties .property {
+      /*&.seedType {
+                .value {
+                    background-color: #009688;
+                    color: #fff;
+                    padding: 1px 8px;
+                    border-radius: 3px;
+                    font-size: 10px;
+                }
+            }*/
+      padding: 6px 0; }
+      .field-view .field-properties .property:hover {
+        background-color: #BBDEFB;
+        border-radius: 3px;
+        color: #fff; }
+      .field-view .field-properties .property label {
+        width: 80px;
+        display: inline-block;
+        text-align: right;
+        color: rgba(0, 0, 0, 0.54); }
+        .field-view .field-properties .property label a {
+          color: rgba(0, 0, 0, 0.54);
+          text-decoration: none; }
+          .field-view .field-properties .property label a:hover {
+            color: #3F51B5;
+            text-decoration: underline; }
+      .field-view .field-properties .property .value {
+        margin-left: 15px;
+        font-weight: 500;
+        color: #333;
+        min-width: 60px; }
+      .field-view .field-properties .property md-checkbox {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        min-width: 0;
+        width: 60px;
+        margin-left: 10px; }
+        .field-view .field-properties .property md-checkbox .md-label {
+          margin-left: 24px;
+          margin-top: 4px; }

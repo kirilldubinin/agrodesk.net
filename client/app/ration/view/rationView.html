@@ -116,14 +116,14 @@
             <md-content class="md-padding distribution" flex id="distribution">
                 <div class="distribution-grid" flex>
                     <div layout="row" class="distribution-grid--title">
-                        <div flex="30" class="first">РАЗДАЧИ</div>
+                        <div flex="50" class="first">РАЗДАЧИ</div>
                         <div flex class="text-center mixer-column" 
                             ng-repeat="item in ::rationView.distribution.ratio track by $index">
                             #0{{$index + 1}}, {{item}}%
                         </div>
                     </div>
                     <div layout="row" class="distribution-grid--by-mixer">
-                        <div flex="30" class="first">МИКСЕРА, (кг)</div>
+                        <div flex="50" class="first">МИКСЕРА, (кг)</div>
                         <div flex layout="row" class="mixer-column"
                             ng-repeat="mixers in ::rationView.distribution.byMixers track by $index">
                             <div class="value" flex layout="row" ng-repeat="mixer in mixers track by $index">
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                     <div layout="row" class="distribution-grid--by-compositions">
-                        <div flex="30">
+                        <div flex="50">
                             <div ng-repeat="component in ::rationView.composition.body" 
                                 class="text-left value {{component.componentType}}">
                                 {{component.name}}, (кг)

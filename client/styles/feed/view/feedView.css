@@ -17,9 +17,9 @@
     .feed-view .feed-title .actions {
       line-height: 58px;
       text-align: right; }
-      .feed-view .feed-title .actions .print-btn {
-        min-width: 60px;
-        color: #555; }
+      .feed-view .feed-title .actions .delete-btn {
+        min-width: 40px;
+        width: 40px; }
     .feed-view .feed-title.done h2 {
       color: #999; }
   .feed-view .feed-composition {
@@ -102,47 +102,47 @@
       text-align: left;
       font-size: 11px; }
 
-.print {
+.feed.print {
   background-color: #fff; }
-  .print ul, .print li {
+  .feed.print ul, .feed.print li {
     padding: 0;
     margin: 0;
     color: #000;
     background-color: #fff; }
-    .print ul .property, .print li .property {
+    .feed.print ul .property, .feed.print li .property {
       margin: 4px 0;
       border-bottom: 1px solid #ddd;
       padding: 2px 0;
       font-size: 12px; }
-      .print ul .property a, .print li .property a {
+      .feed.print ul .property a, .feed.print li .property a {
         text-decoration: none;
         color: #000; }
-      .print ul .property md-checkbox, .print li .property md-checkbox {
+      .feed.print ul .property md-checkbox, .feed.print li .property md-checkbox {
         min-width: 100px;
         margin-left: 15px;
         margin-right: 0; }
-        .print ul .property md-checkbox .md-container, .print li .property md-checkbox .md-container {
+        .feed.print ul .property md-checkbox .md-container, .feed.print li .property md-checkbox .md-container {
           display: none; }
-        .print ul .property md-checkbox .md-label, .print li .property md-checkbox .md-label {
+        .feed.print ul .property md-checkbox .md-label, .feed.print li .property md-checkbox .md-label {
           margin: 0; }
-      .print ul .property .value, .print li .property .value {
+      .feed.print ul .property .value, .feed.print li .property .value {
         margin-left: 15px;
         font-weight: 500;
         min-width: 100px; }
-  .print .print-title {
+  .feed.print .print-title {
     background-color: #fff;
     font-weight: 700;
     border-bottom: 3px solid #fdae39;
     padding-bottom: 6px; }
-    .print .print-title h2 {
+    .feed.print .print-title h2 {
       margin: auto;
       position: relative; }
-    .print .print-title .key {
+    .feed.print .print-title .key {
       text-transform: uppercase; }
-    .print .print-title .storage {
+    .feed.print .print-title .storage {
       font-size: 14px;
       position: absolute;
       padding-left: 4px;
       padding-top: 4px; }
-  .print .break {
+  .feed.print .break {
     page-break-after: always; }
