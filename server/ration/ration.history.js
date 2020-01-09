@@ -77,6 +77,7 @@ function getHistoryForRations(rations) {
             
             var historyByRation = {}
             _.forEach(ration.history, (h) => {
+
                 var data;
                 if (serie === 'ratio') {
                     const ratio = h.general['ratio'].split('/');

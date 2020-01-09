@@ -7,9 +7,7 @@ var lang = require('./ration.lang');
 function byMixers (mixerSize, totalWeight, distributionRation) {
     return _.map(distributionRation, (distribution) => {
         const weight = Math.ceil((totalWeight * (distribution / 100))/10) * 10;
-        console.log('weight', weight);
         const fullMuxers = Math.floor(weight/mixerSize);
-        console.log('fullMuxers', fullMuxers);
         if (fullMuxers === 0) {
             return [weight]
         } else {

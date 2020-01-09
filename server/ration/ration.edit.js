@@ -21,13 +21,6 @@ function convertToControl(item, parentKey, user) {
         }
 
         if (item.hasOwnProperty(key)) {
-
-            if (key === 'startDate') {
-                console.log(rationUtils.disabledFields[parentKey + '.' + key])
-                console.log(rationUtils.disabledFieldsForNonSA[parentKey + '.' + key])
-                console.log(sa)
-            }
-
             editObj[key] = {
 
                 isEnum: rationUtils.enumFields[parentKey + '.' + key],
@@ -52,8 +45,6 @@ function convert(ration, user) {
     if (!ration) {
         ration = Ration.getEmptyRation();
     }
-
-    console.log('ration', ration);
 
     var allControls = Ration.sort(convertToControl(ration.general, 'general', user), 'general');
     var controls = [

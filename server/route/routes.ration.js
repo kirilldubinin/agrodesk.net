@@ -173,9 +173,6 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
                 copyRation.general.name = 'Копия-' + ration.general.name;
 
                 copyRation.composition = ration.composition;
-
-                console.log(copyRation);
-
                 copyRation.save(function(err, newRation) {
                     if (err) {
                         return errorHandler(err, req, res);
@@ -223,6 +220,11 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
                 if (!_.isEqual(_.map(req.body.composition, 'name').sort(), _.map(ration.composition, 'name').sort())) {
                     newHistory.composition = req.body.composition;
                 }   
+
+                // if composition changed BUT general NOT, lets add general to history any way
+                if (newHistory.composition && !newHistory.general) {
+                    newHistory.general = _.pick(req.body.general, _.keys(utils.historyFields.general));
+                }
 
                 if (!_.isEmpty(newHistory)) {
                     newHistory.date = new Date();

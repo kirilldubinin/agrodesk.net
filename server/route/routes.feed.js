@@ -158,7 +158,6 @@ module.exports = function(app, isAuthenticated, errorHandler, log) {
     // get feeds by search query
     app.post('/api/feeds/search', isAuthenticated, function(req, res) {
         var query = req.body.query;
-        console.log(query);
 
         Feed.find({
             'createdBy.tenantId': req.user.tenantId

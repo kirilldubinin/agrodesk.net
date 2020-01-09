@@ -17,7 +17,7 @@ db.on('error', function(err) {
 });
 db.once('open', function callback() {
     console.log("Connected to DB!");
-    addRatioAndMixerAndCowsNumberToRation();
+    removeHistoryFromRation();
 });
 
 function delete_Ration_History (ready) {
@@ -403,13 +403,12 @@ function addField_CODE_for_FEED_ANALYSIS () {
 } 
 
 function removeHistoryFromRation() {
-    //5dee7a2b06e25d478fa20c97
+    //5e17721fe342ab24e56c03ad
 
     Ration.find().then(function(rations) {
         rations.forEach(r => {
-            if (r._id.equals('5dee7a2b06e25d478fa20c97')) {
-                console.log(r.history.pull)
-                r.history.pull({ _id: '5e0ef3e206e25d478fa20cb0' })
+            if (r._id.equals('5e17721fe342ab24e56c03ad')) {
+                r.history.pull({ _id: '5e1778f8e342ab24e56c03b3' })
                 r.save(function (err, _r) {
                     if (err) {
                         console.log(err);
@@ -421,24 +420,6 @@ function removeHistoryFromRation() {
         })
     });
 
-}
-
-function removeHistoryFromRation() {
-    Ration.find().then(function(rations) {
-        rations.forEach(r => {
-            if (r._id.equals('5dee7a2b06e25d478fa20c97')) {
-                console.log(r.history.pull)
-                r.history.pull({ _id: '5e0ef3e206e25d478fa20cb0' })
-                r.save(function (err, _r) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log(_r);
-                    }
-                });
-            }
-        })
-    });
 }
 
 function addRatioAndMixerAndCowsNumberToRation () {
