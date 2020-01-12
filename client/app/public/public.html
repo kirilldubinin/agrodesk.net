@@ -1,29 +1,40 @@
-<div class="public-screen" layout="column">
-    <section class="header" layout="row" layout-xs="column">
-        <div class="prokorm">
-            <a href="/"><b>AGRO</b>DESK</a>
-            <div class="sub-info">управление данными</div>
-        </div>
-        <div class="contact" flex>
-            8 800 550 28 27
-            <div class="sub-info">sales@prokorm.com</div>
-        </div>
-        <md-button class="login" ng-href="/#/login">
-            Вход
-        </md-button>
-    </section>
-    <section class="modules" flex layout="row">
-        <div class="module feed">
-            <h4>КОРМА</h4>
-            <div class="module__icon feed"></div>
-        </div>
-        <div class="module ration">
-            <h4>РАЦИОНЫ</h4>
-            <div class="module__icon ration"></div>
-        </div>
-        <div class="module field">
-            <h4>ПОЛЯ</h4>
-            <div class="module__icon field"></div>
-        </div>
-    </section>
-</div>
+<div class="login-screen" >
+    <div class="farm-login" flex>
+      <md-card md-theme="default" md-theme-watch class="farm-login--card">
+  
+        <md-card-title>
+          <md-card-title-text><h2>AGRODESK</h2></md-card-title-text>
+        </md-card-title>
+  
+        <md-card-content>
+          <div class="login-input">
+            <p>Организация</p>
+            <input type="text" name="tenantname" ng-model="public.user.tenantname"></input>
+          </div>
+  
+          <div class="login-input">
+            <p>Имя пользователя</p>
+            <input type="text" name="username" ng-model="public.user.username"></input>
+          </div>
+  
+          <div class="login-input">
+            <p>Пароль</p>
+            <input type="password" name="password" ng-model="public.user.password"></input>
+          </div>
+  
+          <p ng-if="public.info" ng-class="{error: public.info}" class="message">
+            {{public.info}}
+          </p>
+        </md-card-content>
+  
+        <md-card-actions layout="row" layout-align="" class="farm-login--action">
+          <div flex>
+            <a class="forget" href="#/forget">забыли пароль ?</a>
+          </div>
+          <div>
+            <md-button class="md-raised md-primary" ng-click="public.do()">Войти</md-button>
+          </div>
+        </md-card-actions>
+      </md-card>  
+    </div>
+  </div>

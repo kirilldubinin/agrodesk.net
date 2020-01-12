@@ -67,7 +67,7 @@
                 // optional method
                 'responseError': function(rejection) {
                     if (rejection.status === 401) {
-                        $injector.get('$state').transitionTo('login');
+                        $injector.get('$state').transitionTo('public');
                     }
                     if (isAPIrequest(rejection.config.url)) {
 

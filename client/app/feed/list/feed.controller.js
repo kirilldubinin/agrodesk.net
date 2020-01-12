@@ -17,7 +17,7 @@
         });
         
         vm.openMenu = function($mdOpenMenu, ev) {
-            originatorEv = ev;
+            //originatorEv = ev;
             $mdOpenMenu(ev);
         };
         vm.goToHome = function() {

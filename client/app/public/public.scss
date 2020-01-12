@@ -1,49 +1,53 @@
-@import "../variables";
-.public-screen {
-    color: #fff;
-    background-color: #00a4de;
-    height: 100%;
-    .header {
-        width: 600px;
-        max-width: 800px;
+.login-screen {
+    padding-top: 10em;
+    .farm-login {
         margin: 0 auto;
-        padding: 2em 0;
-        button {
-            color: #fff;
+        padding-top: 4em;
+        width: 500px;
 
-            &.registration {
-                text-decoration: none;
-            }
-        }   
-
-        .prokorm {
-            font-size: 28px;
-            a {
-                text-decoration: none;
-                color: #fff;
-                b {
-                    font-size: 29px;
-                    margin-right: 4px;
-                }
-            }
-            .sub-info {
-                text-transform: lowercase;
-                letter-spacing: 2px;
-                font-size: 12px;
-            }
-        } 
-        .contact {
-            padding-left: 2em;
+        .phone {
+            text-align: center;
             font-size: 22px;
-            padding-top: 2px;
-            .sub-info {
-                display: block;
-                margin-top: 6px;
-                font-size: 12px;
+            font-weight: 100;
+            color: #3f51b5;
+        }
+
+        &--card {
+            padding: 1em;
+
+            h2 {
+                text-align: center;
+                font-size: 32px;
             }
         }
+        &--action {
+            padding: 1em 0 0 0;
+            margin-bottom: 20px;
+            margin-left: 16px;
+            margin-right: 16px;
+
+            .forget {
+                line-height: 36px;
+                font-size: 12px;
+                color: #3f51b5;
+            }
+        }
+
+        .login-input {
+        	input {
+        		padding: 10px 4px;
+        		border: 1px solid #999;
+        		border-radius: 2px;
+                width: 100%;
+                color: #333;
+        	}
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 6px;
+            padding: 0;
+            color: #3f51b5;
+        }
     }
-
-    
-
 }

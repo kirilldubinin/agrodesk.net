@@ -41,38 +41,38 @@
 	.feed-edit-content {
 		overflow: auto;
 		.feed-property {
-
-			&._md-datepicker-floating-label {
-				label {
-
-				}
+			width: 90%;
+			margin: 12px 0;
+			label {
+				font-size: 11px;
 			}
-
 			&.booleanProperty {
 				margin: 0;
 			}
-
 			&.required {
 				label {
 					color: rgb(255,87,34);
 				}
 			}
-
-			width: 90%;
 			.md-errors-spacer {
 				display: none;
 			}
-
 			.self-explanation-link {
 				&:hover {
 					color: #3F51B5;
+				}
+			}
+
+			.md-select-value {
+				.md-text {
+					font-size: 14px;
 				}
 			}
 		}
 
 		.checkbox {
 			span {
-				font-size: 16px;
+				font-size: 12px;
 			}
 		}
 
