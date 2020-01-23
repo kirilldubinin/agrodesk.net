@@ -217,11 +217,11 @@ RationSchema.pre('validate', function(next) {
     // general properies
     if (!this.general.rationType || 
         !this.general.name ||
-        !this.general.cowsNumber ||
-        !this.general.dryMaterialConsumption ||
-        !this.general.productivityRate ||
-        !this.general.estimatedProductivity ||
-        !this.general.actualProductivity ||
+        !_.isNumber(this.general.cowsNumber) ||
+        !_.isNumber(this.general.dryMaterialConsumption) ||
+        !_.isNumber(this.general.productivityRate) ||
+        !_.isNumber(this.general.estimatedProductivity) ||
+        !_.isNumber(this.general.actualProductivity) ||
         !this.general.ratio ||
         !this.general.rationPrice ||
         !this.general.milkPrice ||
