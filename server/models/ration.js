@@ -223,9 +223,9 @@ RationSchema.pre('validate', function(next) {
         !_.isNumber(this.general.estimatedProductivity) ||
         !_.isNumber(this.general.actualProductivity) ||
         !this.general.ratio ||
-        !this.general.rationPrice ||
-        !this.general.milkPrice ||
-        !this.general.efficiency
+        !_.isNumber(this.general.rationPrice) ||
+        !_.isNumber(this.general.milkPrice) ||
+        !_.isNumber(this.general.efficiency)
     ) {
         return next(Error('Обязательные поля не заполнены !'));
     } 
