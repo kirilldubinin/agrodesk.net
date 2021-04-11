@@ -4,12 +4,8 @@
     /** @ngInject */
     function routerConfig($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('admin', {
+            .state('tenant.admin', {
                 url: '/admin',
-                abstract: true
-            })
-            .state('admin.dashboard', {
-                url: '/dashboard',
                 templateUrl: 'app/home/admin/admin.html',
                 controller: 'AdminController',
                 controllerAs: 'admin',

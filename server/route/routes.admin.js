@@ -10,7 +10,7 @@ module.exports = function(app, isAuthenticated, errorHandler) {
     
     function isAdmin(req, res, next) {
         
-        if (req.user && req.user.name === "prokorm" && req.user.tenantName === "prokorm") {
+        if (req.user && req.user.name === "sa" && req.user.tenantName === "prokorm") {
             next();
         } else {
             return res.status(401).send({

@@ -86,12 +86,12 @@ function convert(ration, sessionData) {
         return item;
     });
 
-    const totalWeight =  Math.ceil(_.sumBy(ration.composition, 'value') * ration.general.cowsNumber / 10) * 10;
+    const totalWeight =  _.sumBy(ration.composition, 'value') * ration.general.cowsNumber;
     const mixerSize = ration.distribution.mixerSize;
     const distributionRatio = ration.distribution.ratio;
-    
+
     const byMixers = _.map(distributionRatio, (distribution) => {
-        var weight = Math.ceil((totalWeight * (distribution / 100)));
+        var weight =  Math.round(totalWeight * (distribution / 100) * 10) / 10;
         var fullMuxers = Math.floor(weight/mixerSize);
         if (fullMuxers === 0) {
             return [weight];
@@ -108,11 +108,13 @@ function convert(ration, sessionData) {
 
     const byComposition = _.map(byMixers, (mixer) => {
         return _.map(mixer, function(weight) {
-            var map = _.map(ration.composition, function(item) {
-                var v = (weight * item.value * ration.general.cowsNumber) / totalWeight; 
-                return item.componentType === 'mk' ? Math.round(v * 10) / 10 : Math.round(v);
+            let total = 0;
+            return _.map(ration.composition, function(item) {
+                let v = (weight * item.value * ration.general.cowsNumber) / totalWeight; 
+                v = item.componentType === 'mk' ? Math.round(v * 10) / 10 : Math.round(v)
+                total = total + v
+                return [v, total] ;
             });
-            return map;
         });
     })
 

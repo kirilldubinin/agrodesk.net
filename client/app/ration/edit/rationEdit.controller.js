@@ -174,23 +174,20 @@
                     vm.distributionError = 'Сумма процентов не может быть больше 100%';
                 }
 
-                // check mixer size, can not be < 1000
-                if (vm.distribution.initialItem.mixerSize < 1000) {
-                    vm.distribution.initialItem.mixerSize = 1000;
+                // check mixer size, can not be < 100
+                if (vm.distribution.initialItem.mixerSize < 100) {
+                    vm.distribution.initialItem.mixerSize = 100;
                 }
 
                 var weightPerCow = 0;
                 _.forEach(vm.composition.initialItem, function(c) {
                     weightPerCow += c.value;
                 });
-                vm.distribution.initialItem.totalWeight = Math.ceil(
-                    weightPerCow * vm.general.initialItem.cowsNumber / 10
-                ) * 10;
-                
+                vm.distribution.initialItem.totalWeight = weightPerCow * vm.general.initialItem.cowsNumber;
                 vm.distribution.initialItem.byMixers = byMixers();
                 vm.distribution.initialItem.byCompositions = byComposition();
 
-            }, 500);
+            }, 1000);
         };
 
         vm.removeDistributionItem = function (index) {
@@ -234,13 +231,12 @@
         };
 
         function byMixers () {
-
             var mixerSize = vm.distribution.initialItem.mixerSize;
             var totalWeight = vm.distribution.initialItem.totalWeight;
             var distributionRatio = vm.distribution.initialItem.ratio;
 
             return _.map(distributionRatio, function(distribution) {
-                var weight = Math.ceil((totalWeight * (distribution / 100)));
+                var weight = Math.round(totalWeight * distribution / 100 * 10) / 10;
                 var fullMuxers = Math.floor(weight/mixerSize);
                 if (fullMuxers === 0) {
                     return [weight];
@@ -261,11 +257,13 @@
             var totalWeight = vm.distribution.initialItem.totalWeight;
             return _.map(byMixers, function(mixer) {
                 return _.map(mixer, function(weight) {
-                    var map = _.map(vm.composition.initialItem, function(item) {
+                    var total = 0;
+                    return _.map(vm.composition.initialItem, function(item) {
                         var v = (weight * item.value * vm.general.initialItem.cowsNumber) / totalWeight; 
-                        return item.componentType === 'mk' ? Math.round(v * 10) / 10 : Math.round(v);
+                        v = item.componentType === 'mk' ? Math.round(v * 10) / 10 : Math.round(v)
+                        total = total + v;
+                        return [v, total];
                     });
-                    return map;
                 });
             });
         }

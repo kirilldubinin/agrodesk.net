@@ -127,7 +127,7 @@
                         <div flex layout="row" class="mixer-column"
                             ng-repeat="mixers in ::rationView.distribution.byMixers track by $index">
                             <div class="value" flex layout="row" ng-repeat="mixer in mixers track by $index">
-                                <label class="text-right" flex>{{mixer}}</label>
+                                <label class="text-center" flex>{{mixer}}</label>
                             </div>  
                         </div>
                     </div>
@@ -142,7 +142,10 @@
                             ng-repeat="allDistributions in ::rationView.distribution.byComposition">
                             <div layout="row">
                                 <div flex ng-repeat="ditribution in ::allDistributions">
-                                    <div ng-repeat="item in ::ditribution track by $index" class="text-right value">{{item}}</div>
+                                    <div layout="row" ng-repeat="item in ::ditribution track by $index" class="text-right value">
+                                        <div flex="50" class="text-center">{{item[0]}}</div>
+                                        <div flex="50" class="text-center">{{item[1]}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

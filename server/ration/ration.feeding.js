@@ -1,12 +1,8 @@
 var _ = require('lodash');
-var dimension = require('./ration.dimension');
-var color = require('./ration.color');
-var lang = require('./ration.lang');
-
 
 function byMixers (mixerSize, totalWeight, distributionRation) {
     return _.map(distributionRation, (distribution) => {
-        const weight = Math.ceil((totalWeight * (distribution / 100))/10) * 10;
+        const weight = (totalWeight * (distribution / 100));
         const fullMuxers = Math.floor(weight/mixerSize);
         if (fullMuxers === 0) {
             return [weight]
@@ -52,13 +48,12 @@ function feeding (rations) {
         const weightPerCow = _.sumBy(ration.composition, (c) => {
             return c.componentType === 'mk' ? 0 : c.value;
         });
-        const totalWeight = Math.ceil(
-            weightPerCow * ration.general.cowsNumber / 10
-        ) * 10;
+        const totalWeight = weightPerCow * ration.general.cowsNumber;
         const mixerSize = ration.mixerSize;
         const distributionRation = ration.distributionRation;
         const mixers = byMixers(mixerSize, totalWeight, distributionRation);
         const compositions = byComposition(mixers, ration, totalWeight);
+        
         return {
             rationName: ration.general.name,
             dryMaterialConsumption: ration.general.dryMaterialConsumption,
