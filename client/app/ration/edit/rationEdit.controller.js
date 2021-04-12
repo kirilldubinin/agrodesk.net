@@ -179,11 +179,11 @@
                     vm.distribution.initialItem.mixerSize = 100;
                 }
 
-                var weightPerCow = 0;
+                vm.distribution.initialItem.totalWeight = 0;
                 _.forEach(vm.composition.initialItem, function(c) {
-                    weightPerCow += c.value;
+                    vm.distribution.initialItem.totalWeight += c.componentType === 'mk' ? Math.round(c.value * vm.general.initialItem.cowsNumber * 10) / 10 : Math.round(c.value * vm.general.initialItem.cowsNumber)
+                    
                 });
-                vm.distribution.initialItem.totalWeight = weightPerCow * vm.general.initialItem.cowsNumber;
                 vm.distribution.initialItem.byMixers = byMixers();
                 vm.distribution.initialItem.byCompositions = byComposition();
 
@@ -261,7 +261,7 @@
                     return _.map(vm.composition.initialItem, function(item) {
                         var v = (weight * item.value * vm.general.initialItem.cowsNumber) / totalWeight; 
                         v = item.componentType === 'mk' ? Math.round(v * 10) / 10 : Math.round(v)
-                        total = total + v;
+                        total = item.componentType === 'mk' ? Math.round((total + v ) * 10) / 10 : Math.round(total + v) 
                         return [v, total];
                     });
                 });

@@ -85,8 +85,9 @@ function convert(ration, sessionData) {
         item.priceInRation = Math.round(item.price * item.value * 100)/ 100
         return item;
     });
-
-    const totalWeight =  _.sumBy(ration.composition, 'value') * ration.general.cowsNumber;
+    let totalWeight = _.sumBy(ration.composition, item => {
+        return item.componentType === 'mk' ? Math.round(item.value * ration.general.cowsNumber * 10) / 10 : Math.round(item.value * ration.general.cowsNumber)
+    })
     const mixerSize = ration.distribution.mixerSize;
     const distributionRatio = ration.distribution.ratio;
 
@@ -112,7 +113,7 @@ function convert(ration, sessionData) {
             return _.map(ration.composition, function(item) {
                 let v = (weight * item.value * ration.general.cowsNumber) / totalWeight; 
                 v = item.componentType === 'mk' ? Math.round(v * 10) / 10 : Math.round(v)
-                total = total + v
+                total = item.componentType === 'mk' ? Math.round((total + v ) * 10) / 10 : Math.round(total + v) 
                 return [v, total] ;
             });
         });
